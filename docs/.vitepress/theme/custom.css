@@ -1,0 +1,305 @@
+:root {
+  /**
+   * Colors Theme
+   * -------------------------------------------------------------------------- */
+
+  /* 控制顶部导航栏 hover 导航线条颜色 */
+  --vp-c-brand-dark: #0086ff;
+
+  /* 控制右侧导航栏 a链接 导航线条颜色 */
+  --vp-c-brand: #7bc7d1;
+
+
+  /**
+   * Component: Home
+   * -------------------------------------------------------------------------- */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #41d1ff, #bd34fe);
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-border: rgba(172, 74, 246, 1);
+  --vp-button-brand-bg: rgba(172, 74, 246, 0.76);
+  --vp-button-brand-hover-bg: rgba(172, 74, 246, 1);
+  --vp-button-brand-active-bg: rgba(140, 114, 255, 1);
+
+  --vp-font-family-base: 'Consolas', 'SourceHanSerifCN', monospace;
+  /* ? code 代码块 */
+  --vp-font-family-mono: 'SourceCodePro', 'SourceHanSerifCN', monospace;
+}
+
+/* 单个代码块 */
+code {
+  font-family: 'SourceCodePro', 'SourceHanSerifCN', monospace;
+}
+
+/* 多行代码块 */
+code .line {
+  font-family: 'SourceCodePro', 'SourceHanSerifCN', monospace;
+}
+
+
+.VPDocAsideOutline .content {
+  border-left: unset !important;
+}
+
+/* 右侧导航栏 */
+.VPDocAsideOutline .content .outline-marker {
+  width: 4px !important;
+  height: 20px !important;
+  background-color: #7ed0fb !important;
+  border-radius: 4px !important;
+  left: 3px !important;
+}
+
+/* 有序列表 */
+.vp-doc ol {
+  padding-left: 2.25rem;
+}
+
+/* 正文 h1 一般只在顶部写一次 */
+.vp-doc h1 {
+  /* font-family: 'Nereus', 'SourceHanSerifCN', monospace; */
+  font-family: 'POLYA', 'SourceHanSerifCN', monospace;
+}
+
+.vp-doc h1 code {
+  font-family: 'Potra', 'SourceHanSerifCN', monospace;
+}
+
+/* 正文 a链接 */
+.vp-doc a {
+  font-family: 'Consolas', 'SourceHanSerifCN', monospace;
+}
+
+/* 团队成员卡片 .vp-doc h1 */
+.VPTeamMembersItem.small .name {
+  font-family: 'Comfortaa', 'SourceHanSerifCN', monospace;
+}
+
+/* 顶部导航 左侧标题 */
+.VPNavBarTitle .title {
+  font-family: 'PirataOne';
+  font-size: 28px;
+  /* color: rgba(153, 44, 39, 1); */
+  color: rgb(137, 70, 62);
+}
+
+/* 顶部导航 左侧logo */
+.VPNavBarTitle .logo {
+  height: 36px;
+}
+
+/* 顶部导航 右侧菜单 */
+.VPNavBarMenu,
+.menu {
+  font-family: 'Morena', 'SourceHanSerifCN';
+}
+
+/* 起始页 中间标题 */
+.is-home .clip {
+  font-family: 'EDIX';
+  font-size: 30px;
+  line-height: 0;
+}
+
+/* 起始页 标题右侧图片 docs/index.md/hero.image.src */
+@media (max-width: 768px) {
+  .image-src {
+    /* max-width: 184px !important; */
+    max-width: 320px !important;
+    /* top: 48% !important; */
+    top: 41% !important;
+    /* border-radius: 6px !important; */
+  }
+}
+
+@media (min-width: 960px) {
+  .image-src {
+    /* max-width: 484px !important; */
+    max-width: 368px !important;
+    /* top: 70% !important; */
+    top: 50% !important;
+    /* border-radius: 6px !important; */
+  }
+}
+
+/* 起始页 左侧按钮 */
+.brand {
+  font-family: 'Zero-G';
+  font-size: 10px !important;
+}
+
+/* 起始页 右侧按钮 */
+.alt {
+  font-family: 'Potra';
+}
+
+/* 起始页 下面卡片 docs/index.md/features */
+.VPFeature .title {
+  font-family: 'Comfortaa';
+  font-size: 24px;
+  color: #888888;
+}
+
+/* 起始页 下面卡片 docs/index.md/features */
+.VPFeature .details {
+  font-family: 'HALFOMANIA';
+  font-size: 20px;
+  /* letter-spacing: 2px; */
+  color: #848282;
+}
+
+/* 左侧链接字体 右侧大纲字体 */
+.link-text,
+.outline-link {
+  font-family: 'Quicksand', 'SourceHanSerifCN';
+}
+
+/* 左侧链接顶部可折叠字体 */
+.title-text {
+  font-family: 'Quicksand', 'SourceHanSerifCN';
+}
+
+/* a链接 hover时导航线条颜色 */
+.vp-doc a:hover {
+  color: #0086ff;
+}
+
+@font-face {
+  font-family: 'SourceCodePro';
+  src: url('/SourceCodePro-Regular.otf')
+}
+
+@font-face {
+  font-family: 'Hamurz';
+  src: url('/Hamurz Free Version.otf')
+}
+
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('/Comfortaa-VariableFont_wght.ttf')
+}
+
+@font-face {
+  font-family: 'PirataOne';
+  src: url('/PirataOne.ttf')
+}
+
+@font-face {
+  font-family: 'Neoneon';
+  src: url('/Neoneon.otf')
+}
+
+@font-face {
+  font-family: 'Halfomania';
+  src: url('/Halfomania.ttf')
+}
+
+@font-face {
+  font-family: 'Quantum';
+  src: url('/Quantum.otf')
+}
+
+@font-face {
+  font-family: 'POLYA';
+  src: url('/POLYA.otf')
+}
+
+@font-face {
+  font-family: 'EDIX';
+  src: url('/EDIX.ttf')
+}
+
+@font-face {
+  font-family: 'Glitch';
+  src: url('/Glitch.otf')
+}
+
+@font-face {
+  font-family: 'Comforter';
+  src: url('/Comforter.ttf')
+}
+
+@font-face {
+  font-family: 'Zero-G';
+  src: url('/Zero-G Regular.otf')
+}
+
+@font-face {
+  font-family: 'Misto';
+  src: url('/Misto.otf')
+}
+
+@font-face {
+  font-family: 'Potra';
+  src: url('/Potra.otf')
+}
+
+@font-face {
+  font-family: 'Paralines';
+  src: url('/Paralines.otf')
+}
+
+@font-face {
+  font-family: 'Morena';
+  src: url('/Morena-Bold.otf')
+}
+
+@font-face {
+  font-family: 'SourceHanSerifCN';
+  src: url('/SourceHanSerifCN-Regular-1.otf')
+}
+
+@font-face {
+  font-family: 'Nereus';
+  src: url('/Nereus-Bold.ttf')
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/Quicksand-Regular.ttf')
+}
+
+@font-face {
+  font-family: 'SXT';
+  src: url('/手写体.ttf')
+}
+
+/**
+   * Component: Button
+   * -------------------------------------------------------------------------- */
+.dark {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe, #41d1ff);
+
+  --vp-button-brand-border: #44a6d6;
+  --vp-button-brand-hover-border: #44a6d6;
+  --vp-button-brand-text: #e3e3e3;
+  --vp-button-brand-hover-text: #e3e3e3;
+  --vp-button-brand-bg: rgba(76, 196, 255, 0.66);
+  --vp-button-brand-hover-bg: rgba(97, 165, 211, 1);
+
+  --vp-button-alt-border: #778dff;
+  --vp-button-alt-hover-border: #9765ff;
+  --vp-button-alt-text: rgba(123, 135, 254, 0.8);
+  --vp-button-alt-hover-text: #9765ff;
+  --vp-button-alt-bg: transparent;
+  --vp-button-alt-hover-bg: transparent;
+}
+
+/* 长槽 */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  /* background: -webkit-linear-gradient(120deg, #41d1ff, #bd34fe); */
+  background: rgba(241, 241, 241, 1);
+  border-radius: 20px;
+}
+
+/* 短杠 */
+::-webkit-scrollbar-thumb {
+  width: 4px;
+  height: 4px;
+  /* background: rgba(241, 241, 241, 1); */
+  background: -webkit-linear-gradient(120deg, #41d1ff, #bd34fe);
+  border-radius: 20px;
+}
