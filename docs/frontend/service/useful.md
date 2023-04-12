@@ -1,8 +1,63 @@
 # 业务代码
 
-## 函数封装
+## Map重构 if.else
 
-### 获取query参数
+Using a `Map` in JavaScript can help you refactor long chains of `if-else` statements into a more concise, readable, and maintainable structure. This can be especially useful when you have multiple conditions with corresponding actions. Here's a step-by-step guide to help you restructure your `if-else` statements using a `Map` object:
+
+Let's assume you have the following `if-else` block:
+
+```javascript
+function doAction(action) {
+    if (action === 'create') {
+        // create something
+    } else if (action === 'read') {
+        // read something
+    } else if (action === 'update') {
+        // update something
+    } else if (action === 'delete') {
+        // delete something
+    } else {
+        // handle invalid action
+    }
+}
+```
+
+Now, let's refactor this using a `Map`:
+
+1. Create a `Map` object with keys as the conditions (e.g., `'create', 'read', 'update', 'delete'`) and values as the corresponding functions:
+
+```javascript
+const actionMap = new Map([
+    ['create', () => {
+        // create something
+    }],
+    ['read', () => {
+        // read something
+    }],
+    ['update', () => {
+        // update something
+    }],
+    ['delete', () => {
+        // delete something
+    }]
+]);
+```
+
+2. Refactor the `doAction` function to look up the function to execute from the `Map` using the `action` parameter as the key. If the key is not found, provide a default function to handle the invalid action:
+
+```javascript
+function doAction(action) {
+    const actionFunction = actionMap.get(action) || (() => {
+        // handle invalid action
+    });
+
+    actionFunction();
+}
+```
+
+The refactored code is now more concise and maintainable, and you can easily add or remove actions by updating the `Map`.
+
+## 获取query参数
 
 ```js
 getParameterByName(name) {
