@@ -1,6 +1,8 @@
 # 业务代码
 
-## Map重构 if.else
+## Map 重构 if.else
+
+### e.g. 1
 
 Using a `Map` in JavaScript can help you refactor long chains of `if-else` statements into a more concise, readable, and maintainable structure. This can be especially useful when you have multiple conditions with corresponding actions. Here's a step-by-step guide to help you restructure your `if-else` statements using a `Map` object:
 
@@ -57,6 +59,34 @@ function doAction(action) {
 
 The refactored code is now more concise and maintainable, and you can easily add or remove actions by updating the `Map`.
 
+### e.g. 2
+
+```js
+activeImg(index) {
+  const enums = new Map([
+    [0, require('@/assets/medicalService/a1.png')],
+    [1, require('@/assets/medicalService/a2.png')],
+    [2, require('@/assets/medicalService/a3.png')],
+    [3, require('@/assets/medicalService/a4.png')],
+    [4, require('@/assets/medicalService/a5.png')],
+    [5, require('@/assets/medicalService/a6.png')],
+    [6, require('@/assets/medicalService/a1.png')],
+    [7, require('@/assets/medicalService/a2.png')],
+    [8, require('@/assets/medicalService/a3.png')],
+    [9, require('@/assets/medicalService/a4.png')],
+    [10, require('@/assets/medicalService/a5.png')],
+    [11, require('@/assets/medicalService/a6.png')],
+    [12, require('@/assets/medicalService/a1.png')]
+  ])
+  return enums.get(index)
+},
+changeBtn(item) {
+  this.activeIndex = item
+  this.activeImgUrl = this.activeImg(item)
+  this.$bus.$emit('serviceId', this.btnList[item])
+},
+```
+
 ## 获取query参数
 
 ```js
@@ -81,8 +111,8 @@ landscapeWidth: 900
 
 ![image-20221031181414400](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20221031181414400.png)
 
-
 ## 低版本Vue Cli的node-ipc缺失
+
 ```json
 // package.json
 "overrides": {
@@ -92,6 +122,7 @@ landscapeWidth: 900
 ```
 
 ## Node > 17，Vue Cli无法运行
+
 ```json
 // package.json
 "scripts": {
