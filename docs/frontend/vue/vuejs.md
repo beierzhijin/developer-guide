@@ -278,3 +278,20 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 
 1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
 2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+
+## 一些概念
+
+### require
+在 Node.js 环境中，我们可以使用 require 关键字来导入 CommonJS 模块，<strong style="color:red;">但是在浏览器环境中，require 是不被支持的，只有 ES6 模块规范被广泛支持。</strong>
+
+在 Vue 中，require 关键字通常与 webpack 打包工具和 CommonJS 模块规范有关；
+
+```js
+const axios = require('axios')
+```
+
+在ES6模块中，我们可以使用import来代替require来导入依赖。
+
+```js
+import axios from 'axios';
+```
