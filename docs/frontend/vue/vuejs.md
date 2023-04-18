@@ -17,6 +17,11 @@ const members = [
 
 ## [Vue2](https://github.com/vuejs/vue/blob/main/CHANGELOG.md)
 
+> https://github.com/vuejs/vue/blob/main/CHANGELOG.md#270-2022-07-01 
+> 
+> Upgrade vue to ^2.7.0. You can also remove vue-template-compiler from the dependencies - it is no longer needed in 2.7.
+
+
 ## [Vue CLI](https://github.com/vuejs/vue-cli/releases)
 
 ### babelrc <strong style="color:orange;">vs</strong> babel.config.js
