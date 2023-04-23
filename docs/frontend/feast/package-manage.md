@@ -64,6 +64,8 @@ fnm default v18.12.0
 fnm current
 # fnm安装的node的路径
 $env:FNM_DIR
+# 环境变量配置node位置
+C:\Users\klaus\AppData\Roaming\fnm\node-versions\v16.20.0\installation
 # 为了保持项目组成员node版本一致，可以在项目根目录下添加一个 .node-version 文件，内容为当前使用的node版本，Adding a .node-version to your project is as simple as:
 # To automatically run fnm use when a directory contains a .node-version or .nvmrc file, add the --use-on-cd option to your shell setup.
 # https://github.com/Schniz/fnm#shell-setup
