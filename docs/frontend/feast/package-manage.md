@@ -42,28 +42,32 @@ eval "$(fnm env --use-on-cd)"
 [nodejs版本管理工具fnm - 掘金 (juejin.cn)](https://juejin.cn/post/7047120772032102407)
 
 ```powershell
-# 配置环境变量: `C:\A\fnm`
-$ fnm
+# 通过scoop安装
+scoop install fnm
+# 自己通过.exe文件，把.exe文件放到C:\A\fnm目录，配置环境变量: `C:\A\fnm`
+https://github.com/Schniz/fnm/releases
+
 # 命令
+$ fnm
 $ fnm env 
 # 配置上面的结果至 $profile, $env:FNM_DIR 查看配置效果
 fnm env --use-on-cd | Out-String | Invoke-Expression
-#$env:FNM_MULTISHELL_PATH = "C:\Users\klaus\AppData\Local\fnm_multishells\26608_1653144181358"
-$env:FNM_MULTISHELL_PATH = "C:\A\nodejs"
-$env:FNM_VERSION_FILE_STRATEGY = "local"
-$env:FNM_DIR = "C:\A\fnm"
-$env:FNM_LOGLEVEL = "info"
-$env:FNM_NODE_DIST_MIRROR = "https://npm.taobao.org/dist"
-$env:FNM_ARCH = "x64"
-
-# 查看版本
+# 查看node版本
 fnm list-remote --node-dist-mirror="https://npm.taobao.org/dist"
 # 下载node，仍然需要配置nodejs的环境变量: `C:\A\nodejs`
 fnm install v18.12.0  --node-dist-mirror="https://npm.taobao.org/dist"
 # 使用版本
 fnm use v18.12.0
+# 配置默认版本，这样设置之后，每次打开新的终端，都会自动使用默认版本，fnm use 可能会每次开新终端都要设置node版本
+fnm default v18.12.0
 # 查看当前使用的版本
 fnm current
+# fnm安装的node的路径
+$env:FNM_DIR
+# 为了保持项目组成员node版本一致，可以在项目根目录下添加一个 .node-version 文件，内容为当前使用的node版本，Adding a .node-version to your project is as simple as:
+# To automatically run fnm use when a directory contains a .node-version or .nvmrc file, add the --use-on-cd option to your shell setup.
+# https://github.com/Schniz/fnm#shell-setup
+node --version > .node-version
 ```
 
 ## ~~nvm~~
