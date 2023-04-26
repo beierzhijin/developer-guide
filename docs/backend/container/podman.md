@@ -209,21 +209,24 @@ Podman machine set --rootful=false
 [UbuntuBackports - Community Help Wiki](https://help.ubuntu.com/community/UbuntuBackports#Enabling_Backports)
 
 ```bash
-apt-get install PACKAGE/RELEASE-backports
-apt-get install -t RELEASE-backports PACKAGE
+sudo apt update
+sudo apt upgrade
+. /etc/os-release
+sudo apt install -t ${VERSION_CODENAME}-backports cockpit
 ```
+
+> <span style="color: #779db3;">*Model: GPT-4* </span>
+>
+> 在 Linux 系统中，. (点) 命令表示用当前 shell 执行指定的脚本文件。
+> 
+> 当您运行 `. /etc/os-release` 时，实际上是在当前 shell 环境中执行 /etc/os-release 文件。这样，脚本中定义的变量会在当前 shell 环境中生效，而不是在子 shell 中。这与使用 source 命令具有相同的效果。例如，您也可以用 source /etc/os-release 代替 . /etc/os-release。
+>
+> /etc/os-release 文件包含了 Linux 发行版的信息，例如名称、版本号、ID等。当您执行 . /etc/os-release 或 source /etc/os-release 时，这些信息会作为环境变量被加载到当前 shell 环境中，然后您可以使用这些变量来获取或显示系统信息。例如，使用 echo $PRETTY_NAME 命令可以显示当前系统的发行版名称和版本。
 
 > If you are unsure of your release name, you can check it with: 
 > 
-> `lsb_release -cs`
+> `lsb_release -cs` `echo ${VERSION_CODENAME}` `cat /etc/os-release` 
 
-或者执行`echo ${VERSION_CODENAME}`，或`cat /etc/os-release` 查看
-
-```bash
-sudo apt update
-sudo apt upgrade
-sudo apt install -t jammy-backports cockpit
-```
 
 ### 启动
 
@@ -236,9 +239,17 @@ sudo apt install -t jammy-backports cockpit
 > With successful installation, this web-based server management will be on your system. However, we have to start its service manually to access it. Also, at the same time enable it to start automatically in case of crash or system reboot.
 
 ```bash
-sudo systemctl start cockpit cockpit.socket
-sudo systemctl enable --now cockpit.socket
-sudo systemctl stop cockpit cockpit.socket
+sudo systemctl status cockpit # 请注意 Active 一行，如果它显示为 active (running)，则表示 Cockpit 服务已成功启动并正在运行
+# 启动 Cockpit 网络服务（Web 服务），允许你通过浏览器访问管理界面
+sudo systemctl start cockpit
+# 启动与 Cockpit 服务相关的 socket
+# 在 systemd 中，socket 是一种特殊的单位，用于管理进程间通信（IPC）。通过使用 socket，Cockpit 可以在需要时按需启动，而不是始终运行。
+# 当有新的请求到达 socket 时，Cockpit 服务将被自动启动，这种方法有助于节省系统资源
+sudo systemctl start cockpit cockpit.socket ✅
+sudo systemctl enable --now cockpit.socket ✅ # Cockpit在系统启动时自动运行，在需要时按需启动 Cockpit 服务
+sudo systemctl disable cockpit.socket # 禁用 Cockpit 的 socket，这样在下次系统启动时，它不会自动启动
+sudo systemctl stop cockpit cockpit.socket ✅
+sudo journalctl -u cockpit # 如果服务无法启动，可以使用该命令查看与 Cockpit 服务相关的日志
 ```
 
 ~~会报错：<strong style="color:red;">System has not been booted with systemd as init system (PID 1). Can't operate.
