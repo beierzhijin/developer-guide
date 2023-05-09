@@ -42,6 +42,10 @@ eval "$(fnm env --use-on-cd)"
 [nodejs版本管理工具fnm - 掘金 (juejin.cn)](https://juejin.cn/post/7047120772032102407)
 
 ```powershell
+# powershell设置执行策略
+get-executionpolicy
+set-executionpolicy remotesigned
+
 # 通过scoop安装
 scoop install fnm
 # 自己通过.exe文件，把.exe文件放到C:\A\fnm目录，配置环境变量: `C:\A\fnm`

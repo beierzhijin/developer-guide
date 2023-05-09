@@ -2,8 +2,30 @@
 
 ## 常用命令
 
+### vnc远程桌面
+```bash
+# 安装xfce4桌面环境和浏览器
+sudo apt install xfce4 firefox
+# 客户端安装
+scoop install vncviewer
+# 服务器端安装
+sudo apt update
+sudo apt install tightvncserver
+# 设置vnc密码
+vncpasswd
+# 启动TightVNC Server，这将启动一个名为 :1 的 VNC 服务器，使用 1280x800 的分辨率
+tightvncserver :1 -geometry 1280x800 -depth 24
+vncserver :1
+# 停止服务
+vncserver -kill :1
+# 客户端连接 <服务器IP地址>:<显示号码>
+ip:1
+```
+
 ### 系统相关
 ```bash
+# 升级系统
+do-release-upgrade
 # 查看centos版本
 cat /etc/redhat-release
 # 查看系统信息
