@@ -3,23 +3,31 @@
 ## 常用命令
 
 ### vnc远程桌面
+https://www.youtube.com/watch?v=ODhGNe0s4lI
+
 ```bash
-# 安装xfce4桌面环境和浏览器
-sudo apt install xfce4 firefox
-# 客户端安装
-scoop install vncviewer
+sudo apt update -y && sudo apt upgrade -y
+# the gnome desktop by default uses something called gdm3 as the default display manager, but 太重了，改用slim
+sudo install slim
+# 查看默认的显示管理器
+cat /etc/X11/default-display-manager  
+
 # 服务器端安装
-sudo apt update
-sudo apt install tightvncserver
-# 设置vnc密码
-vncpasswd
-# 启动TightVNC Server，这将启动一个名为 :1 的 VNC 服务器，使用 1280x800 的分辨率
-tightvncserver :1 -geometry 1280x800 -depth 24
-vncserver :1
+sudo apt install tigervnc-standalone-server
+# 启动vnc服务
+vncserver -localhost no
+vncserver :1 -geometry 1280x800 -depth 24
+# 查看vnc服务（占用端口）
+vncserver -list
 # 停止服务
 vncserver -kill :1
+# 修改vnc密码
+vncpasswd
+
+# 客户端安装
+scoop install vncviewer
 # 客户端连接 <服务器IP地址>:<显示号码>
-ip:1
+ip:5901
 ```
 
 ### 系统相关
