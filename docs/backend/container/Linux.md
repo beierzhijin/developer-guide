@@ -17,6 +17,11 @@ sudo tasksel
 
 # 服务器端安装
 sudo apt install tigervnc-standalone-server
+# 卸载（包括安装时候的依赖包）
+sudo apt autoremove --purge tigervnc-standalone-server
+# 卸载（通过.deb手动安装）
+sudo dpkg -i ~/Downloads/tigervncserver_1.13.1-1ubuntu1_amd64.deb
+sudo apt autoremove --purge tigervncserver
 # 启动vnc服务
 vncserver -localhost no :1 -geometry 1280x800 -depth 24
 # 查看vnc服务（占用端口）
