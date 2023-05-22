@@ -8,15 +8,17 @@ https://www.youtube.com/watch?v=ODhGNe0s4lI
 ```bash
 sudo apt update -y && sudo apt upgrade -y
 # the gnome desktop by default uses something called gdm3 as the default display manager, but 太重了，改用slim
-sudo install slim
+sudo apt install slim -y
 # 查看默认的显示管理器
 cat /etc/X11/default-display-manager  
+# tasksel 是一个在Debian/Ubuntu中安装软件包组的工具，选择安装Ubuntu minimal desktop桌面
+sudo apt install tasksel -y
+sudo tasksel
 
 # 服务器端安装
 sudo apt install tigervnc-standalone-server
 # 启动vnc服务
-vncserver -localhost no
-vncserver :1 -geometry 1280x800 -depth 24
+vncserver -localhost no :1 -geometry 1280x800 -depth 24
 # 查看vnc服务（占用端口）
 vncserver -list
 # 停止服务
