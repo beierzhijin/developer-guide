@@ -175,8 +175,9 @@ chsh -s /usr/bin/fish
 ```bash
 # 查看指定端口占用
 sudo netstat -tunlp |grep 5173
-lsof  -i:5173
+lsof -i:5173
 # 查看所有端口占用
+lsof -i
 netstat -ntlp
 # 杀死进程
 # | 是管道，将前面的结果作为后面的输入
