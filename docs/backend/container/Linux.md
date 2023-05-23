@@ -2,8 +2,20 @@
 
 ## 常用命令
 
+### 微软远程桌面
+```bash
+sudo apt update -y
+sudo apt install xrdp
+sudo systemctl enable xrdp
+sudo systemctl start xrdp
+sudo lsof -i:3389
+客户端远程连接，输入ip地址（不用端口），用户名和密码
+```
+
 ### vnc远程桌面
 https://www.youtube.com/watch?v=ODhGNe0s4lI
+
+<strong style="color:red;">有个问题：</strong>中文无法在服务端和客户端之间正常粘贴显示，排查到大概率是tigervnc-standalone-server的Clipboard没有实现UTF-8字符集的传输
 
 ```bash
 sudo apt update -y && sudo apt upgrade -y
