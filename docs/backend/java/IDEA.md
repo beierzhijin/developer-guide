@@ -11,6 +11,13 @@
 | **Alt Insert**                                                                                  | **Generate... 构造 set get**                                  |
 |                                                                                                 |                                                             |
 
+
+## 启动打开上次项目
+![image-20230524211428538](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20230524211428538.png)
+
+## JDK配置
+**Ctrl + Alt + Shift + S** Project Structure
+
 ## JUnit单元测试
 
 🎉需要开启JUnit插件(IDEA Bundled)，[IDEA新建单元测试](https://blog.csdn.net/qq_36761831/article/details/87540177)
