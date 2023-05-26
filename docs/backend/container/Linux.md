@@ -6,6 +6,7 @@
 客户端和远程都安装即可，不需要额外配置，默认端口4000
 
 ### 微软远程桌面
+https://learn.microsoft.com/zh-cn/azure/virtual-machines/linux/use-remote-desktop?tabs=azure-cli
 ```bash
 sudo apt update -y
 sudo apt install xrdp
@@ -25,7 +26,9 @@ sudo apt update -y && sudo apt upgrade -y
 # the gnome desktop by default uses something called gdm3 as the default display manager, but 太重了，改用slim
 sudo apt install slim -y
 # 查看默认的显示管理器
-cat /etc/X11/default-display-manager  
+cat /etc/X11/default-display-manager
+# 切换默认的显示管理器
+sudo dpkg-reconfigure gdm3
 # tasksel 是一个在Debian/Ubuntu中安装软件包组的工具，选择安装Ubuntu minimal desktop桌面
 sudo apt install tasksel -y
 sudo tasksel
@@ -118,7 +121,7 @@ sudo adduser klaus
 # 添加到sudo组，-a|--append 把用户追加到某些组中，仅与-G选项一起使用 
 sudo usermod -aG sudo klaus
 
-# 一行命令创建用户，未测试
+# 一行命令创建用户
 adduser klaus --ingroup sudo
 
 # 切换用户
