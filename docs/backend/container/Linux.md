@@ -7,6 +7,17 @@
 
 ### 微软远程桌面
 https://learn.microsoft.com/zh-cn/azure/virtual-machines/linux/use-remote-desktop?tabs=azure-cli
+
+实测：xfce4用root用户登录桌面才可以下载语言包，gnome自建用户进入桌面可以下载语言包，但是无法把中文拖拽到顶层
+```bash
+# 找到zh_CN开头的语言，依次按空格键选择，选择完后按Tab键选择ok
+sudo dpkg-reconfigure locales
+# 选择 zh_CN.UTF-8 作为Default locale
+
+# 设置默认输入法，感觉xfce4有点绕，https://blog.csdn.net/w47_csdn/article/details/129107128
+im-config
+```
+
 ```bash
 sudo apt update -y
 sudo apt install xrdp
