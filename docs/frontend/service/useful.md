@@ -1,5 +1,56 @@
 # 业务代码
 
+## 循环遍历时值覆盖问题
+有这样的业务场景：选中或取消userCheck会增加或减少对应项，操作之后如果userCheck中还包含userId中的某项，showSomething置为true，否则仍为false
+```js
+let showSomething = false
+let userId = ['1', '2']
+let userCheck = [
+  {
+    name: 'A',
+    userId: '10'
+  }, 
+  {
+    name: 'B',
+    userId: '11'
+  }, 
+  {
+    name: 'C',
+    userId: '12'
+  }, 
+  {
+    name: 'D',
+    userId: '2'
+  }
+]
+```
+如果使用`forEach`，会出现覆盖问题， `showSomething`最终为最后一次循环赋的值
+```js
+userCheck.forEach(item => {
+  userId.forEach(id => {
+    if (item.userId === id) {
+      showSomething = true
+    } else {
+      showSomething = false
+    }
+  })
+})
+```
+
+`array.some(function(currentValue,index,arr),thisValue)`
+
+some()方法会依次执行数组的每个元素：
++ 如果有一个元素满足条件，则表达式返回true , 剩余的元素不会再执行检测
++ 如果没有满足条件的元素，则返回false
+
+如果使用`some`，则不会出现覆盖问题，`showSomething`最终为第一次满足条件时的值
+```js
+const exists = userCheck.some(item => userId.includes(item.userId))
+if (exists) {
+  showSomething = true
+}
+```
+
 ## Map 重构 if.else
 
 ### e.g. 1
