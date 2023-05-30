@@ -175,7 +175,8 @@ function sidebarFrontend() {
       items: [
         { text: 'typescript', link: '/frontend/feast/typescript' },
         { text: 'package manager', link: '/frontend/feast/package-manage' },
-        { text: 'plugins', link: '/frontend/feast/plugins' }
+        { text: 'plugins', link: '/frontend/feast/plugins' },
+        { text: 'nodejs', link: '/frontend/feast/nodejs' },
       ]
     },
     {
