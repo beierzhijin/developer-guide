@@ -6,7 +6,8 @@
 客户端和远程都安装即可，不需要额外配置，默认端口4000
 
 ### 微软远程桌面
-https://learn.microsoft.com/zh-cn/azure/virtual-machines/linux/use-remote-desktop?tabs=azure-cli
+- [Microsoft Remote Desktop](https://learn.microsoft.com/zh-cn/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients) 
+- [远程桌面连接教程](https://learn.microsoft.com/zh-cn/azure/virtual-machines/linux/use-remote-desktop?tabs=azure-cli)
 
 实测：xfce4用root用户登录桌面才可以下载语言包，gnome自建用户进入桌面可以下载语言包，但是无法把中文拖拽到顶层
 ```bash
