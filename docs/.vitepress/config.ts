@@ -81,10 +81,10 @@ export default defineConfig({
         }
       }
     },
-    carbonAds: {
-      code: 'your-carbon-code',
-      placement: 'your-carbon-placement'
-    },
+    // carbonAds: {
+    //   code: 'your-carbon-code',
+    //   placement: 'your-carbon-placement'
+    // },
     docFooter: {
       prev: '上一篇',
       next: '下一篇'
@@ -128,7 +128,7 @@ function nav() {
           ]
         },
         { text: 'Linux', link: '/backend/container/Linux' },
-        { text: 'Containers', link: '/backend/container/podman' },
+        { text: 'Containers', link: '/backend/container/docker' },
         { text: 'Vim', link: '/backend/container/vim' },
       ]
     },
@@ -223,6 +223,7 @@ function sidebarBackend() {
           text: 'Containers',
           collapsible: true,
           items: [
+            { text: 'Docker', link: '/backend/container/docker' },
             { text: 'Podman', link: '/backend/container/podman' },
           ]
         },
