@@ -2,14 +2,17 @@
 
 ## OSS
 
-### Mac-Typora-picgo
-我的应用是通过brew管理的，MacOS - fnm - node - pnpm - picgo
+### MacOS-Typora-picgo
+我的应用是通过brew管理的，`brew` - `fnm` - `node(npm)` - `pnpm` - `picgo`
+
 ```bash
 pnpm add picgo -g
 picgo set uploader
 ```
 > select “Custom Command” : [your node path] [your picgo-core path] upload
+
 ✘ [which node] [which picgo] upload
+
 ✔ [which node] [`npm root -g`/picgo/bin/picgo] upload
 
 ### [PicGo](https://support.typora.io/Upload-Image/#picgo-core-command-line-opensource)
