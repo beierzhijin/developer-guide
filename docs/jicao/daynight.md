@@ -2,6 +2,16 @@
 
 ## OSS
 
+### Mac-Typora-picgo
+我的应用是通过brew管理的，MacOS - fnm - node - pnpm - picgo
+```bash
+pnpm add picgo -g
+picgo set uploader
+```
+> select “Custom Command” : [your node path] [your picgo-core path] upload
+✘ [which node] [which picgo] upload
+✔ [which node] [`npm root -g`/picgo/bin/picgo] upload
+
 ### [PicGo](https://support.typora.io/Upload-Image/#picgo-core-command-line-opensource)
 Config PicGo-Core
 Please edit config.json at following location
@@ -16,6 +26,7 @@ Please edit config.json at following location
 ```
 
 ```json
+# Typora + Picgo + aliyun OSS https://zhuanlan.zhihu.com/p/104152479
 # area（阿里云区域查询）https://help.aliyun.com/document_detail/31837.html
 # area（七牛区域查询）https://developer.qiniu.com/kodo/1671/region-endpoint-fq
 {
