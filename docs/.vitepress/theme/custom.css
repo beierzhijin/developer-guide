@@ -52,7 +52,7 @@ code .line {
 
 /* 有序列表 */
 .vp-doc ol {
-  padding-left: 2.25rem;
+  /* padding-left: 1rem; */
 }
 
 /* 正文 h1 一般只在顶部写一次 */
