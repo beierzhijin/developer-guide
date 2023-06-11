@@ -1,4 +1,4 @@
-# Day & Night
+# SOFTWARE
 
 ## OSS
 
@@ -77,5 +77,26 @@ Please edit config.json at following location
 6. 重启浏览器
 
 ## PowerToys
-
 ![image-20230308170748337](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20230308170748337.png){width="555px"}
+
+## Brew软件源配置
+在`~/.zshrc`中添加以下内容，然后执行`source ~/.zshrc`即可
+```bash
+# 切换到清华源
+function set_tuna_source() {
+  export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+  export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+  export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+  export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+  export HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
+}
+
+# 切换回官方源
+function unset_tuna_source() {
+  unset HOMEBREW_API_DOMAIN
+  unset HOMEBREW_BOTTLE_DOMAIN
+  unset HOMEBREW_BREW_GIT_REMOTE
+  unset HOMEBREW_CORE_GIT_REMOTE
+  unset HOMEBREW_PIP_INDEX_URL
+}
+```

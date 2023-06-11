@@ -265,7 +265,8 @@ function sidebarJiCao() {
       text: '基操💘六',
       collapsible: true,
       items: [
-        { text: '一些反复查的东西', link: '/jicao/daynight' },
+        { text: '软件配置', link: '/jicao/daynight' },
+        { text: 'ENGLISH', link: '/jicao/english' },
       ]
     }
   ]

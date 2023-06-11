@@ -136,6 +136,8 @@ sudo usermod -aG sudo klaus
 # 一行命令创建用户
 adduser klaus --ingroup sudo
 
+# 修改用户密码
+passwd [username]
 # 切换用户
 su klaus
 ```
