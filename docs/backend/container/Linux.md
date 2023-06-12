@@ -128,13 +128,34 @@ htop
 
 ### 用户相关
 ```bash
-# 在Ubuntu创建用户，自动创建用户目录 Creating home directory `/home/klaus'
+# -------- Ubuntu --------
+# Ubuntu创建用户，自动创建用户目录 Creating home directory `/home/klaus'
 sudo adduser klaus
-# 添加到sudo组，-a|--append 把用户追加到某些组中，仅与-G选项一起使用 
+# Ubuntu添加用户添加到sudo组，-a|--append 把用户追加到某些组中，仅与-G选项一起使用 
 sudo usermod -aG sudo klaus
-
-# 一行命令创建用户
+# Ubuntu一行命令创建用户
 adduser klaus --ingroup sudo
+
+# -------- CentOS --------
+# CentOS创建用户
+useradd klaus
+passwd klaus
+# CentOS添加用户添加到sudo组
+# 查看权限
+ls -l /etc/sudoers
+# 会发现只有读权限，将此文件增加写权限
+chmod u+w /etc/sudoers
+vim /etc/sudoers
+# 在root ALL=(ALL) ALL下面添加一行
+youuser    ALL=(ALL)      ALL # 允许用户youuser执行sudo命令(需要输入密码)
+%youuser   ALL=(ALL)      ALL # 允许用户组youuser里面的用户执行sudo命令(需要输入密码)
+youuser    ALL=(ALL)      NOPASSWD: ALL # 允许用户youuser执行sudo命令,并且在执行的时候不输入密码
+%youuser   ALL=(ALL)      NOPASSWD: ALL # 允许用户组youuser里面的用户执行sudo命令,并且在执行的时候不输入密码
+# 保存退出后，将sudoers文件权限还原
+chmod u-w /etc/sudoers
+# 删除用户
+userdel -r test
+
 
 # 修改用户密码
 passwd [username]
