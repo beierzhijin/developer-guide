@@ -71,13 +71,13 @@ source .zshrc
 mvn -version 
 ```
 同时，IDEA中配置Maven
-- Maven home path: `/Volumes/Panamera/programming/java/maven/apache-maven-3.9.2`
-- User settings file: `/Volumes/Panamera/programming/java/maven/apache-maven-3.9.2/conf/settings.xml`
-- Local repository: `/Volumes/Panamera/programming/java/maven/localRepository`
+- Maven home path: `/Volumes/Panamera/A/maven/apache-maven-3.9.2`
+- User settings file: `/Volumes/Panamera/A/maven/apache-maven-3.9.2/conf/settings.xml`
+- Local repository: `/Volumes/Panamera/A/maven/localRepository`
 
 [阿里云镜像](https://developer.aliyun.com/mirror/maven)
 ```xml
-<localRepository>/Volumes/Panamera/programming/java/maven/localRepository</lcalRepository>
+<localRepository>/Volumes/Panamera/A/maven/localRepository</lcalRepository>
 
 <mirror>
   <id>aliyunmaven</id>
