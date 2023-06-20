@@ -16,7 +16,10 @@ outline: deep
 
 [什么是面向对象（OOP） - 简书 (jianshu.com)](https://www.jianshu.com/p/7a5b0043b035)
 
-## 系统环境变量配置
+## JDK环境变量配置
+
+### Windows
+
 |    变量     |                  值                  |
 | :---------: | :----------------------------------: |
 | `JAVA_HOME` | `C:\Program Files\Java\jdk1.8.0_351` |
@@ -26,6 +29,60 @@ outline: deep
 java -version
 java
 javac
+```
+
+### Mac
+
+通过 Homebrew 安装
+```shell
+brew search openjdk
+brew install openjdk@17
+java --version
+```
+把homebrew安装的openjdk17软链接到系统目录 
+```shell
+sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+```
+切到用户目录
+```shell
+cd
+vim .zshrc
+# 加入下面的配置，保存退出
+JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home"
+export JAVA_HOME
+CLASS_PATH="$JAVA_HOME/lib"
+PATH=".$PATH:$JAVA_HOME/bin"
+# 完成配置
+source .zshrc
+# 检查配置
+echo $JAVA_HOME
+```
+## Maven环境变量配置
+```shell
+cd
+vim .zshrc
+# 加入下面的配置，保存退出
+export M2_HOME="/Volumes/Panamera/programming/java/maven/apache-maven-3.9.2"
+PATH="${M2_HOME}/bin:${PATH}"
+export PATH
+# 完成配置
+source .zshrc
+# 检查配置
+mvn -version 
+```
+同时，IDEA中配置Maven
+- Maven home path: `/Volumes/Panamera/programming/java/maven/apache-maven-3.9.2`
+- User settings file: `/Volumes/Panamera/programming/java/maven/apache-maven-3.9.2/conf/settings.xml`
+- Local repository: `/Volumes/Panamera/programming/java/maven/localRepository`
+
+[阿里云镜像](https://developer.aliyun.com/mirror/maven)
+```xml
+<mirror>
+  <id>aliyunmaven</id>
+  <mirrorOf>*</mirrorOf>
+  <name>阿里云公共仓库</name>
+  <url>https://maven.aliyun.com/repository/public</url>
+</mirror>
 ```
 
 ## 基本数据类型没有父类
