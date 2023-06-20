@@ -77,6 +77,8 @@ mvn -version
 
 [阿里云镜像](https://developer.aliyun.com/mirror/maven)
 ```xml
+<localRepository>/Volumes/Panamera/programming/java/maven/localRepository</lcalRepository>
+
 <mirror>
   <id>aliyunmaven</id>
   <mirrorOf>*</mirrorOf>
