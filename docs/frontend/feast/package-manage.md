@@ -28,8 +28,27 @@ pnpm和npm用的同一个配置文件.npmrc，https://pnpm.io/cli/config
 ```shell
 brew install fnm
 vim .zshrc (~/.zshrc)
-// 添加
+fnm list-remote
+fnm install v18.16.1
+# node -v 会报找不到node，需要配置环境变量
+fnm use v18.16.1 
+# warning: The current Node.js path is not on your PATH environment variable. You should setup your shell profile to evaluate `fnm env`.
+# https://github.com/Schniz/fnm#shell-setupß
+# To automatically run fnm use when a directory contains a .node-version or .nvmrc file, add the --use-on-cd option to your shell setup.
+# 大概就是可以根据项目中的.node-version或者.nvmrc文件自动切换node版本
+# 使用fnm之前要先配置环境变量，通过fnm env 查看环境配置，然后把配置添加到.zshrc中
 eval "$(fnm env --use-on-cd)"
+# fnm env 的输出结果
+export ...
+export ...
+export ...
+...
+...
+fnm default v18.16.1
+# Adding a .node-version to your project is as simple as:
+node --version
+node --version > .node-version
+// 添加
 :wq
 ```
 
