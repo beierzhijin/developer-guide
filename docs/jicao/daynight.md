@@ -64,6 +64,7 @@ Please edit config.json at following location
 
 🔺[picgo + 七牛云`华东-浙江2`无法上传图片](https://github.com/Molunerfinn/PicGo/issues/365#issuecomment-1380207705)
 
+## [Chrome offline](https://www.google.cn/chrome/next-steps.html?platform=win64&standalone=1&statcb=1&installdataindex=empty&defaultbrowser=0)
 
 ## [火狐开发者版切换语言](https://support.mozilla.org/en-US/questions/1223719)
 
