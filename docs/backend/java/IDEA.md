@@ -120,3 +120,9 @@ com.intellij.ide.plugins.StartupAbortedException: Cannot start app
 net stop winnat 
 net start winnat
 ```
+
+## 文件夹是否一层展示
+决定是`src.main.java` 还是 `src` `main` `java` 三个文件夹显示
+
+![image-20230730230121848](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20230730230121848.png)
+

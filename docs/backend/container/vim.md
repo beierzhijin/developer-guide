@@ -5,6 +5,9 @@ titleTemplate: ShowMaker
 
 # VIM
 
+## 光标进入编辑模式
+`i` `a` `o` `O` `I` `A`
+
 ## 删除光标到指定字符之间的内容
 `dt 不包含` `df 包含`
 
@@ -30,18 +33,20 @@ titleTemplate: ShowMaker
 ## 光标移动
 > https://zhuanlan.zhihu.com/p/365490170
 
-`w:移动到下一个word开头`
+`w : 移动到下一个word开头`
 
-`W:也是移动到下一个WORD开头`
+`W : 也是移动到下一个WORD开头`
 
-`e:移动到下一个word结尾，不在空行停留`
+`e : 移动到下一个word结尾，不在空行停留`
 
-`E:移动到下一个WORD结尾 ，不在空行停留`
+`E : 移动到下一个WORD结尾 ，不在空行停留`
 
-`b:移动到上一个word开头`
+`b : 移动到上一个word开头`
 
-`B:移动到上一个WORD开头`
+`B : 移动到上一个WORD开头`
 
-`ge:移动到上一个word结尾`
+`ge : 移动到上一个word结尾`
 
-`gE:移动到上一个WORD结尾`
+`gE : 移动到上一个WORD结尾`
+
+`$ or A : 移动到行尾`
