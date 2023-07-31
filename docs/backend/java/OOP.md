@@ -18,7 +18,7 @@ outline: deep
 
 ## JDK环境变量配置
 
-### Windows
+### Win
 
 |    变量     |                  值                  |
 | :---------: | :----------------------------------: |
@@ -58,6 +58,15 @@ source .zshrc
 echo $JAVA_HOME
 ```
 ## Maven环境变量配置
+
+### Win
+
+|    变量     |                  值                  |
+| :---------: | :----------------------------------: |
+| `MAVEN_HOME` | `D:\A\maven\apache-maven-3.9.2` |
+|   `Path`    |          `%MAVEN_HOME%\bin`           |
+
+### Mac
 ```shell
 cd
 vim .zshrc
