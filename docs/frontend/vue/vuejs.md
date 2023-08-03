@@ -149,7 +149,7 @@ eslint --init / pnpm create @eslint/config
    }
    ```
 
-### [unplugin-auto-impor](https://github.com/antfu/unplugin-auto-import)
+### [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import)
 
 **安装：**`pnpm add -D unplugin-auto-import`
 
