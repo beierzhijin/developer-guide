@@ -74,3 +74,7 @@ titleTemplate: ShowMaker
 `$ or A : 移动到行尾`
   
 `^ or I or 0 : 移动到行首`
+
+`F xiangying 移动到当前行中，光标之前的xiangying字符`
+
+`f xiangying 移动到当前行中，光标之后的xiangying字符`
