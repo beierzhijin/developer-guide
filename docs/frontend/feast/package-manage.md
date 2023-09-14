@@ -193,7 +193,7 @@ corepack enable
 npm i -g pnpm
 which pnpm # Git Bash 中运行此命令
 pnpm root -g
-pnpm store path # 返回活跃的存储目录的路径
+pnpm store path # 返回活跃的存储目录的路径, 注意要在.pnpm-store下执行
 pnpm store prune # 从存储中删除未引用的包
 pnpm view @slidev/cli versions # If you need the full list of all published versions
 ```
