@@ -66,6 +66,11 @@ let preservingFalsy = myText ?? 'Hi neighborhood';
 console.log(preservingFalsy); // '' (as myText is neither undefined nor null)
 ```
 
+### ... 扩展运算符
+![2e4ab2657528ac24c89c9154a3e58bf](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/2e4ab2657528ac24c89c9154a3e58bf.png){width=50%}
+
+在JavaScript中，... 运算符（也称为展开运算符）用于对象或数组的浅拷贝。这意味着它只会复制对象的顶层属性。如果对象中包含嵌套的对象或数组，这些嵌套的对象或数组不会被深度复制，而是会保留对原始对象或数组的引用
+
 ## Compare With Ts
 
 ### why TS
