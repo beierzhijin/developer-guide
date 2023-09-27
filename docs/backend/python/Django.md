@@ -22,6 +22,15 @@ conda search --full-name python
 conda search --full-name python --channel conda-forge
 ```
 
+`conda activate` 在windows powershell激活时可能会报错 <strong style="color:red;">UnicodeEncodeError: 'gbk' codec can't encode character '\ue1bb' in position ...</strong>
+
+原因：Python 的输出尝试使用 'gbk' 编码来显示一个包含特殊字符的字符，但 'gbk' 编码无法处理该字符。这通常发生在 Windows 中，因为 Windows 中文版默认使用 'gbk' 编码来处理命令行输出。
+
+解决方法如下：
+
+![image-20230927171617269](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20230927171617269.png)
+
+
 #### WIN
 
 ##### curl
