@@ -127,6 +127,7 @@ function nav() {
             { text: 'OOP', link: '/backend/java/OOP' }
           ]
         },
+        { text: 'Python', link: '/backend/python/Django' },
         { text: 'Linux', link: '/backend/container/Linux' },
         { text: 'Containers', link: '/backend/container/docker' },
         { text: 'Vim', link: '/backend/container/vim' },
@@ -211,6 +212,13 @@ function sidebarBackend() {
         { text: 'biyi', link: '/backend/java/biyi' },
         { text: 'SpringBoot', link: '/backend/java/springboot' },
         { text: 'IDEA', link: '/backend/java/IDEA' }
+      ]
+    },
+    {
+      text: 'Python',
+      collapsible: true,
+      items: [
+        { text: 'Django', link: '/backend/python/Django' },
       ]
     },
     {
