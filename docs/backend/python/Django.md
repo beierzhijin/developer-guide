@@ -82,5 +82,11 @@ After installing, initialize your newly-installed Miniconda. The following comma
 ```zsh
 conda config --set auto_activate_base false
 ```
+
+#### Linux
+
+> https://docs.conda.io/projects/miniconda/en/latest/#quick-command-line-install
+
+切换至Linux
   
 
