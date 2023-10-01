@@ -9,7 +9,7 @@
 > Miniconda 是一个小型的 Anaconda，提供了 Anaconda 的包管理器 conda，但不包括 Anaconda 发行版中预安装的大量数据科学包。这样可以节省空间，用户可以根据需要安装特定的包。
 
 ```powershell
-conda init powershell
+conda update -n base -c defaults conda # 更新conda
 conda env list
 conda create --name myenv python=3.11.5
 conda create --prefix ./myenv python=3.11.5
@@ -53,6 +53,7 @@ After installing, open the “Anaconda Prompt (miniconda3)” program to use Min
 ```powershell
 scoop install miniconda3
 scoop info miniconda3 # 查看安装信息
+conda init powershell
 ```
 
 #### Mac
