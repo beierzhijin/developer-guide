@@ -158,3 +158,50 @@ pip install django==version-number
 django-admin -h
 django-admin startproject project-name
 ```
+
+### 创建 django 项目
+
+`django-admin startproject project-name`
+
+```shell
+├── manage.py           【启动】【不要动】
+└── mysite
+    ├── __init__.py
+    ├── asgi.py         【接收网络请求 异步】【Django3+】【不要动】
+    ├── settings.py     【项目配合：数据库...】【常常修改】
+    ├── urls.py         【URL和函数的对应关系】【常常修改】
+    └── wsgi.py         【接收网络请求 同步】【不要动】
+```
+
+### 创建 app
+
+> 一个项目可以包含多个 app，一个"app"是一个包含模型、视图、模板、路由等的小型模块化 Web 应用程序。它被设计成可复用的，这意味着你可以在多个项目中使用相同的 app，或者将其与其他开发者分享。
+
+`模块化` `可复用` `完整性`
+
+`python manage.py startapp app-name`
+
+```shell
+├── app01
+│   ├── __init__.py
+│   ├── admin.py        【django默认提供了admin后台管理】【不用动】
+│   ├── apps.py         【app启动类】【不用动】
+│   ├── migrations      【数据库变更记录】【不用动】
+│   │   └── __init__.py
+│   ├── models.py       【重要】【对数据库操作】
+│   ├── tests.py        【单元测试】【不用动】
+│   └── views.py        【重要】【函数】
+├── manage.py           【启动】【不要动】
+└── mysite
+    ├── __init__.py
+    ├── asgi.py         【接收网络请求 异步】【Django3+】【不要动】
+    ├── settings.py     【项目配合：数据库...】【常常修改】
+    ├── urls.py         【URL ⇢ 函数】【常常修改】
+    └── wsgi.py         【接收网络请求 同步】【不要动】
+```
+
+### 启动项目
+
+```shell
+python manage.py runserver 0.0.0.0:8080
+```
