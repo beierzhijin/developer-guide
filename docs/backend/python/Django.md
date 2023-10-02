@@ -107,6 +107,16 @@ pip install -r requirements.txt # 安装依赖
 pip list # 列出已安装的包
 ```
 
+### pip-autoremove
+
+> 默认情况下，使用pip uninstall命令卸载一个包时，它不会自动卸载该包的依赖项（除非这些依赖项不再被其他包使用并且是通过安装该包自动安装的）
+
+卸载一个包以及其所有依赖
+```shell
+pip install pip-autoremove
+pip-autoremove package-name -y
+```
+
 ### 切换源
 
 <br />
