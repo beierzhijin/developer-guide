@@ -91,3 +91,51 @@ conda config --set auto_activate_base false
 切换至Linux
   
 
+## pip
+
+### 命令
+
+`pip search` 已经被弃用，<strong style="color:red;">ERROR: XMLRPC request failed [code: -32500]
+RuntimeError: PyPI no longer supports 'pip search' (or XML-RPC search). Please use https://pypi.org/search (via a browser) instead. See https://warehouse.pypa.io/api-reference/xml-rpc.html#deprecated-methods for more information.</strong>
+
+```shell
+pip search package-name # 已经被弃用
+pip install package-name==version-number # 安装指定版本包
+pip uninstall package-name # 卸载包
+pip freeze > requirements.txt # 导出依赖
+pip install -r requirements.txt # 安装依赖
+pip list # 列出已安装的包
+```
+
+### 切换源
+
+<br />
+
+#### Linux（Ubuntu）
+
+<br />
+
+##### 临时使用
+
+```bash
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package-name
+```
+
+##### 永久使用
+
+> 这种更改只会影响当前用户，如果对所有用户都使用清华源，可以编辑 /etc/pip.conf 文件
+
+```bash
+mkdir -p ~/.pip
+vim ~/.pip/pip.conf
+```
+
+`~/.pip/pip.conf` 内容如下：
+
+```conf
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+trusted-host = https://pypi.tuna.tsinghua.edu.cn
+```
+
