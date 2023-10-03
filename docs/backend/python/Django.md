@@ -8,7 +8,7 @@
 
 > Miniconda 是一个小型的 Anaconda，提供了 Anaconda 的包管理器 conda，但不包括 Anaconda 发行版中预安装的大量数据科学包。这样可以节省空间，用户可以根据需要安装特定的包。
 
-```powershell
+```shell
 conda update -n base -c defaults conda # 更新conda
 conda env list
 conda create --name myenv python=3.11.5
@@ -20,6 +20,9 @@ conda install python=3.11.5
 conda search python
 conda search --full-name python
 conda search --full-name python --channel conda-forge
+conda list
+conda list -e > requirements.txt #导出当前环境所有的依赖包及其对应的版本号
+conda install --yes --file requirements.txt #在新的环境中安装导出的包
 ```
 
 `conda activate` 在 windows powershell 激活时可能会报错 <strong style="color:red;">UnicodeEncodeError: 'gbk' codec can't encode character '\ue1bb' in position ...</strong>
@@ -203,5 +206,21 @@ django-admin startproject project-name
 ### 启动项目
 
 ```shell
-python manage.py runserver 0.0.0.0:8080
+python manage.py runserver 8080
 ```
+
+### 模板语法
+
+> https://gitee.com/beierzhijin/django3-study
+>
+> 参考项目示例，看 commit history
+
+### FBV & CBV
+
+> FBV: Function Based View
+>
+> CBV: Class Based View
+
+### DRF
+
+> https://www.django-rest-framework.org/
