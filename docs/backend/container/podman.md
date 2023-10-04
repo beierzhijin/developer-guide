@@ -2,12 +2,15 @@
 
 > https://podman.io/
 
+> https://hub.docker.com/
+
 ## Linux（Ubuntu）
 
 ```shell
 sudo apt update
 sudo apt install -y podman
 podman pull docker.io/mysql:latest
+podman pull docker.io/mysql:5.7 # 指定版本
 podman image -h # Manage images: https://docs.podman.io/en/latest/markdown/podman-image.1.html
 podman images # List images in local storage: https://docs.podman.io/en/latest/markdown/podman-images.1.html
 podman rmi [Image ID]
