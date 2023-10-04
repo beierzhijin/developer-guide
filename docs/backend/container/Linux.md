@@ -97,6 +97,12 @@ top
 htop
 ```
 
+### 公网 ip
+
+```shell
+curl ifconfig.me
+```
+
 ### 服务器带宽
 
 > <span style="color: #779db3;">_Model: GPT-4_ </span>
