@@ -197,6 +197,7 @@ function sidebarFrontend() {
         { text: 'error', link: '/frontend/service/error' },
         { text: '业务代码', link: '/frontend/service/useful' },
         { text: '若依vue3', link: '/frontend/vue/ruoyi' },
+        { text: 'UNI-APP', link: '/frontend/service/uniapp' },
       ]
     },
   ]
