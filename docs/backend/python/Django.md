@@ -215,6 +215,13 @@ python manage.py runserver 8080
 >
 > 参考项目示例，看 commit history
 
+### 数据库迁移
+
+```shell
+python manage.py makemigrations # 生成迁移文件
+python manage.py migrate # 执行迁移文件
+```
+
 ### FBV & CBV
 
 > FBV: Function Based View
@@ -224,3 +231,7 @@ python manage.py runserver 8080
 ### DRF
 
 > https://www.django-rest-framework.org/
+
+```
+
+```
