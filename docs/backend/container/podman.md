@@ -42,6 +42,22 @@ podman run --name mysql-container -p 3306:3306 -v ~/mysql_data:/var/lib/mysql -e
 - `-e MYSQL_ROOT_PASSWORD=root`：设置 MySQL 的 root 密码为 root
 - `-d`：后台运行容器，并返回容器 ID，否则关掉 shell 容器就停了
 
+🔺 注意：如果已经运行过一次 mysql 容器，想修改 root 密码再次运行时，不仅要删除容器，还要删除 `~/mysql_data` 目录下的所有内容
+
+> 如果你之前已经运行过容器并使用~/mysql_data 作为数据目录，那么该目录可能已经被初始化并设置了一个密码。当你再次运行容器并试图使用不同的密码时，它仍然会使用旧的密码。为了解决这个问题，你可以停止并删除容器，然后删除~/mysql_data 目录下的所有内容，再次运行容器。
+
+```shell
+cd ~/mysql_data
+sudo rm -rf *
+```
+
+### 查看 mysql 容器的 root 密码
+
+```shell
+podman inspect mysql-container # 查看容器的详细信息
+podman inspect mysql-container | grep MYSQL_ROOT_PASSWORD
+```
+
 ## command
 
 ### run
