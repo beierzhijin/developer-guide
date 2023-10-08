@@ -222,6 +222,43 @@ python manage.py makemigrations # 生成迁移文件
 python manage.py migrate # 执行迁移文件
 ```
 
+#### 数据库驱动（mysql）
+
+```shell
+pip install mysqlclient
+```
+
+🔺 在某些平台上安装 mysqlclient 可能会遇到问题，比如我在我的 WSL2 Ubuntu 上安装 mysqlclient 时, 先在系统上安装：
+
+- Ubuntu
+
+```shell
+sudo apt install pkg-config
+sudo apt install libmysqlclient-dev
+sudo apt install build-essential
+```
+
+- CentOS
+
+```shell
+sudo yum install pkg-config
+sudo yum install mysql-devel
+sudo yum groupinstall 'Development Tools'
+```
+
+<strong style="color:green;">使用 `pymysql` 作为 `mysqlclient` 的替代方案</strong>
+
+```shell
+pip install pymysql
+```
+
+> 在 Django 项目的 `__init__.py` 中加入以下代码，配置 pymysql 模拟 MySQLdb 的接口，作为 Djando 的 MySQL 数据库驱动
+
+```python
+import pymysql
+pymysql.install_as_MySQLdb()
+```
+
 ### FBV & CBV
 
 > FBV: Function Based View
@@ -231,6 +268,14 @@ python manage.py migrate # 执行迁移文件
 ### DRF
 
 > https://www.django-rest-framework.org/
+
+```
+
+```
+
+```
+
+```
 
 ```
 
