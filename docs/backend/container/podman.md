@@ -15,6 +15,7 @@ podman image -h # Manage images: https://docs.podman.io/en/latest/markdown/podma
 podman images # List images in local storage: https://docs.podman.io/en/latest/markdown/podman-images.1.html
 podman rmi [Image ID]
 podman ps -a # 查看所有容器
+podman start [CONTAINER ID] # Start one or more containers: https://docs.podman.io/en/latest/markdown/podman-start.1.html
 podman stop [CONTAINER ID] # Stop one or more containers: https://docs.podman.io/en/latest/markdown/podman-stop.1.html
 podman rm [CONTAINER ID] # Remove one or more containers: https://docs.podman.io/en/latest/markdown/podman-rm.1.html
 ```
