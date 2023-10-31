@@ -189,6 +189,11 @@ chmod 700 /home/username
 chmod 700 ~/.ssh/
 # ~/.ssh/authorized_keys 文件权限
 chmod 600 ~/.ssh/authorized_keys
+# 更改文件或目录的所有者和组, chown 是 change owner 的缩写
+sudo chown -R [user]:[group] [directory_or_file]
+sudo chown -R klaus:klaus /var/www/site1.com/
+# 恢复目录权限 (推荐)
+sudo chown -R www-data:www-data /var/www/site1.com/
 ```
 
 ### 软件相关
@@ -219,6 +224,14 @@ touch love.txt
 echo "I love you" > love.txt
 # 移动文件到某目录
 mv love.txt ~/services/
+# 解压
+sudo apt install unzip  # 对于Debian/Ubuntu系统
+sudo yum install unzip  # 对于CentOS系统
+unzip xxx.zip
+# 解压一个gzip压缩的tar归档文件，并显示正在解压的文件名
+tar -zxvf xxx.tar.gz
+# 移动所有文件到上一级
+mv dist/* .
 ```
 
 ### shell 相关
