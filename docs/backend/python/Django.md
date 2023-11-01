@@ -146,7 +146,7 @@ vim ~/.pip/pip.conf
 
 `~/.pip/pip.conf` 内容如下：
 
-```conf
+```txt
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 [install]

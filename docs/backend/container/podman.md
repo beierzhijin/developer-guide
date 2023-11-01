@@ -22,7 +22,7 @@ podman rm [CONTAINER ID] # Remove one or more containers: https://docs.podman.io
 
 或者先配置 `sudo vim /etc/containers/registries.conf`
 
-```conf
+```txt
 [registries.search]
 registries = ['docker.io', 'quay.io']
 ```
