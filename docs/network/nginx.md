@@ -21,6 +21,18 @@ Nginx 启动后，在 Linux 系统中有两个进程，一个为 master，一个
 
 ## 常用命令
 
+```bash
+nginx -V
+nginx -v
+nginx -t # 验证配置是否正确
+start nginx
+nginx -s reload # nginx.conf修改后需执行，使修改生效(在cmd下执行)
+nginx -s stop # 快速停止
+nginx -s quit # 完整有序的停止
+```
+
+### windows
+
 ```powershell
 # 检查80端口是否被占用的命令，windows
 netstat -ano | findstr 0.0.0.0:80 或 netstat -ano | findstr "80"
@@ -41,13 +53,19 @@ taskkill /f /pid 6276 /pid 24500
 tasklist /?
 # 查看所有进程
 tasklist
+```
 
-nginx -V
-nginx -t # 验证配置是否正确
-start nginx
-nginx -s reload # nginx.conf修改后需执行，使修改生效(在cmd下执行)
-nginx -s stop # 快速停止
-nginx -s quit # 完整有序的停止
+### Linux
+
+#### 查看 nginx 是否启动
+
+```bash
+# 如果Nginx安装并启动成功，你应该会看到类似于active (running)的状态信息
+systemctl status nginx
+# 使用netstat命令检查80端口（Nginx默认的HTTP端口）
+sudo netstat -tulnp | grep :80
+sudo ss -tulnp | grep :80
+# 浏览器访问服务器地址，如果在本机测试，输入 http://localhost 或 http://127.0.0.1，看到Nginx的欢迎页面说明启动成功
 ```
 
 ## 正向代理
