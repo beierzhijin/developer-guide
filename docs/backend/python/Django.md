@@ -268,15 +268,3 @@ pymysql.install_as_MySQLdb()
 ### DRF
 
 > https://www.django-rest-framework.org/
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```

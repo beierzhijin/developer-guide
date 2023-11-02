@@ -171,6 +171,15 @@ chmod u-w /etc/sudoers
 # 删除用户
 userdel -r test
 
+# 查看所有用户
+cat /etc/passwd
+cat /etc/passwd |cut -f 1 -d :
+# 查找某个用户
+cat /etc/passwd |grep 用户名
+# 查看所有组
+cat /etc/group
+cat /etc/group |grep klaus
+组名:x:组id:用户1,用户2,用户3
 
 # 修改用户密码
 passwd [username]

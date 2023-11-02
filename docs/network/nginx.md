@@ -9,13 +9,13 @@ titleTemplate: 反向代理
 
 <iframe src="//player.bilibili.com/player.html?aid=680452541&bvid=BV18S4y1T7Gv&cid=478784385&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
-ppt资料请转至[About Me](/guide/connect-me#email)发送邮件获取
+ppt 资料请转至[About Me](/guide/connect-me#email)发送邮件获取
 
-## Nginx简介
+## Nginx 简介
 
-> [Nginx](https://docshome.gitbook.io/nginx-docs/)是由俄罗斯的程序员Igor Sysoev所开发，第一个公开版本0.1.0发布于2004年10月4日。Nginx是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP代理服务器。Nginx是由C语言编写的，也有人用C++重写了Nginx，名为Tengine。Nginx的特点是占有内存少，并发能力强，事实上Nginx的并发能力在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户已经超过50%。--- 来自Github Copilot
+> [Nginx](https://docshome.gitbook.io/nginx-docs/)是由俄罗斯的程序员 Igor Sysoev 所开发，第一个公开版本 0.1.0 发布于 2004 年 10 月 4 日。Nginx 是一个高性能的 HTTP 和反向代理服务器，也是一个 IMAP/POP3/SMTP 代理服务器。Nginx 是由 C 语言编写的，也有人用 C++重写了 Nginx，名为 Tengine。Nginx 的特点是占有内存少，并发能力强，事实上 Nginx 的并发能力在同类型的网页服务器中表现较好，中国大陆使用 nginx 网站用户已经超过 50%。--- 来自 Github Copilot
 
-Nginx启动后，在Linux系统中有两个进程，一个为master，一个为worker。master作为管理员不参与任何工作，只负责管理worker进程，给多个worker分配不同的任务（worker一般配置多个），worker进程负责处理请求。
+Nginx 启动后，在 Linux 系统中有两个进程，一个为 master，一个为 worker。master 作为管理员不参与任何工作，只负责管理 worker 进程，给多个 worker 分配不同的任务（worker 一般配置多个），worker 进程负责处理请求。
 
 ![](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/1666370176643.png)
 
@@ -56,7 +56,7 @@ nginx -s quit # 完整有序的停止
 
 <strong style="color:orange;">正向代理代理的是客户端</strong>
 
-客户端向代理服务器发送请求，代理服务器再向目标服务器转发请求，然后将目标服务器返回的响应返回给客户端。🪜就是正向代理。
+客户端向代理服务器发送请求，代理服务器再向目标服务器转发请求，然后将目标服务器返回的响应返回给客户端。🪜 就是正向代理。
 
 - 能够隐藏真实的客户端信息：对于你想要进入的服务器来说，它只知道代理服务器，并不知道客户端
 
@@ -64,7 +64,7 @@ nginx -s quit # 完整有序的停止
 
 <strong style="color:green;">反向代理代理的是服务器</strong>
 
-将Nginx作为反向代理服务器，我们访问<strong style="color:pink;">百度</strong>时，反向代理服务器会将我们的访问请求转发到真实的服务器上。所以，反向代理隐藏了真实的服务器地址信息。从我们（客户端）的角度看，并不知道我们刚才访问的其实是代理服务器。
+将 Nginx 作为反向代理服务器，我们访问<strong style="color:pink;">百度</strong>时，反向代理服务器会将我们的访问请求转发到真实的服务器上。所以，反向代理隐藏了真实的服务器地址信息。从我们（客户端）的角度看，并不知道我们刚才访问的其实是代理服务器。
 
 - [负载均衡](/network/nginx#负载均衡)：反向代理的主要应用是负载均衡
 
@@ -140,7 +140,7 @@ server {
 
 ## 负载均衡
 
-将nginx用于反向代理服务器，将客户端的请求分发到(后端)多个(Tomcat)服务器上，从而提高服务器的并发能力，达到负载均衡的目的。
+将 nginx 用于反向代理服务器，将客户端的请求分发到(后端)多个(Tomcat)服务器上，从而提高服务器的并发能力，达到负载均衡的目的。
 
 ### server [parameters]
 
@@ -204,7 +204,7 @@ $ tree
 server {
 
 	listen 9999;
-	server_name localhost;	
+	server_name localhost;
 
 	location /static/ {
 
@@ -215,7 +215,7 @@ server {
 		autoindex on;
 
 	}
-    
+
 }
 ```
 
@@ -225,7 +225,7 @@ server {
 server {
 
 	listen 9999;
-	server_name localhost;	
+	server_name localhost;
 
 	location /static/ {
 
@@ -236,7 +236,7 @@ server {
 		autoindex on;
 
 	}
-	
+
 }
 ```
 
@@ -249,7 +249,7 @@ server {
 	server_name localhost;
 
     # 存放静态文件的文件目录，linux下应该需要加 /，形如/xxx/xxx;
-    # root my_images_host;  
+    # root my_images_host;
 
     location / {
 		root html;
@@ -263,12 +263,15 @@ server {
 		root my_images_host;
 		autoindex on;
 	}
-	
+
 }
 ```
 
-## Linux配置
+## Linux 配置
+
 ```bash
+# Nginx的配置文件, 通常是
+/etc/nginx/nginx.conf
 # 通过 killall 命令
 sudo killall nginx
 # 通过 pkill 命令，类似于 pgrep + kill
@@ -285,7 +288,8 @@ pidof nginx | kill -9
 kill -9 `pgrep nginx`
 ```
 
-### 彻底卸载nginx
+### 彻底卸载 nginx
+
 ```bash
 # 停止nginx
 ps -ef | grep nginx
@@ -297,12 +301,6 @@ sudo find / -name nginx
 rm -rf ****
 ```
 
-
-
-
 ## 502 Bad Gateway
 
 [How to Solve 502 Bad Gateway Issues? - KeyCDN Support](https://www.keycdn.com/support/502-bad-gateway)
-
-
-
