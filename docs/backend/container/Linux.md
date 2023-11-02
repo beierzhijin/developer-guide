@@ -201,7 +201,7 @@ chmod 600 ~/.ssh/authorized_keys
 # 更改文件或目录的所有者和组, chown 是 change owner 的缩写
 sudo chown -R [user]:[group] [directory_or_file]
 sudo chown -R klaus:klaus /var/www/site1.com/
-# 恢复目录权限 (推荐)
+# 恢复目录权限 (推荐)。在很多Linux发行版中，特别是Debian和Ubuntu，Web服务器（例如Apache和Nginx）默认以www-data用户和组运行。因此，将Web目录的所有权设置为www-data是常见的做法，以确保Web服务器可以正确地读取和写入文件。
 sudo chown -R www-data:www-data /var/www/site1.com/
 ```
 
