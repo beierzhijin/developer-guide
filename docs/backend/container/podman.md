@@ -107,8 +107,19 @@ https://github.com/docker-library/mysql/issues/396，
 
 ### redis & redisinsight
 
+> https://redis.io/docs/install/install-stack/docker/
+
 ```bash
-podman run -d --name redis-stack -p 127.0.0.1:6379:6379 -p 8001:8001 -v ~/mypod/redis/conf/local-redis-stack.conf:/redis-stack.conf -v ~/mypod/redis/data:/data -e REDIS_ARGS="--requirepass 12345" -e REDIS_ARGS="--appendonly yes" redis/redis-stack:latest
+podman run -d --name redis-stack -p 127.0.0.1:6379:6379 -p 8001:8001 -v ~/my-containers/redis/local-redis-stack.conf:/redis-stack.conf -v ~/my-containers/redis/local-data:/data -e REDIS_ARGS="--requirepass 123456 --appendonly yes" redis/redis-stack:latest
+```
+
+`local-redis-stack.conf` 配置如下
+
+```conf
+bind 0.0.0.0
+protected-mode no
+appendonly no
+requirepass 123456
 ```
 
 ## Podman for Windows（WSL2）
