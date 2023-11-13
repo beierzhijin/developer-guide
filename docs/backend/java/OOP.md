@@ -16,7 +16,7 @@ outline: deep
 
 [什么是面向对象（OOP） - 简书 (jianshu.com)](https://www.jianshu.com/p/7a5b0043b035)
 
-## JDK环境变量配置
+## JDK 环境变量配置
 
 ### Win
 
@@ -27,6 +27,15 @@ outline: deep
 
 ```powershell
 java -version
+# 如果安装的是 SUN/OracleJDK
+java version "1.8.0_381"
+Java(TM) SE Runtime Environment (build 1.8.0_381-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.381-b09, mixed mode)
+# 如果安装的是 OpenJDK
+openjdk version "1.8.0_381"
+OpenJDK Runtime Environment (build 1.8.0_381-b09)
+OpenJDK 64-Bit Server VM (build 25.381-b09, mixed mode)
+
 java
 javac
 ```
@@ -34,16 +43,21 @@ javac
 ### Mac
 
 通过 Homebrew 安装
+
 ```shell
 brew search openjdk
 brew install openjdk@17
 java --version
 ```
-把homebrew安装的openjdk17软链接到系统目录 
+
+把 homebrew 安装的 openjdk17 软链接到系统目录
+
 ```shell
 sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
 ```
+
 切到用户目录
+
 ```shell
 cd
 vim .zshrc
@@ -57,16 +71,18 @@ source .zshrc
 # 检查配置
 echo $JAVA_HOME
 ```
-## Maven环境变量配置
+
+## Maven 环境变量配置
 
 ### Win
 
-|    变量     |                  值                  |
-| :---------: | :----------------------------------: |
+|     变量     |               值                |
+| :----------: | :-----------------------------: |
 | `MAVEN_HOME` | `D:\A\maven\apache-maven-3.9.2` |
-|   `Path`    |          `%MAVEN_HOME%\bin`           |
+|    `Path`    |       `%MAVEN_HOME%\bin`        |
 
 ### Mac
+
 ```shell
 cd
 vim .zshrc
@@ -77,14 +93,17 @@ export PATH
 # 完成配置
 source .zshrc
 # 检查配置
-mvn -version 
+mvn -version
 ```
-同时，IDEA中配置Maven
+
+同时，IDEA 中配置 Maven
+
 - Maven home path: `/Volumes/Panamera/A/maven/apache-maven-3.9.2`
 - User settings file: `/Volumes/Panamera/A/maven/apache-maven-3.9.2/conf/settings.xml`
 - Local repository: `/Volumes/Panamera/A/maven/localRepository`
 
 [阿里云镜像](https://developer.aliyun.com/mirror/maven)
+
 ```xml
 <localRepository>/Volumes/Panamera/A/maven/localRepository</lcalRepository>
 
@@ -108,8 +127,8 @@ import org.junit.jupiter.api.Test;
 class BalenciagaTest {
 
     /**
-     * @param 
-     * @return 
+     * @param
+     * @return
      * @Description: 基本数据类型没有父类，打印值都为 null
      * @version v1.0
      * @author 刘仁钦
@@ -130,16 +149,16 @@ class BalenciagaTest {
 }
 ```
 
-| 基本类型                    | 位数  | 包装类     | 缺省sheng值 |
-|:----------------------- | --- |:------- |:-------- |
-| byte                    | 8位  | Byte    | 0        |
-| short                   | 16位 | Short   | 0        |
-| int                     | 32位 | Int     | 0        |
-| long                    | 64位 | Long    | 0L       |
-| float                   | 32位 | Float   | 0.0F     |
-| double(默认)              | 64位 | Double  | 0.0D     |
-| char(只能存放一个字符,用 ' ' 表示) | 16位 | Char    | 空        |
-| boolean                 | 1位  | Boolean | false    |
+| 基本类型                           | 位数  | 包装类  | 缺省 sheng 值 |
+| :--------------------------------- | ----- | :------ | :------------ |
+| byte                               | 8 位  | Byte    | 0             |
+| short                              | 16 位 | Short   | 0             |
+| int                                | 32 位 | Int     | 0             |
+| long                               | 64 位 | Long    | 0L            |
+| float                              | 32 位 | Float   | 0.0F          |
+| double(默认)                       | 64 位 | Double  | 0.0D          |
+| char(只能存放一个字符,用 ' ' 表示) | 16 位 | Char    | 空            |
+| boolean                            | 1 位  | Boolean | false         |
 
 ```java
     int i = 5;
@@ -227,20 +246,20 @@ public class Hero {
 
 ## 访问控制修饰符
 
-[Java访问控制修饰符详解](http://c.biancheng.net/view/965.html)
+[Java 访问控制修饰符详解](http://c.biancheng.net/view/965.html)
 
 **package = default**
 
-|           | 自身  | 同包类  | 同包子类 | 不同包子类 | 其他类  |
-|:---------:|:---:|:----:|:----:|:-----:|:----:|
-| private   | 访问  | 不能访问 | 不能继承 | 不能继承  | 不能访问 |
-| package   | 访问  | 访问   | 继承   | 不能继承  | 不能访问 |
-| protected | 访问  | 访问   | 继承   | 继承    | 不能访问 |
-| public    | 访问  | 访问   | 继承   | 继承    | 访问   |
+|           | 自身 |  同包类  | 同包子类 | 不同包子类 |  其他类  |
+| :-------: | :--: | :------: | :------: | :--------: | :------: |
+|  private  | 访问 | 不能访问 | 不能继承 |  不能继承  | 不能访问 |
+|  package  | 访问 |   访问   |   继承   |  不能继承  | 不能访问 |
+| protected | 访问 |   访问   |   继承   |    继承    | 不能访问 |
+|  public   | 访问 |   访问   |   继承   |    继承    |   访问   |
 
 ## 重载重写
 
-重载：方法名一样，参数类型不一样，在调用方法attack的时候，会根据传递的参数类型以及数量，自动调用对应的方法
+重载：方法名一样，参数类型不一样，在调用方法 attack 的时候，会根据传递的参数类型以及数量，自动调用对应的方法
 
 ```java
 public void attack()
