@@ -210,7 +210,7 @@ function sidebarBackend() {
       collapsible: true,
       items: [
         { text: 'OOP', link: '/backend/java/OOP' },
-        { text: 'biyi', link: '/backend/java/biyi' },
+        { text: 'ruoyi', link: '/backend/java/ruoyi' },
         { text: 'SpringBoot', link: '/backend/java/springboot' },
         { text: 'IDEA', link: '/backend/java/IDEA' }
       ]

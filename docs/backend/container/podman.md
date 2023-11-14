@@ -107,11 +107,15 @@ https://github.com/docker-library/mysql/issues/396，
 
 ### redis & redisinsight
 
-> https://redis.io/docs/install/install-stack/docker/
+> https://redis.io/docs/install/install-stack/docker/ > https://dockerproxy.com/
 
 ```bash
-podman run -d --name redis-stack -p 127.0.0.1:6379:6379 -p 8001:8001 -v ~/my-containers/redis/local-redis-stack.conf:/redis-stack.conf -v ~/my-containers/redis/local-data:/data -e REDIS_ARGS="--requirepass 123456 --appendonly yes" redis/redis-stack:latest
+podman pull dockerproxy.com/library/redis-stack:latest
+
+podman run -d --name redis-stack -p 127.0.0.1:6379:6379 -p 13333:8001 -v ~/my-containers/redis/local-redis-stack.conf:/redis-stack.conf -v ~/my-containers/redis/local-data:/data -e REDIS_ARGS="--requirepass 123456 --appendonly yes" redis/redis-stack:latest
 ```
+
+网页直接 `localhost:13333` 访问，输入上面的密码 `123456`
 
 `local-redis-stack.conf` 配置如下
 

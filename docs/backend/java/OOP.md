@@ -78,7 +78,7 @@ echo $JAVA_HOME
 
 |     变量     |               值                |
 | :----------: | :-----------------------------: |
-| `MAVEN_HOME` | `D:\A\maven\apache-maven-3.9.2` |
+| `MAVEN_HOME` | `D:\A\maven\apache-maven-3.9.5` |
 |    `Path`    |       `%MAVEN_HOME%\bin`        |
 
 ### Mac
@@ -87,7 +87,7 @@ echo $JAVA_HOME
 cd
 vim .zshrc
 # 加入下面的配置，保存退出
-export M2_HOME="/Volumes/Panamera/programming/java/maven/apache-maven-3.9.2"
+export M2_HOME="/Volumes/Panamera/programming/java/maven/apache-maven-3.9.5"
 PATH="${M2_HOME}/bin:${PATH}"
 export PATH
 # 完成配置
@@ -98,8 +98,8 @@ mvn -version
 
 同时，IDEA 中配置 Maven
 
-- Maven home path: `/Volumes/Panamera/A/maven/apache-maven-3.9.2`
-- User settings file: `/Volumes/Panamera/A/maven/apache-maven-3.9.2/conf/settings.xml`
+- Maven home path: `/Volumes/Panamera/A/maven/apache-maven-3.9.5`
+- User settings file: `/Volumes/Panamera/A/maven/apache-maven-3.9.5/conf/settings.xml`
 - Local repository: `/Volumes/Panamera/A/maven/localRepository`
 
 [阿里云镜像](https://developer.aliyun.com/mirror/maven)
