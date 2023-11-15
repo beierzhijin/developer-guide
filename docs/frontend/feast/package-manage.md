@@ -54,7 +54,28 @@ node --version > .node-version
 
 ### Linux
 
-安装`curl -fsSL https://fnm.vercel.app/install | bash`
+安装 `curl -fsSL https://fnm.vercel.app/install | bash`
+
+::: danger INTERNET FREEDOM 
+国内的某些傻逼服务器, 可能会 curl: (7) Failed to connect to fnm.vercel.app port 443 after 6 ms: Connection refused
+:::
+
+#### 下载二进制文件
+
+[github官方仓库下载](https://github.com/Schniz/fnm/releases), `unzip fnm-linux.zip`
+
+#### 赋权
+
+```Bash
+# 确保该文件具有可执行权限
+chmod +x fnm
+```
+
+#### 移动文件到全局路径
+
+```Bash
+sudo mv fnm /usr/local/bin
+```
 
 ### Windows
 
