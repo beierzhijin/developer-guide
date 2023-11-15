@@ -182,3 +182,48 @@ landscapeWidth: 900
   "lint": "vue-cli-service lint"
 },
 ```
+
+## 图片本地选择展示
+
+```vue
+<template>
+  <div>
+    <el-upload
+      ref="upload"
+      class="upload-demo"
+      action="https://jsonplaceholder.typicode.com/posts/" <!-- 替换为实际的上传地址 -->
+      list-type="picture-card"
+      :auto-upload="false"
+      :before-upload="handleBeforeUpload">
+      <i class="el-icon-plus"></i>
+    </el-upload>
+    <!-- 回显图片 -->
+    <img v-if="imageUrl" :src="imageUrl" alt="Image preview" style="max-width: 100%; height: auto;" />
+    <el-button type="primary" @click="submitUpload">上传图片</el-button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      imageUrl: null, // 存储图片预览的 URL
+    };
+  },
+  methods: {
+    handleBeforeUpload(file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = e => {
+        this.imageUrl = e.target.result;
+      };
+      return false; // 阻止文件自动上传
+    },
+    submitUpload() {
+      this.$refs.upload.submit(); // 调用上传方法
+    }
+  }
+};
+</script>
+
+```
