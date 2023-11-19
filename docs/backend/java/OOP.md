@@ -266,3 +266,10 @@ public void attack()
 public void attack(Hero h1)
 public void attack(Hero h1, Hero h2)
 ```
+
+## 垃圾回收(garbage collection)
+
+HEAP: 堆内存，存放对象实例
+STACK: 栈内存，存放局部变量（包括这个变量如果是对象实例的引用），方法执行完毕后 Java Runtime 会立即自动释放
+
+如果一个对象在一段时间内不再使用（包括没有任何引用指向它），那么这个对象会被垃圾回收器回收
