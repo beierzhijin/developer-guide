@@ -26,7 +26,7 @@ nginx -h
 nginx -V
 nginx -v
 nginx -t # 验证配置是否正确
-start nginx
+nginx # 启动
 nginx -s reload # nginx.conf修改后需执行，使修改生效(在cmd下执行)
 nginx -s stop # 快速停止
 nginx -s quit # 完整有序的停止
