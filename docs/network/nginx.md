@@ -22,6 +22,7 @@ Nginx 启动后，在 Linux 系统中有两个进程，一个为 master，一个
 ## 常用命令
 
 ```bash
+nginx -h
 nginx -V
 nginx -v
 nginx -t # 验证配置是否正确
@@ -32,6 +33,22 @@ nginx -s quit # 完整有序的停止
 ```
 
 ### windows
+
+```powershell
+scoop install main/nginx
+```
+
+`C:\Users\klaus\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1` 写入
+
+```powershell
+# 给 nginx -p `$env:NGINX_HOME" 添加别名
+# scoop info nginx 命令 - Notes: To use the correct configuration run 'nginx -p "$env:NGINX_HOME"' or 'nginx -p "%NGINX_HOME%"'
+function Handle-Nginx {
+		& "C:\Users\klaus\scoop\apps\nginx\current\nginx.exe" -p "$env:NGINX_HOME" @args
+}
+
+Set-Alias -Name nginx -Value Handle-Nginx
+```
 
 ```powershell
 # 检查80端口是否被占用的命令，windows
