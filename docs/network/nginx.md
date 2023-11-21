@@ -40,7 +40,7 @@ netstat -ano | findstr 0.0.0.0:80 或 netstat -ano | findstr "80"
 netstat -ano | grep 0.0.0.0:80 或 netstat -ano | grep "80"
 
 # windows查看nginx进程
-tasklist /fi  "imagename eq nginx.exe"
+tasklist /fi "imagename eq nginx.exe"
 
 映像名称          PID 会话名                会话#       内存使用
 =========== ======== ================ =========== ============
