@@ -158,6 +158,21 @@ http {
 }
 ```
 
+### include myvhost/80.conf;
+
+```nginx
+server {
+    listen 80;
+    server_name www.viphimself.vip;
+
+    root /var/www/quanyi;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+
 ### include myvhost/8888.conf;
 
 ```nginx
