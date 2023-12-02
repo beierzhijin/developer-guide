@@ -168,6 +168,7 @@ function sidebarFrontend() {
         { text: 'css', link: '/frontend/web/css' },
         { text: 'creative power', link: '/frontend/web/creativity' },
         { text: '大屏', link: '/frontend/web/big-screen' },
+        { text: 'debug', link: '/frontend/web/debug' },
       ]
     },
     {
