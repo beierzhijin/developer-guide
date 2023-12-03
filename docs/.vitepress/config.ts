@@ -167,7 +167,7 @@ function sidebarFrontend() {
         { text: 'create a site', link: '/frontend/web/site' },
         { text: 'css', link: '/frontend/web/css' },
         { text: 'creative power', link: '/frontend/web/creativity' },
-        { text: '大屏', link: '/frontend/web/big-screen' },
+        { text: 'datav', link: '/frontend/web/datav' },
         { text: 'debug', link: '/frontend/web/debug' },
       ]
     },
