@@ -115,3 +115,12 @@ function unset_china_source() {
 ```bash
 rm -rf $(brew --prefix)/var/homebrew/locks
 ```
+
+## powershell 设置代理
+
+### 临时设置
+
+```powershell
+$env:HTTP_PROXY = "http://localhost:7890"
+$env:HTTPS_PROXY = "http://localhost:7890"
+```
