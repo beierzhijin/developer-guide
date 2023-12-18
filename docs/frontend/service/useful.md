@@ -1,53 +1,59 @@
 # 业务代码
 
 ## 循环遍历时值覆盖问题
-有这样的业务场景：选中或取消userCheck会增加或减少对应项，操作之后如果userCheck中还包含userId中的某项，showSomething置为true，否则仍为false
+
+有这样的业务场景：选中或取消 userCheck 会增加或减少对应项，操作之后如果 userCheck 中还包含 userId 中的某项，showSomething 置为 true，否则仍为 false
+
 ```js
-let showSomething = false
-let userId = ['1', '2']
+let showSomething = false;
+let userId = ["1", "2"];
 let userCheck = [
   {
-    name: 'A',
-    userId: '10'
-  }, 
+    name: "A",
+    userId: "10",
+  },
   {
-    name: 'B',
-    userId: '11'
-  }, 
+    name: "B",
+    userId: "11",
+  },
   {
-    name: 'C',
-    userId: '12'
-  }, 
+    name: "C",
+    userId: "12",
+  },
   {
-    name: 'D',
-    userId: '2'
-  }
-]
+    name: "D",
+    userId: "2",
+  },
+];
 ```
+
 如果使用`forEach`，会出现覆盖问题， `showSomething`最终为最后一次循环赋的值
+
 ```js
-userCheck.forEach(item => {
-  userId.forEach(id => {
+userCheck.forEach((item) => {
+  userId.forEach((id) => {
     if (item.userId === id) {
-      showSomething = true
+      showSomething = true;
     } else {
-      showSomething = false
+      showSomething = false;
     }
-  })
-})
+  });
+});
 ```
 
 `array.some(function(currentValue,index,arr),thisValue)`
 
 some()方法会依次执行数组的每个元素：
-+ 如果有一个元素满足条件，则表达式返回true , 剩余的元素不会再执行检测
-+ 如果没有满足条件的元素，则返回false
+
+- 如果有一个元素满足条件，则表达式返回 true , 剩余的元素不会再执行检测
+- 如果没有满足条件的元素，则返回 false
 
 如果使用`some`，则不会出现覆盖问题，`showSomething`最终为第一次满足条件时的值
+
 ```js
-const exists = userCheck.some(item => userId.includes(item.userId))
+const exists = userCheck.some((item) => userId.includes(item.userId));
 if (exists) {
-  showSomething = true
+  showSomething = true;
 }
 ```
 
@@ -61,17 +67,17 @@ Let's assume you have the following `if-else` block:
 
 ```javascript
 function doAction(action) {
-    if (action === 'create') {
-        // create something
-    } else if (action === 'read') {
-        // read something
-    } else if (action === 'update') {
-        // update something
-    } else if (action === 'delete') {
-        // delete something
-    } else {
-        // handle invalid action
-    }
+  if (action === "create") {
+    // create something
+  } else if (action === "read") {
+    // read something
+  } else if (action === "update") {
+    // update something
+  } else if (action === "delete") {
+    // delete something
+  } else {
+    // handle invalid action
+  }
 }
 ```
 
@@ -81,18 +87,30 @@ Now, let's refactor this using a `Map`:
 
 ```javascript
 const actionMap = new Map([
-    ['create', () => {
-        // create something
-    }],
-    ['read', () => {
-        // read something
-    }],
-    ['update', () => {
-        // update something
-    }],
-    ['delete', () => {
-        // delete something
-    }]
+  [
+    "create",
+    () => {
+      // create something
+    },
+  ],
+  [
+    "read",
+    () => {
+      // read something
+    },
+  ],
+  [
+    "update",
+    () => {
+      // update something
+    },
+  ],
+  [
+    "delete",
+    () => {
+      // delete something
+    },
+  ],
 ]);
 ```
 
@@ -100,11 +118,13 @@ const actionMap = new Map([
 
 ```javascript
 function doAction(action) {
-    const actionFunction = actionMap.get(action) || (() => {
-        // handle invalid action
+  const actionFunction =
+    actionMap.get(action) ||
+    (() => {
+      // handle invalid action
     });
 
-    actionFunction();
+  actionFunction();
 }
 ```
 
@@ -138,7 +158,7 @@ changeBtn(item) {
 },
 ```
 
-## 获取query参数
+## 获取 query 参数
 
 ```js
 getParameterByName(name) {
@@ -158,11 +178,11 @@ landscape: true,
 landscapeWidth: 900
 ```
 
-配置宽屏后跑不起来的话，小写a换成大写A
+配置宽屏后跑不起来的话，小写 a 换成大写 A
 
 ![image-20221031181414400](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20221031181414400.png)
 
-## 低版本Vue Cli的node-ipc缺失
+## 低版本 Vue Cli 的 node-ipc 缺失
 
 ```json
 // package.json
@@ -172,7 +192,7 @@ landscapeWidth: 900
 },
 ```
 
-## Node > 17，Vue Cli无法运行
+## Node > 17，Vue Cli 无法运行
 
 ```json
 // package.json
@@ -191,14 +211,22 @@ landscapeWidth: 900
     <el-upload
       ref="upload"
       class="upload-demo"
-      action="https://jsonplaceholder.typicode.com/posts/" <!-- 替换为实际的上传地址 -->
-      list-type="picture-card"
-      :auto-upload="false"
+      action="https://jsonplaceholder.typicode.com/posts/"
+      <!--
+      替换为实际的上传地址
+      --
+    >
+      list-type="picture-card" :auto-upload="false"
       :before-upload="handleBeforeUpload">
       <i class="el-icon-plus"></i>
     </el-upload>
     <!-- 回显图片 -->
-    <img v-if="imageUrl" :src="imageUrl" alt="Image preview" style="max-width: 100%; height: auto;" />
+    <img
+      v-if="imageUrl"
+      :src="imageUrl"
+      alt="Image preview"
+      style="max-width: 100%; height: auto;"
+    />
     <el-button type="primary" @click="submitUpload">上传图片</el-button>
   </div>
 </template>
@@ -214,16 +242,35 @@ export default {
     handleBeforeUpload(file) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = e => {
+      reader.onload = (e) => {
         this.imageUrl = e.target.result;
       };
       return false; // 阻止文件自动上传
     },
     submitUpload() {
       this.$refs.upload.submit(); // 调用上传方法
-    }
-  }
+    },
+  },
 };
 </script>
+```
 
+## Element PLus - autocompelte
+
+```js
+<el-autocomplete
+  v-model="formData.xxx"
+  :fetch-suggestions="querySearchAsync"
+  placeholder="请输入"
+/>
+
+let timeout: ReturnType<typeof setTimeout>
+const querySearchAsync = async (queryString: string, cb: (arg: any) => void) => {
+  const res = await SmsApi.getNameList(queryString)
+  let nameList = res.map(i => ({ value: i.name }))
+  clearTimeout(timeout)
+  timeout = setTimeout(() => {
+    cb(nameList)
+  }, 200)
+}
 ```
