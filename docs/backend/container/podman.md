@@ -59,6 +59,12 @@ podman inspect mysql-container # 查看容器的详细信息
 podman inspect mysql-container | grep MYSQL_ROOT_PASSWORD
 ```
 
+### 进入容器
+
+```bash
+podman exec -it 【容器 ID】 bash
+```
+
 ## command
 
 ### run
