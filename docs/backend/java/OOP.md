@@ -48,6 +48,14 @@ javac
 brew search openjdk
 brew install openjdk@17
 java --version
+# 安装 JDK8
+brew tap homebrew/cask-versions
+brew install --cask zulu8
+java -version
+# 查看 JAVA_HOME
+/usr/libexec/java_home
+# 结果是 /Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home
+/usr/libexec/java_home -V
 ```
 
 把 homebrew 安装的 openjdk17 软链接到系统目录
@@ -62,10 +70,8 @@ sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/Java
 cd
 vim .zshrc
 # 加入下面的配置，保存退出
-JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home"
-export JAVA_HOME
-CLASS_PATH="$JAVA_HOME/lib"
-PATH=".$PATH:$JAVA_HOME/bin"
+export JAVA_HOME="/usr/libexec/java_home -v 1.8"
+export PATH=$JAVA_HOME/bin:$PATH
 # 完成配置
 source .zshrc
 # 检查配置
@@ -88,8 +94,7 @@ cd
 vim .zshrc
 # 加入下面的配置，保存退出
 export M2_HOME="/Volumes/Panamera/programming/java/maven/apache-maven-3.9.5"
-PATH="${M2_HOME}/bin:${PATH}"
-export PATH
+export PATH="${M2_HOME}/bin:${PATH}"
 # 完成配置
 source .zshrc
 # 检查配置
