@@ -52,7 +52,12 @@ Set-Alias -Name nginx -Value Handle-Nginx
 
 ```powershell
 # 检查80端口是否被占用的命令，windows
-netstat -ano | findstr 0.0.0.0:80 或 netstat -ano | findstr "80"
+netstat -ano | findstr 0.0.0.0:80
+netstat -ano | findstr "80"
+netstat -aon | findstr 80
+netstat -aon | findstr :80
+Get-Process -Id PID
+
 # 检查80端口是否被占用的命令，linux
 netstat -ano | grep 0.0.0.0:80 或 netstat -ano | grep "80"
 
