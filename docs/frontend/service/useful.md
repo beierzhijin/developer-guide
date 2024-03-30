@@ -274,3 +274,10 @@ const querySearchAsync = async (queryString: string, cb: (arg: any) => void) => 
   }, 200)
 }
 ```
+
+## 小于10的数字第一位补0
+```js
+// v-for index
+<span>{{ String(index + 1).padStart(2, '0') }}</span>
+```
+

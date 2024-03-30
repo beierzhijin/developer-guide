@@ -30,3 +30,34 @@ transform: rotateZ(90deg);
 
 ## 视差滚动 Parallax Scrolling
 [如何实现视差滚动效果的网页](https://www.zhihu.com/question/20990029)
+
+## 布局
+
+### 上固定，下滚动
+
+> ```css
+> .flex-1 {
+>   flex: 1 1 0%;
+> }
+> ```
+>
+> `flex` 属性是`flex-grow`, `flex-shrink`, 和 `flex-basis`三个属性的简写
+>
+> `flex-basis: 0%`意味着元素的初始大小忽略其内容，这与`flex-basis: auto;`（自动大小，基于内容大小）或具体的尺寸值（如`flex-basis: 20px;`或`flex-basis: 10em;`）形成对比
+>
+> - `flex: 0 1 auto`意味着：
+>   - `flex-grow: 0;` - 元素不会伸展来填充额外的空间。
+>   - `flex-shrink: 1;` - 如果空间不足，该元素可以收缩。
+>   - `flex-basis: auto;` - 元素的大小基于其默认的内容大小。
+> - `flex: 1 1 auto`意味着：
+>   - `flex-grow: 1;` - 元素会伸展来占据任何额外的空间。
+>   - `flex-shrink: 1;` - 如果空间不足，该元素可以收缩。
+>   - `flex-basis: auto;` - 元素的大小基于其默认的内容大小。
+
+
+```html
+<div class="h-screen">
+  <header class="flex-grow-0"></header>
+  <div class="flex-1 overflow-auto"></div>
+</div>
+```
