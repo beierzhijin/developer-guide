@@ -125,7 +125,7 @@ podman run -d --name redis-stack -p 127.0.0.1:6379:6379 -p 13333:8001 -v ~/my-co
 
 `local-redis-stack.conf` 配置如下
 
-```conf
+```
 bind 0.0.0.0
 protected-mode no
 appendonly no
