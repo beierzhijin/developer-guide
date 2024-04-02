@@ -321,42 +321,41 @@ ssh-keygen -b 4096 -t rsa
 ssh-keygen -t ed25519 -C "Mac -> hwc"
 ```
 
-#### 第一步：生成 `rsa` 密钥对
+### 第一步：生成 `rsa` 密钥对
 
 ```powershell
 ssh-keygen
 ```
+### 第二步：将公钥文件通过 scp 的方式上传到远程服务器上
 
-### powershell (Win)，以本地连接华为云远程服务器为例
+以本地连接aliyun远程服务器为例
 
-#### 第二步：将公钥文件通过 scp 的方式上传到远程服务器上
-
-```powershell
+```shell
 # win
-scp C:\Users\你的用户名\.ssh\hwc_win_id_rsa.pub klaus@120.46.139.**:~/.ssh
+scp C:\Users\你的用户名\.ssh\aliyun.pub klaus@[host]:~/.ssh
 # mac
-scp ~/.ssh/hwc_mac_id_ed25519.pub klaus@120.46.139.**:~/.ssh
+scp ~/.ssh/aliyun.pub klaus@[host]:~/.ssh
 ```
 
-#### 第三步：登录远程服务器，终端输入
+### 第三步：登录远程服务器，终端输入
 
-```powershell
+```shell
 # >> 是在文件内容后面追加新内容，即追加重定向
 # > 是清空并添加新内容，即重定向
-cat ~/.ssh/hwc_win_id_rsa.pub >> ~/.ssh/authorized_keys
+cat ~/.ssh/aliyun.pub >> ~/.ssh/authorized_keys
 ```
 
-#### 第四步：windows 用户目录下，~/.ssh/config，同 Linux
+### 第四步：windows 用户目录下，~/.ssh/config，同 Linux
 
-```powershell
-# 华为云
+```shell
+# 阿里云
 # 偶现：LocalForward 开启后导致ssh连接远程服务器报错 channel 3: open failed: connect failed: Connection refused，关闭后正常
-# hwc is name-alias
-Host hwc
+Host aliyun
   HostName xxx.xxx.xxx.xx
   User klaus
-  IdentityFile ~/.ssh/hwc_win_id_rsa
+  IdentityFile ~/.ssh/aliyun
   LocalForward 5173 localhost:5173
+  LocalForward 3000 localhost:3000
   # 将日志级别设置为: QUIET，似乎可以临时解决 channel 3: open failed: connect failed: Connection refused
   LogLevel QUIET
 
@@ -373,10 +372,10 @@ Host github.com
   IdentityFile ~/.ssh/github_id_rsa
 ```
 
-#### 连接 ssh name-alias
+### 第五步：连接 ssh name-alias
 
-```powershell
-# ssh hwc
+```shell
+# ssh aliyun
 ```
 
 ### bash (Linux)，以在 Linux 中设置 github 免密登录为例
