@@ -100,6 +100,7 @@ function nav() {
       activeMatch: `^/frontend/`,
       items: [
         { text: 'Web', link: '/frontend/web/site' },
+        { text: 'GSAP', link: '/frontend/gsap/gsap' },
         {
           text: 'Feast',
           items: [
@@ -171,6 +172,7 @@ function sidebarFrontend() {
         { text: 'debug', link: '/frontend/web/debug' },
       ]
     },
+    { text: 'GSAP', link: '/frontend/gsap/gsap' },
     {
       text: 'Feast',
       collapsible: true,

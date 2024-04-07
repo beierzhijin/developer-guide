@@ -356,6 +356,26 @@ sudo find / -name nginx
 rm -rf ****
 ```
 
+
+## 检测手机
+```nginx
+server {
+    listen 80;
+    server_name www.viphimself.vip;
+    # 检测移动端用户代理
+    if ($http_user_agent ~* '(mobile|android|iphone|ipad)') {
+        rewrite ^(.*)$ https://baidu.com$1 permanent;
+    }
+
+    location / {
+        root /home/klaus/www/quanyi;
+        try_files $uri $uri/ /index.html;
+    }
+    # 其他配置（如错误页面、日志文件等）可以根据需要添加
+}
+```
+
+
 ## 502 Bad Gateway
 
 [How to Solve 502 Bad Gateway Issues? - KeyCDN Support](https://www.keycdn.com/support/502-bad-gateway)
