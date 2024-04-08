@@ -40,6 +40,7 @@ const members = [
 - 现哔站年费会员
 - 0.000006百万粉丝网红博主
 - 在和平精英当过几年特种兵
+- 召唤师峡谷SKT-T5战队现役第一男枪
 
 ![image-20230201174747974](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20230201174747974.png)
 
