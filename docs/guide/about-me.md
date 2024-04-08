@@ -27,6 +27,20 @@ const members = [
 
 <VPTeamMembers size="small" :members="members" />
 
+- KlausL
+- MBTI-ESFJ
+- 诺贝尔文学奖读者
+- 清华大学所在国家学生
+- 世界500强简历投递者
+- 亿万彩票项目参与者
+- 各大购物平台资深买手
+- HEEKCAA品鉴师
+- 京东PLUS.VIP
+- 前爱奇艺会员
+- 现哔站年费会员
+- 0.000006百万粉丝网红博主
+- 在和平精英当过几年特种兵
+
 ![image-20230201174747974](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20230201174747974.png)
 
 <AboutMe />
