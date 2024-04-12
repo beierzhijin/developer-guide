@@ -440,7 +440,3 @@ Cockpit also supports [a large list of optional and third-party applications](ht
 ```bash
 sudo apt install cockpit-podman -y
 ```
-
-```
-
-```
