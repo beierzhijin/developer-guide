@@ -11,8 +11,12 @@
 ## Start
 
 > https://gsap.com/pricing/
+>
+> https://gsap.com/demos
 
 All plans include the Core GSAP Library, [ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/), [Draggable](https://gsap.com/docs/v3/Plugins/Draggable/), [Flip](https://gsap.com/docs/v3/Plugins/Flip/), [MotionPath](https://gsap.com/docs/v3/Plugins/MotionPathPlugin/), [Observer](https://gsap.com/docs/v3/Plugins/Observer/), [Pixi](https://gsap.com/docs/v3/Plugins/PixiPlugin/), [ScrollTo](https://gsap.com/docs/v3/Plugins/ScrollToPlugin/) and [Text](https://gsap.com/docs/v3/Plugins/TextPlugin/)
+
+上述插件是免费的，一些另外的插件需要商业许可，详见 [GSAP Pricing](https://gsap.com/pricing/)
 
 ```nginx
 # 检测移动端用户代理
