@@ -2,6 +2,7 @@ import footnote from 'markdown-it-footnote'
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  lang: 'en-US',
   title: 'Develop Manual',  // 标签页左侧及  导航栏左侧指向起始页的标题，themeConfig.siteTitle可以覆盖该标题
   titleTemplate: '开发手册', // The suffix for the title.  https://vitepress.vuejs.org/config/app-configs.html#titletemplate
   base: '/developer-guide/',
