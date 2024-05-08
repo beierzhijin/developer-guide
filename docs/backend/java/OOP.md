@@ -16,6 +16,14 @@ outline: deep
 
 [什么是面向对象（OOP） - 简书 (jianshu.com)](https://www.jianshu.com/p/7a5b0043b035)
 
+## 编程范式
+![image-20240508233458579](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20240508233458579.png)
+
+### 面向对象&函数式编程
+![image-20240508211720462](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20240508211720462.png)
+
+
+
 ## JDK 环境变量配置
 
 ### Win
