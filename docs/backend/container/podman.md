@@ -8,6 +8,9 @@
 
 ## Linux（Ubuntu）
 
+⚠️ 在 `podman images` 时如果警告 `WARN[0000] "/" is not a shared mount, this could cause issues or missing mounts with rootless containers`，手动将挂载点设置为共享 `sudo mount --make-shared /`，
+上述命令需要在每次系统重启后运行Podman之前执行。
+
 ```shell
 sudo apt update
 sudo apt install -y podman
