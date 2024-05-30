@@ -11,12 +11,14 @@
 ```shell
 conda update -n base -c defaults conda # 更新conda
 conda env list
-conda create --name myenv python=3.11.5
-conda create --prefix ./myenv python=3.11.5
-conda activate myenv
+conda create --name myenv # 默认安装的是空环境，没有任何包
+conda install python=3.12.3
+conda create --name myenv python=3.12.3
+conda create --prefix ./myenv python=3.12.3
+conda activate myenv # To activate this environment, use
 conda activate ./myenv
+conda deactivate # To deactivate an active environment, use
 cat ~/.conda/environments.txt
-conda install python=3.11.5
 conda search python
 conda search --full-name python
 conda search --full-name python --channel conda-forge
