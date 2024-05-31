@@ -109,6 +109,8 @@ $ fnm
 $ fnm env
 # 配置上面的结果至 $profile, $env:FNM_DIR 查看配置效果
 fnm env --use-on-cd | Out-String | Invoke-Expression
+# fnm 1.37.0 通过scoop安装时有bug，需这样配置
+fnm env --use-on-cd --shell power-shell | Out-String | Invoke-Expression 
 # 查看node版本
 fnm list-remote --node-dist-mirror="https://npm.taobao.org/dist"
 # 下载node，仍然需要配置nodejs的环境变量: `C:\A\nodejs`

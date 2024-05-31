@@ -11,6 +11,11 @@
 ⚠️ 在 `podman images` 时如果警告 `WARN[0000] "/" is not a shared mount, this could cause issues or missing mounts with rootless containers`，手动将挂载点设置为共享 `sudo mount --make-shared /`，
 上述命令需要在每次系统重启后运行Podman之前执行。
 
+也可以在powershell中执行以下（在WSL中以root用户身份执行`mount --make-rshared /`，这会将根目录（/）及其所有子目录的挂载点设置为递归共享）
+```powershell
+wsl.exe -u root -e mount --make-rshared /
+```
+
 ```shell
 sudo apt update
 sudo apt install -y podman
@@ -204,9 +209,11 @@ podman pull redis/redis-stack
 podman run -d --name redis-stack -p 6379:6379 -p 8001:8001 -v ~/mypod/redis/conf/local-redis-stack.conf:/redis-stack.conf -v ~/mypod/redis/data:/data -e REDIS_ARGS="--requirepass 12345" -e REDIS_ARGS="--appendonly yes" redis/redis-stack:latest
 ```
 
-💔 <strong style="color:red;">Unable to connect to Redis server: localhost/127.0.0.1:6379</strong>
+2024年5月31日测试最新版redis，springboot中可以直接连接127.0.0.1:6379了
 
-❤️ it works , 似乎是 ip 的问题，但是 podman mysql 就可以正常连接。解决办法目前是在 WSL2 下查到 WSL2 本身对应的 ip，`curl ip:6379` 可正常连接，但这不应该是一个科学的办法，因为 ip 会变
+~~💔 <strong style="color:red;">Unable to connect to Redis server: localhost/127.0.0.1:6379</strong>~~
+
+~~❤️ it works , 似乎是 ip 的问题，但是 podman mysql 就可以正常连接。解决办法目前是在 WSL2 下查到 WSL2 本身对应的 ip，`curl ip:6379` 可正常连接，但这不应该是一个科学的办法，因为 ip 会变~~
 
 > https://github.com/microsoft/WSL/issues/5728#issuecomment-674883029
 
