@@ -73,13 +73,13 @@ Please edit config.json at following location
 
 ## [火狐开发者版切换语言](https://support.mozilla.org/en-US/questions/1223719)
 
-💔 开发者版参考 Firefox 官方更换语言指引不生效
+💔 开发者版参考 Firefox 官方更换语言指引不生效，前提是下载了[语言包](https://addons.mozilla.org/en-US/firefox/language-tools/)
 
 1. 在地址栏输入 about:config
-2. "I accept the risk!"
+2. "Accept The Risk"
 3. 搜索框输入 intl.locale.requested
 4. 选择 string（字符串），然后点击右侧 ➕ 号
-5. 输入 zh-cn，en-us 等
+5. 输入 zh-cn，en-us ... 只写其中一个
 6. 重启浏览器
 
 ## PowerToys
