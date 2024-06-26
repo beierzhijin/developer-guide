@@ -22,7 +22,7 @@
     "sass": "^1.77.6",
     "vite": "^5.3.1",
     "vitepress": "^1.2.3",
-    "vue": "^3.4.29"
+    "vue": "^3.4.30"
   },
   "pnpm": {
     "peerDependencyRules": {

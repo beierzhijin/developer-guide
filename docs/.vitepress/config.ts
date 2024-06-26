@@ -191,7 +191,8 @@ function sidebarFrontend() {
         { text: 'vue', link: '/frontend/vue/vuejs' },
         { text: 'react', link: '/frontend/react/reactjs' },
         { text: 'jsx', link: '/frontend/react/jsx' },
-        { text: 'soildjs', link: '/frontend/solid/solidjs' }
+        { text: 'soildjs', link: '/frontend/solid/solidjs' },
+        { text: 'astro', link: '/frontend/ssr/astro' }
       ]
     },
     {

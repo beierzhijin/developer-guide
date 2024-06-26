@@ -290,6 +290,28 @@ C:\Users\klaus\AppData\Local\pnpm
 >
 > 如果安装(pnpm install)在磁盘 `A` 上运行，则存储将在 `A` 的文件系统根目录下的 `.pnpm-store` 下被创建。 如果稍后安装在磁盘 `B` 上运行，将会在 `B` 上的 `.pnpm-store`处创建一个独立的存储。 项目仍将保持 pnpm 的优势，但每个驱动器可能有冗余包。
 
+## pnpm dlx
+
+pnpm dlx 会从网络上下载并运行一个临时的包，与 npx 的行为非常相似
+
+```sh
+npx create-react-app my-app
+pnpm dlx create-react-app my-app
+```
+
+```sh
+# npx 的作用是下载并运行 astro 包的命令行工具，然后执行 add tailwind 子命令
+npx astro add tailwind 
+```
+
+> npx 的作用是临时安装和执行一个 npm 包，而不需要全局安装它
+>
+> 1.下载并运行 astro，npx 会检查你当前的环境中是否已经安装了 astro 命令行工具。如果没有，它会从 npm 注册表中下载这个工具。
+>
+> 2.执行 add tailwind 命令，npx 会使用下载的 astro 工具执行 add tailwind 命令，这个命令会自动为你的 Astro 项目添加 Tailwind CSS，并进行必要的配置。
+
+这样，npx 简化了命令的执行过程，使得你不需要手动安装 astro 工具即可直接使用其功能
+
 ## npm
 
 > node package manager , [https://www.npmjs.com](https://www.npmjs.com) , [npm Docs (npmjs.com)](https://docs.npmjs.com/)
