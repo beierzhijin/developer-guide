@@ -158,6 +158,35 @@ changeBtn(item) {
 },
 ```
 
+## new Set
+
+Set（集合）是一组唯一值的集合，每个值只能在 Set 中出现一次，Set 可以容纳任何数据类型的值
+
+new Set(iterable)，iterable可迭代对象（如数组、字符串、`Map`等）
+
+### 求两个数组的并集，交集，差集
+
+#### 并集
+```js
+const arr1 = [33, 22, 55, 33, 11, 33, 5]
+const arr2 = [22, 55, 77, 88, 88, 99, 99]
+const union = [...new Set([...arr1, ...arr2])]
+console.log(union) //  [33, 22, 55, 11, 5, 77, 88, 99]
+```
+#### 交集
+```js
+const arr1 = [33, 22, 22, 55, 33, 11, 33, 5]
+const arr2 = [22, 22, 55, 77, 88, 88, 99, 99]
+const cross = [...new Set(arr1.filter(i => arr2.includes(i)))]
+console.log(cross) // [22, 55]
+```
+
+#### 差集
+```js
+const diff = union.filter(i => !cross.includes(i))
+console.log(diff) // [33, 11, 5, 77, 88, 99]
+```
+
 ## 获取 query 参数
 
 ```js
