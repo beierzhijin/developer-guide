@@ -310,3 +310,19 @@ const querySearchAsync = async (queryString: string, cb: (arg: any) => void) => 
 <span>{{ String(index + 1).padStart(2, '0') }}</span>
 ```
 
+## 数组转字符串
+```ts
+function joinStrings(...strings: string[]) {
+	console.log('展开之前', strings)
+	console.log('展开之后', ...strings)
+  return strings.filter(Boolean).join(" ")
+}
+
+joinStrings('', 'relative group') // 展开之前 [ '', 'relative group' ]，展开之后  relative group，注意这里有空字符串，是3个字符串
+joinStrings('test', 'relative group') // 展开之前 [ 'test', 'relative group' ]，展开之后 test relative group
+```
+
+```ts
+// export const joinStrings = (...strings: string[]) => strings.filter(s => !!s).join(" ");
+export const joinStrings = (...strings: string[]) => strings.filter(Boolean).join(" ");
+```
