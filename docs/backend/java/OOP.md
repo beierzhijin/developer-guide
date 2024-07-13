@@ -58,7 +58,7 @@ brew install openjdk@17
 java --version
 # 安装 JDK8
 brew tap homebrew/cask-versions
-brew install --cask zulu8
+brew install --cask zulu@8
 java -version
 # 查看 JAVA_HOME
 /usr/libexec/java_home
