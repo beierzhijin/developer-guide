@@ -494,75 +494,104 @@ mime ^text,  label pager  = "$PAGER" -- "$@"
 
 ### 代理
 
-#### WSL2 走 windows 的代理
+在 WSL2 中，Windows 主机的 IP 地址不再是`127.0.0.1`。首先，你需要找到 Windows 主机在 WSL2 虚拟网络中的 IP 地址。你可以在 WSL2 中使用以下命令来获取它：
 
-1. 在 WSL2 中，Windows 主机的 IP 地址不再是`127.0.0.1`。首先，你需要找到 Windows 主机在 WSL2 虚拟网络中的 IP 地址。你可以在 WSL2 中使用以下命令来获取它：
+```shell
+cat /etc/resolv.conf
+```
 
-   ```shell
-   cat /etc/resolv.conf
-   ```
+查找 `nameserver` 行，那里的 IP 地址就是你的 Windows 主机的 IP
 
-   查找 `nameserver` 行，那里的 IP 地址就是你的 Windows 主机的 IP
+_/etc/resolv.conf -> /mnt/wsl/resolv.conf_
 
-   _/etc/resolv.conf -> /mnt/wsl/resolv.conf_
+![image-20231005160357215](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20231005160357215.png){width="400px"}
 
-   ![image-20231005160357215](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20231005160357215.png){width="400px"}
+#### 设置代理1
 
-2. 临时设置代理
+```shell
+curl -L --proxy http://nameserver:7890 https://www.google.com
+```
 
-   ```shell
-   curl -L --proxy http://nameserver:7890 https://www.google.com
-   ```
+- `-L` 或 `--location` 自动跟随重定向
 
-   - `-L` 或 `--location` 自动跟随重定向
+```shell
+set_windows_proxy() {
+  windows_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+  export http_proxy="http://${windows_ip}:7890"
+  export https_proxy="http://${windows_ip}:7890"
+  echo "Proxy set to ${http_proxy}"
+}
 
-3. 永久设置代理
+unset_windows_proxy() {
+  unset http_proxy
+  unset https_proxy
+  echo "Proxy settings removed"
+}
+```
 
-   `~/.bashrc` 添加
+#### 设置代理2
 
-   ```shell
-   # 自定义代理
-   alias proxy="source /home/klaus/proxy.sh"
-   ```
+➡ `~/proxy.sh`配置
 
-   ` /home/klaus/proxy.sh` 内容为：
+在`~/.bashrc` 添加
 
-   ```shell
-   WIN_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
-   WSL_IP=$(hostname -I | awk '{print $1}')
-   PORT=7890
-   PROXY_HTTP="http://${WIN_IP}:${PORT}"
+```shell
+# 自定义代理
+alias proxy="source /home/klaus/proxy.sh"
+```
 
-   function proxy_on() {
-     # 设置代理
-     export http_proxy="${PROXY_HTTP}"
-     export https_proxy="${PROXY_HTTP}"
-     echo "Proxy is now set to $PROXY_HTTP"
-   }
+` /home/klaus/proxy.sh` 内容为：
 
-   function proxy_off() {
-     unset http_proxy
-     unset https_proxy
-     echo "Proxy is now OFF"
-   }
+```shell
+WIN_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+WSL_IP=$(hostname -I | awk '{print $1}')
+PORT=7890
+PROXY_HTTP="http://${WIN_IP}:${PORT}"
 
-   function proxy_test() {
-     echo "Host ip:" ${WIN_IP}
-     echo "WSL ip:" ${WSL_IP}
-     echo "Current proxy:" $https_proxy
-   }
+function proxy_on() {
+  # 设置代理
+  export http_proxy="${PROXY_HTTP}"
+  export https_proxy="${PROXY_HTTP}"
+  echo "Proxy is now set to $PROXY_HTTP"
+}
 
-   if [ "$1" = "set" ]
-   then proxy_on
+function proxy_off() {
+  unset http_proxy
+  unset https_proxy
+  echo "Proxy is now OFF"
+}
 
-   elif [ "$1" = "unset" ]
-   then proxy_off
+function proxy_test() {
+  echo "Host ip:" ${WIN_IP}
+  echo "WSL ip:" ${WSL_IP}
+  echo "Current proxy:" $https_proxy
+}
 
-   elif [ "$1" = "test" ]
-   then proxy_test
-   else echo "Unsupported arguments."
-   fi
-   ```
+if [ "$1" = "set" ]
+then proxy_on
+
+elif [ "$1" = "unset" ]
+then proxy_off
+
+elif [ "$1" = "test" ]
+then proxy_test
+else echo "Unsupported arguments."
+fi
+```
+
+➡ 使配置生效
+
+```shell
+source .bashrc
+```
+
+➡ 测试
+
+```shell
+proxy test
+proxy set
+proxy unset
+```
 
 ### 安装包时 Failed to ...
 

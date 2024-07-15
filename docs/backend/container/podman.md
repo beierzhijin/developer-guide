@@ -6,6 +6,18 @@
 
 > https://dockerproxy.com/
 
+## Common Commands
+
+### volume
+```shell
+# 创建名为 postgres_volume 的卷，为卷添加元数据标签（组织分类，筛选查询）
+podman volume create --label purpose=database postgres_volume
+podman volume ls --filter label=purpose=database
+podman volume ls
+# postgres_volume卷 在系统中的精确位置
+podman volume inspect postgres_volume
+```
+
 ## Linux（Ubuntu）
 
 ⚠️ 在 `podman images` 时如果警告 `WARN[0000] "/" is not a shared mount, this could cause issues or missing mounts with rootless containers`，手动将挂载点设置为共享 `sudo mount --make-shared /`，
