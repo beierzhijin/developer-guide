@@ -593,6 +593,33 @@ proxy set
 proxy unset
 ```
 
+#### 官方
+Ubuntu-24.04 LTS 对上述代理设置不生效了，原因未知，google到了官方解决方案：
+
+> https://learn.microsoft.com/en-us/windows/wsl/networking#auto-proxy
+
+> https://learn.microsoft.com/en-us/windows/wsl/wsl-config#configuration-settings-for-wslconfig
+
+> https://learn.microsoft.com/en-us/windows/wsl/wsl-config#wslconfig
+
+在用户目录下，`cd ~` 即文件地址栏输入 `%UserProfile%`，新建 `.wslconfig` 文件，内容如下，注意必须加上这个section label: [wsl2]，否则会报错 <strong style="color:red;">wsl: C:\Users\klaus\.wslconfig:1 中的未知密钥 'autoProxy'</strong>
+```shell
+[wsl2]
+autoProxy = true
+```
+
+::: danger NOTE
+Configuring global settings with `.wslconfig` are only available for distributions running as WSL 2 in Windows Build 19041 and later. Keep in mind you may need to run `wsl --shutdown` to shut down the WSL 2 VM and then restart your WSL instance for these changes to take effect.
+:::
+
+实测没有卵用，可能我配置还不到位，提示镜像网络...NAT网络啥的...，按github上的解决方案目前也没用
+
+#### ultimate solution
+
+TUN模式打开，开启全局代理
+
+
+
 ### 安装包时 Failed to ...
 
 ```bash
