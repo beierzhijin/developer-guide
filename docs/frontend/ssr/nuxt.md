@@ -6,6 +6,8 @@
 
 > Both the browser and server can interpret JavaScript code to turn Vue.js components into HTML elements. This step is called rendering.
 
+生成HTML的过程就是 render
+
 ## [universal rendering](https://nuxt.com/docs/guide/concepts/rendering#universal-rendering)
 
 > the Client (browser) loads the JavaScript code that runs on the Server in the background once the HTML document has been downloaded
@@ -15,3 +17,9 @@
 > Making a static page interactive in the browser is called "Hydration"
 
 > Universal rendering allows a Nuxt application to provide quick page load times while preserving the benefits of client-side rendering. Furthermore, as the content is already present in the HTML document, crawlers can index it without overhead.
+
+## What you can build with Nuxt?
+
++ Websites
++ Web Applications (SPAs)
++ Static Site Generation (SSG)
