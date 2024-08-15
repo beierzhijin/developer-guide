@@ -23,3 +23,7 @@
 + Websites
 + Web Applications (SPAs)
 + Static Site Generation (SSG)
+
+## 基于目录结构的router
+
+通过F12 devtools的观察，初始页面`pages`-`index.vue`在服务端渲染后，客户端的vue-router就会开始takeover了，后续的路由切换都基于客户端浏览器了
