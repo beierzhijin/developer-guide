@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   lang: 'en-US',
-  title: 'Develop Manual',  // 标签页左侧及  导航栏左侧指向起始页的标题，themeConfig.siteTitle可以覆盖该标题
+  title: 'Develop Manual',  // 标签页左侧及导航栏左侧指向起始页的标题，themeConfig.siteTitle可以覆盖该标题
   titleTemplate: '开发手册', // The suffix for the title.  https://vitepress.vuejs.org/config/app-configs.html#titletemplate
   base: '/developer-guide/',
   description: '开发手册', // This will render as a <meta> tag in the page HTML
@@ -19,10 +19,10 @@ export default defineConfig({
   },
   themeConfig: {
     // logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/logo_01.png',
-    logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/RED-AssassinS.png',
+    logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/wukong_logo.png',
     // logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/AssassinS-1.png',
     // logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/TEXT-AssassinS.png',
-    siteTitle: 'ASSASSINS CREED', // 导航栏左侧指向起始页的标题
+    siteTitle: 'BLACK MYTH: Wukong', // 导航栏左侧指向起始页的标题
     // siteTitle: false, // 导航栏左侧指向起始页的标题
     nav: nav(),
     sidebar: {
