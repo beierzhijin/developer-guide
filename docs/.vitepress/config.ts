@@ -30,7 +30,7 @@ export default defineConfig({
       '/backend/': sidebarBackend(),
       '/database/': sidebarDatabase(),
       '/network/': sidebarNetWork(),
-      '/jicao/': sidebarJiCao()
+      '/developer/': sidebarDeveloper()
     },
     outline: 'deep', // 右侧大纲标题层级
     // outlineTitle: '本页大纲', // 右侧导航栏顶部文字 customize the title of the right sidebar (on the top of outline links)
@@ -151,10 +151,11 @@ function nav() {
       ]
     },
     {
-      text: 'JiCao💘6',
-      activeMatch: `^/jicao/`,
+      text: 'Developer',
+      activeMatch: `^/developer/`,
       items: [
-        { text: 'OSS', link: '/jicao/daynight' },
+        { text: 'OSS', link: '/developer/daynight' },
+        { text: 'Git', link: '/developer/git' },
       ]
     }
   ]
@@ -273,14 +274,15 @@ function sidebarNetWork() {
   ]
 }
 
-function sidebarJiCao() {
+function sidebarDeveloper() {
   return [
     {
-      text: '基操💘六',
+      text: 'Developer',
       collapsible: true,
       items: [
         { text: '软件配置', link: '/jicao/daynight' },
         { text: 'ENGLISH', link: '/jicao/english' },
+        { text: 'Git', link: '/developer/git' },
       ]
     }
   ]
