@@ -8,7 +8,7 @@ hero:
   image:
     # src: /Kobe R.I.P.webp
     # src: https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/AssassinS%20CREED.png
-    src: https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/blackmyth_wukong.png
+    src: https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/douzhanshengfo.png
     # src: https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/logo_01.png
     alt: wukong
   actions:
