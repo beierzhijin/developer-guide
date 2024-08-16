@@ -8,7 +8,7 @@ export default defineConfig({
   base: '/developer-guide/',
   description: '开发手册', // This will render as a <meta> tag in the page HTML
   lastUpdated: true,
-  appearance: true, // 增加 DarkMode
+  appearance: 'dark', // 增加 DarkMode
   head: [
     ['link', { rel: 'icon', href: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/favicon.ico' }]
   ],
