@@ -27,3 +27,7 @@
 ## [file-system routing](https://nuxt.com/docs/getting-started/routing#pages)
 
 通过F12 devtools的观察，初始页面`pages`-`index.vue`在服务端渲染后，客户端的vue-router就会开始takeover了，后续的路由切换都基于客户端浏览器了
+
+## bug
+
+实测，vscode 插件 `Astro v2.14.0` 开启时，会导致 nuxt 项目中的组件高亮、ts检查等功能混乱失效，可以在开发nuxt项目时先disable掉Astro插件
