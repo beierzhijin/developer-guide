@@ -19,6 +19,10 @@ Nginx 启动后，在 Linux 系统中有两个进程，一个为 master，一个
 
 ![](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/1666370176643.png)
 
+## 在Linux中部署一个网站
+
+以 `viphimself.vip` 为例， 
+
 ## 常用命令
 
 ```bash
