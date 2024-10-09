@@ -21,7 +21,19 @@ Nginx 启动后，在 Linux 系统中有两个进程，一个为 master，一个
 
 ## 在Linux中部署一个网站
 
-以 `viphimself.vip` 为例， 
+以 部署 `viphimself.vip` 为例：
+
+1. 将 `/var/www/viphimself.vip/html` 目录及其所有子目录和文件的所有权都设置为当前登录用户，确保当前用户对该网站目录有完全的读写权限
+
+   ```shell
+   sudo mkdir -p /var/www/viphimself.vip/html
+   ```
+
+   ```shell
+   sudo chown -R $USER:$USER /var/www/viphimself.vip/html
+   ```
+
+2. 
 
 ## 常用命令
 
