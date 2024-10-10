@@ -33,7 +33,75 @@ Nginx 启动后，在 Linux 系统中有两个进程，一个为 master，一个
    sudo chown -R $USER:$USER /var/www/viphimself.vip/html
    ```
 
-2. 
+2. nginx 配置
+
+   ```shell
+   sudo vim /etc/nginx/sites-available/viphimself.vip
+   ```
+
+   ```nginx
+   server {
+       listen 80;
+       server_name viphimself.vip www.viphimself.vip;
+   
+       location / {
+           root /var/www/viphimself.vip/html;
+           index index.html index.htm;
+       }
+   }
+   ```
+
+3. 启动网站配置 `sites-available -> sites-enabled`
+
+   ```shell
+   sudo ln -s /etc/nginx/sites-available/viphimself.vip /etc/nginx/sites-enabled/
+   ```
+
+4. `https` `Certbot`  `SSL` 
+
+   ```shell
+   sudo apt install certbot python3-certbot-nginx
+   ```
+
+   > 这一步会把ssl相关的配置设置到 `/etc/nginx/sites-enabled/default` 目录下
+   >
+   > ```shell
+   > sudo certbot --nginx -d viphimself.vip -d www.viphimself.vip
+   > ```
+   >
+   > ![image-20241010170415130](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20241010170415130.png)
+
+   这一步会把ssl相关的配置设置到 `/etc/nginx/sites-enabled/viphimself.vip` 目录下
+
+   ```shell
+   sudo certbot --nginx --nginx-server-root=/etc/nginx --nginx-ctl=/usr/sbin/nginx -d viphimself.vip -d www.viphimself.vip
+   ```
+
+   > 如果 Certbot 仍然无法找到正确的配置文件，你可以手动指定配置文件路径：
+   >
+   > ```shell
+   > sudo certbot --nginx --nginx-server-root=/etc/nginx --nginx-ctl=/usr/sbin/nginx --nginx-server-conf=/etc/nginx/sites-available/viphimself.vip -d viphimself.vip -d www.viphimself.vip
+   > ```
+
+   ![image-20241010172232670](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20241010172232670.png)
+
+   > ⚠️ 这一步只是用来测试自动续期是否成功的！
+   > Let's Encrypt 证书的有效期为 90 天，但 Certbot 会自动设置一个 cron 任务来续期证书。
+   > 你可以手动测试续期过程：
+   >
+   > ```shell
+   > sudo certbot renew --dry-run
+   > ```
+   >
+   > 如果没有错误，说明自动续期配置成功。
+   > ![image-20241010171247156](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20241010171247156.png)
+
+5. 测试重启
+
+   ```shell
+   sudo nginx -t
+   sudo systemctl restart nginx
+   ```
 
 ## 常用命令
 
