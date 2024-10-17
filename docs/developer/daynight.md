@@ -124,3 +124,20 @@ rm -rf $(brew --prefix)/var/homebrew/locks
 $env:HTTP_PROXY = "http://localhost:7890"
 $env:HTTPS_PROXY = "http://localhost:7890"
 ```
+
+## windows 查看端口占用
+
+### Powershell
+
+```ps
+Get-Process -Id (Get-NetTCPConnection -LocalPort 8080).OwningProcess
+```
+
+```ps
+netstat -ano | findstr :<端口号>
+tasklist | findstr <PID>
+```
+
+### 使用 Resource Monitor
+
+`Win R，输入 resmon` > `网络` > `侦听端口`

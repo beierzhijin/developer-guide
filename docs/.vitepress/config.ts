@@ -280,8 +280,8 @@ function sidebarDeveloper() {
       text: 'Developer',
       collapsible: true,
       items: [
-        { text: '软件配置', link: '/jicao/daynight' },
-        { text: 'ENGLISH', link: '/jicao/english' },
+        { text: '软件配置', link: '/developer/daynight' },
+        { text: 'ENGLISH', link: '/developer/english' },
         { text: 'Git', link: '/developer/git' },
       ]
     }
