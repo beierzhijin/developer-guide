@@ -160,8 +160,15 @@ code .line {
 }
 
 /* a链接 hover时导航线条颜色 */
-.vp-doc a:hover {
-  color: #0086ff;
+.vp-doc a {
+  color: #05a752;
+  font-weight: 700;
+}
+
+.footnote-item {
+  background: rgba(226, 226, 227, .2);
+  padding: 2px 16px;
+  border-radius: 4px;
 }
 
 @font-face {
