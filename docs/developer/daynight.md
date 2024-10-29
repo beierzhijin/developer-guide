@@ -146,8 +146,54 @@ tasklist | findstr <PID>
 
 一定不要给C盘的子目录取名A、B等这些单字母，害惨我了，不过大概是 Cursor 的bug，VSCode 也短时出现过识别不出的问题，导致 `@nuxtjs/tailwindcss` tailwindcss 在 VS Code 中的 Hover Preview 失效，C:/A/xxx 改成 C:/AI/xxx 后好了
 
-## 重启explorer
+## PS命令
+
+### 重启explorer
 
 ```powershell
 Stop-Process -Name explorer -Force; Start-Process explorer
 ```
+
+### PS执行策略
+
+临时将执行策略设置为 "Bypass"，允许您在当前 PowerShell 会话中运行任何脚本。
+
+```powershell
+& 'C:\AI\DATA\tools\scripts\install-open-with-cursor.ps1'
+```
+
+### [System.IO.Path]::Combine()
+
+```powershell
+$cursorExePath = [System.IO.Path]::Combine($env:LOCALAPPDATA, "Programs", "cursor", "Cursor.exe")
+```
+
+1. $env:LOCALAPPDATA 是一个环境变量,它包含了当前用户的本地应用程序数据目录的路径。例如,在 Windows 10 上,它通常是 C:\Users\<username>\AppData\Local。
+2. 然后,它将 "Programs", "cursor" 和 "Cursor.exe" 这三个路径片段拼接在一起,形成完整的路径。
+
+所以最终的 $cursorExePath 变量的值应该类似于: `C:\Users\klaus\AppData\Local\Programs\cursor\Cursor.exe`
+
+### 以管理员身份运行.ps1脚本
+
+1. 在管理员 PowerShell 窗口中, cd到脚本所在的目录 `.\your_script.ps1`
+
+2. 使用绝对路径来运行脚本 
+
+```powershell
+& 'C:\AI\DATA\tools\scripts\install-open-with-cursor.ps1'
+```
+
+3. 使用 Start-Process cmdlet 以管理员身份运行脚本
+```powershell
+Start-Process powershell.exe -Verb RunAs -ArgumentList "-File", ".\your_script.ps1"
+```
+
+### Get-ChildItem
+
+1. 使用 Get-ChildItem 命令来手动搜索 Cursor.exe 文件
+
+```powershell
+$cursorExePath = Get-ChildItem -Path $env:LOCALAPPDATA, $env:ProgramFiles, "$env:ProgramFiles(x86)" -Filter "Cursor.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
+Write-Host "Cursor executable path: $cursorExePath"
+```
+
