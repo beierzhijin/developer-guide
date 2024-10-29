@@ -145,3 +145,9 @@ tasklist | findstr <PID>
 ## VScode识别不出C盘
 
 一定不要给C盘的子目录取名A、B等这些单字母，害惨我了，不过大概是 Cursor 的bug，VSCode 也短时出现过识别不出的问题，导致 `@nuxtjs/tailwindcss` tailwindcss 在 VS Code 中的 Hover Preview 失效，C:/A/xxx 改成 C:/AI/xxx 后好了
+
+## 重启explorer
+
+```powershell
+Stop-Process -Name explorer -Force; Start-Process explorer
+```
