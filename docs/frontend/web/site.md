@@ -8,15 +8,364 @@
 
 ![image-20240302001429129](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20240302001429129.png)
 
+```bash
+步骤1: 浏览器请求 HTML
+↓
+步骤2: 服务器返回空壳 HTML
+↓
+步骤3: 浏览器加载 Vue.js
+↓
+步骤4: 浏览器执行 JS，请求数据
+↓
+步骤5: 浏览器渲染页面内容
+```
+
+```html
+<!-- CSR模式下的初始HTML -->
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="app">
+      <!-- 这里初始是空的 -->
+    </div>
+    <script src="vue.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return { products: [] };
+        },
+        mounted() {
+          // 在客户端请求数据
+          fetch("/api/products")
+            .then((res) => res.json())
+            .then((data) => (this.products = data));
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
+```
+
 ## SSR
 
 ![image-20240302010653339](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20240302010653339.png)
+
+```bash
+步骤1: 浏览器请求 HTML
+↓
+步骤2: 服务器执行 Vue 代码
+↓
+步骤3: 服务器获取数据
+↓
+步骤4: 服务器生成完整 HTML
+↓
+步骤5: 浏览器接收并显示完整内容
+↓
+步骤6: 加载 JS 后激活交互功能
+```
+
+```js
+// SSR服务器端代码
+import { createSSRApp } from "vue";
+import { renderToString } from "vue/server-renderer";
+
+async function render(url) {
+  const app = createSSRApp({
+    data() {
+      return {
+        products: [],
+      };
+    },
+  });
+
+  // 在服务器端获取数据
+  const products = await fetch("http://api/products").then((res) => res.json());
+  app.data().products = products;
+
+  // 生成HTML字符串
+  const html = await renderToString(app);
+
+  // 返回完整的HTML
+  return `
+        <!DOCTYPE html>
+        <html>
+        <body>
+            <div id="app">${html}</div>
+            <script>
+                // 注入初始状态
+                window.__INITIAL_STATE__ = ${JSON.stringify(products)}
+            </script>
+            <script src="vue.js"></script>
+            <script src="app.js"></script>
+        </body>
+        </html>
+    `;
+}
+```
 
 ## all in all
 
 ![image-20221001155911020](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20221001155911020.png)
 
 简而言之，做一个常规的企业官网，复杂度相对而言是比较低的，难点在于视觉、动画，并且截至 2022 年 9 月 8 日浏览器的`SEO(Search Engine Optimization)`对`SPA(Single Page Application)应用`-`CSR(Client Side Render 客户端渲染)` 还不友好，为了`SEO`需要上`Multi Page Application`-`SSR(Server Side Render)`，~~`SSG(Static Site Generation)` 不适合动态获取数据的场景~~，是否需要使用`Nuxt.js` `Next.js`这样的服务端渲染框架要考虑实际情况，切勿舍近求远。
+
+### 区别的可视化展示
+
+#### CSR 初始 HTML
+
+```html
+<!-- 浏览器收到的初始HTML -->
+<div id="app">
+  <!-- 空的 -->
+</div>
+```
+
+#### SSR 初始 HTML
+
+```html
+<!-- 浏览器收到的初始HTML -->
+<div id="app">
+  <div class="product-list">
+    <div class="product">
+      <h2>商品1</h2>
+      <p>价格: ¥99</p>
+    </div>
+    <div class="product">
+      <h2>商品2</h2>
+      <p>价格: ¥199</p>
+    </div>
+  </div>
+</div>
+```
+
+#### SSR 的主要优势
+
+1. 更快的首屏加载
+
+- 用户立即看到完整内容
+- 不需要等待 JS 执行完毕
+
+2. 更好的 SEO
+
+- 搜索引擎可以直接爬取完整内容
+- 对内容网站特别重要
+
+3. 更好的用户体验
+
+- 无需等待空白页面
+- 特别适合网速较慢的场景
+
+#### SSR 的主要劣势
+
+1. 服务器压力
+   SSR 需要服务器执行 Vue 代码和数据获取，需要合理控制服务器负载
+2. 开发复杂度
+
+## Question
+
+> 即使我用 Nuxt，我的数据也是请求的单独的后端服务，就是在 nuxt 中也只是调用数据接口，这样仍然算是服务端渲染吗
+
+---
+
+_以下内容来自 claude-3.5-sonnet_
+
+这仍然是服务端渲染！让我解释原因：
+
+### 1. Nuxt 的渲染流程
+
+```bash
+浏览器请求页面
+↓
+Nuxt服务器接收请求
+↓
+执行页面组件的asyncData/fetch
+↓
+调用后端API获取数据
+↓
+Nuxt服务器用数据渲染完整HTML
+↓
+返回完整HTML给浏览器
+↓
+浏览器展示内容并激活(hydration)
+```
+
+### 2. 代码示例对比
+
+**传统客户端渲染：**
+
+```vue
+<template>
+  <div class="products">
+    <!-- 初始加载时这里是空的 -->
+    <div v-for="product in products" :key="product.id">
+      {{ product.name }}
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      products: [],
+    };
+  },
+  mounted() {
+    // 在浏览器端请求数据
+    fetch("http://api.example.com/products")
+      .then((res) => res.json())
+      .then((data) => (this.products = data));
+  },
+};
+</script>
+```
+
+**Nuxt 服务端渲染：**
+
+```vue
+<template>
+  <div class="products">
+    <!-- 服务器端已经填充好数据 -->
+    <div v-for="product in products" :key="product.id">
+      {{ product.name }}
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  async asyncData({ $axios }) {
+    // 在服务器端执行！
+    const products = await $axios.$get("http://api.example.com/products");
+    return { products };
+  },
+};
+</script>
+```
+
+### 3. 关键区别
+
+#### 浏览器收到的 HTML 内容：
+
+**客户端渲染：**
+
+```html
+<div class="products">
+  <!-- 空的 -->
+</div>
+```
+
+**Nuxt SSR：**
+
+```html
+<div class="products">
+  <div>iPhone 13</div>
+  <div>MacBook Pro</div>
+  <div>iPad Air</div>
+  <!-- 数据已经填充 -->
+</div>
+```
+
+### 4. 为什么这仍然是 SSR？
+
+1. **数据获取时机**
+
+```javascript
+// Nuxt在服务器端完成这些步骤：
+async function serverRender() {
+  // 1. 执行asyncData/fetch
+  const data = await fetchData();
+
+  // 2. 使用数据渲染HTML
+  const html = await renderComponent(data);
+
+  // 3. 返回完整HTML
+  return html;
+}
+```
+
+2. **HTML 生成位置**
+
+> 虽然数据来自外部 API，但 HTML 的生成是在 Nuxt 服务器上完成的，而不是在浏览器中完成的
+
+### 5. Nuxt 中的数据获取方式
+
+1. **asyncData 方法**
+
+```javascript
+export default {
+  async asyncData({ $axios }) {
+    // 服务器端执行
+    const data = await $axios.$get("/api/data");
+    return { data };
+  },
+};
+```
+
+2. **fetch 钩子**
+
+```javascript
+export default {
+  async fetch() {
+    // 服务器端执行
+    this.items = await this.$axios.$get("/api/items");
+  },
+};
+```
+
+### 6. 验证是否 SSR 的方法
+
+```javascript
+export default {
+  mounted() {
+    // 查看HTML源代码是否包含数据
+    console.log(document.documentElement.outerHTML);
+
+    // 或使用Vue开发者工具查看
+    console.log("是否为SSR:", this.$nuxt?.$ssrContext != null);
+  },
+};
+```
+
+### 7. SSR 的优化建议
+
+1. **使用缓存**
+
+```javascript
+// nuxt.config.js
+export default {
+  render: {
+    http2: {
+      push: true,
+    },
+    static: {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7天缓存
+    },
+  },
+};
+```
+
+2. **数据预取优化**
+
+```javascript
+export default {
+  async asyncData({ $axios, store }) {
+    try {
+      // 并行请求多个API
+      const [products, categories] = await Promise.all([
+        $axios.$get("/api/products"),
+        $axios.$get("/api/categories"),
+      ]);
+      return { products, categories };
+    } catch (error) {
+      console.error(error);
+      return { error: "Failed to load data" };
+    }
+  },
+};
+```
+
+记住：SSR 的关键不在于数据从哪里来，而在于**HTML 的生成位置**和**时机**。只要 HTML 是在服务器端生成的，并且包含了完整的内容，就是 SSR。
 
 ### references：
 
