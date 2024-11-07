@@ -9,14 +9,14 @@ titleTemplate: 包管理
 
 关注下用户根目录下的这几个文件 `~/.node  .nrmrc  .npmrc  .yarnrc  .vuerc`
 
-pnpm 和 npm 用的同一个配置文件.npmrc，https://pnpm.io/cli/config
+pnpm 和 npm 用的同一个配置文件.npmrc，<https://pnpm.io/cli/config>
 
-## 版本号`~`和`^`的区别
+## 版本号 `~` 和 `^` 的区别
 
-- `~`会匹配最近的小版本依赖包，比如~1.2.3 会匹配所有 1.2.x 版本，但是不包括 1.3.0
-- `^`会匹配最新的大版本依赖包，比如^1.2.3 会匹配所有 1.x.x 的包，包括 1.3.0，但是不包括 2.0.0
+* `~`会匹配最近的小版本依赖包，比如~1.2.3 会匹配所有 1.2.x 版本，但是不包括 1.3.0
+* `^`会匹配最新的大版本依赖包，比如^1.2.3 会匹配所有 1.x.x 的包，包括 1.3.0，但是不包括 2.0.0
 
-~~建议使用`~`来标记版本号，这样可以保证项目不会出现大的问题，也能保证包中的小 bug 可以得到修复~~
+~~建议使用 `~` 来标记版本号，这样可以保证项目不会出现大的问题，也能保证包中的小 bug 可以得到修复~~
 
 ## fnm
 
@@ -139,7 +139,7 @@ node --version > .node-version
 
 安装时注意：
 
-> Set Node.js Symlink ⇢ `C:\A\nodejs`；
+> Set Node.js Symlink ⇢  `C:\A\nodejs` ；
 >
 > root: C:\A\nvm；
 >
@@ -179,7 +179,7 @@ npm config set prefix "C:\A\global-package\npm-global"
 
 > npm registry manager
 
-https://github.com/Pana/nrm/issues/111
+<https://github.com/Pana/nrm/issues/111>
 
 🚫nrm 当前版本 1.2.5 有 bug，先使用 `npm install -g @adams549659584/nrm`
 
@@ -222,27 +222,54 @@ Usage: cgr [options] [command]
 
 ## pnpm
 
-> Performant NPM , https://pnpm.io/
+> Performant NPM , <https://pnpm.io/>, semver 版本规范
 
 ```powershell
 corepack enable
 npm i -g pnpm
 which pnpm # Git Bash 中运行此命令
 pnpm root -g
+pnpm why lodash # 查看为什么安装了某个包 lodash
+pnpm list vue-router # 查看已安装的 vue-router 版本
+pnpm list vue-router --depth Infinity # 完整依赖树
+pnpm list lodash --depth=999 # 查看特定包lodash的所有已安装版本
 pnpm store path # 返回活跃的存储目录的路径, 注意要在.pnpm-store下执行
-pnpm store prune # 从存储中删除未引用的包
+pnpm store prune # 清理未使用的包
+pnpm store status # 检查存储状态，Packages in the store are untouched 表示 pnpm store（全局存储）处于健康状态，所有包都完整且未被修改
+pnpm store verify # 验证 store 完整性
 pnpm view @slidev/cli versions # If you need the full list of all published versions
 ```
 
-### pnpm add -g [x] 报错
+### 依赖问题
+
+#### 清理并重新安装依赖
+
+```bash
+# 删除 node_modules
+pnpm clean
+# 重新安装
+pnpm install
+```
+
+#### 如果怀疑 store 有问题
+
+```bash
+# 验证 store
+pnpm store verify
+
+# 如果发现问题，可以清理并重建
+pnpm store prune
+```
+
+#### pnpm add -g [x] 报错
 
 ::: danger ERR_PNPM_REGISTRIES_MISMATCH
-This modules directory was created using the following registries configuration: {"default":"https://registry.npmjs.org/"}. The current configuration is {"default":"https://registry.npmmirror.com/"}. To recreate the modules directory using the new settings, run "pnpm install".
+This modules directory was created using the following registries configuration: {"default":"<https://registry.npmjs.org/"}>. The current configuration is {"default":"<https://registry.npmmirror.com/"}>. To recreate the modules directory using the new settings, run "pnpm install".
 :::
 
-解决：`pnpm install -g`，最好新建项目时`pnpm i`使用哪个 registry，之后`pnpm add`就用哪个源。
+解决： `pnpm install -g` ，最好新建项目时 `pnpm i` 使用哪个 registry，之后 `pnpm add` 就用哪个源。
 
-### pnpm add -g pnpm 报错
+#### pnpm add -g pnpm 报错
 
 ::: danger 在 C 盘目录下执行时
  ERROR  The configured global bin directory "C:\Users\klaus\AppData\Local\pnpm" is not in PATH
@@ -254,9 +281,9 @@ This modules directory was created using the following registries configuration:
 ERROR  Unable to find the global bin directory
 :::
 
-执行 `pnpm setup`，会自动配置好指向 global bin directory 的**用户环境变量**；配置好后继续执行 `pnpm add -g pnpm` 可能会报 **NO Server Run ...**，等待安装完成即可，可以卸载`npm uninstall pnpm -g`，推荐使用 **pnpm** 管理包；仍需注意的是，在使用`pnpm add -g pnpm`作为`pnpm`的全局依赖管理时，我遇到了在 `Windows Terminal`下使用`powershell`执行`pnpm`相关命令正常，但在 vscode 中调用 powershell 执行 pnpm 命令不正常的问题（win11 Beta 版本），`pnpm setup` 命令配置的是用户变量的，在系统变量也添加如下配置后解决了这个问题
+执行 `pnpm setup` ，会自动配置好指向 global bin directory 的**用户环境变量**；配置好后继续执行 `pnpm add -g pnpm` 可能会报 **NO Server Run ...**，等待安装完成即可，可以卸载 `npm uninstall pnpm -g` ，推荐使用 **pnpm** 管理包；仍需注意的是，在使用 `pnpm add -g pnpm` 作为 `pnpm` 的全局依赖管理时，我遇到了在 `Windows Terminal` 下使用 `powershell` 执行 `pnpm` 相关命令正常，但在 vscode 中调用 powershell 执行 pnpm 命令不正常的问题（win11 Beta 版本）， `pnpm setup` 命令配置的是用户变量的，在系统变量也添加如下配置后解决了这个问题
 
-类似问题：https://github.com/pnpm/pnpm/issues/3361
+类似问题：<https://github.com/pnpm/pnpm/issues/3361>
 
 ```powershell
 # 新增系统环境变量键值对
@@ -266,13 +293,13 @@ C:\Users\klaus\AppData\Local\pnpm
 %PNPM_HOME%
 ```
 
-### Error: spawn pnpm ENOENT
+#### Error: spawn pnpm ENOENT
 
 > ENOENT means Error No Entry
 
-原因：`~\.vuerc`  下配置默认包管理为 pnpm `"packageManager": "pnpm"`，安装依赖时还未安装 pnpm 呢！fk.
+原因： `~\.vuerc`   下配置默认包管理为 pnpm  `"packageManager": "pnpm"` ，安装依赖时还未安装 pnpm 呢！fk.
 
-### 关于 pnpm 存储包路径的问题
+#### 关于 pnpm 存储包路径的问题
 
 简而言之，如果[配置](https://pnpm.io/zh/configuring)了存储路径会有一系列麻烦，官方描述为[常见问题 | pnpm](https://pnpm.io/zh/faq#pnpm-%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E8%B7%A8%E5%A4%9A%E4%B8%AA%E9%A9%B1%E5%8A%A8%E5%99%A8%E6%88%96%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%B7%A5%E4%BD%9C)
 
@@ -280,7 +307,7 @@ C:\Users\klaus\AppData\Local\pnpm
 >
 > 如果存储路径是通过[存储配置](https://pnpm.io/zh/configuring)指定的，则存储与项目间的复制行为将会发生在不同的磁盘上。
 >
-> 如果您在磁盘 `A` 上执行 `pnpm install`，则 pnpm 存储必须位于磁盘 `A`。 如果 pnpm 存储位于磁盘 `B`，则所有需要的包将被直接复制到项目位置而不是链接。 这个严重的抑制了 pnpm 的存储和性能优势。
+> 如果您在磁盘 `A` 上执行 `pnpm install` ，则 pnpm 存储必须位于磁盘 `A` 。 如果 pnpm 存储位于磁盘 `B` ，则所有需要的包将被直接复制到项目位置而不是链接。 这个严重的抑制了 pnpm 的存储和性能优势。
 
 所以我个人不建议[配置](https://pnpm.io/zh/configuring)存储路径，对此官方描述为：
 
@@ -288,7 +315,177 @@ C:\Users\klaus\AppData\Local\pnpm
 >
 > 如果未设置存储路径，则会创建多个存储（每个驱动器或文件系统一个）。
 >
-> 如果安装(pnpm install)在磁盘 `A` 上运行，则存储将在 `A` 的文件系统根目录下的 `.pnpm-store` 下被创建。 如果稍后安装在磁盘 `B` 上运行，将会在 `B` 上的 `.pnpm-store`处创建一个独立的存储。 项目仍将保持 pnpm 的优势，但每个驱动器可能有冗余包。
+> 如果安装(pnpm install)在磁盘 `A` 上运行，则存储将在 `A` 的文件系统根目录下的 `.pnpm-store` 下被创建。 如果稍后安装在磁盘 `B` 上运行，将会在 `B` 上的 `.pnpm-store` 处创建一个独立的存储。 项目仍将保持 pnpm 的优势，但每个驱动器可能有冗余包。
+
+### 扁平化依赖
+
+> Flattened Dependencies, 扁平化依赖是一种依赖管理的方式，主要解决了传统嵌套依赖带来的问题
+
+传统嵌套依赖结构：
+
+```text
+node_modules/
+├── A
+│   └── node_modules/
+│       └── B
+│           └── node_modules/
+│               └── C
+└── D
+    └── node_modules/
+        └── B
+```
+
+扁平化后的结构：
+
+```text
+node_modules/
+├── A
+├── B (共享版本)
+├── C
+└── D
+```
+
+#### 优势
+
+1. 解决重复安装问题
+
+* 传统方式可能导致同一个包被重复安装多次
+* 占用更多磁盘空间
+* 可能导致版本冲突
+
+2. 提高性能
+
+* 减少文件系统的层级深度
+* 加快模块的查找速度
+* 减少磁盘空间占用
+
+#### pnpm的创新
+
+pnpm 采用了一种独特的方式来处理扁平化：
+
+```text
+node_modules/
+├── .pnpm/                         # 集中存储
+│   ├── package-a@1.0.0/           # 实际文件
+│   ├── package-b@2.0.0/           # 实际文件
+│   └── node_modules/              # 扁平化的依赖
+│       ├── package-a -> ../package-a@1.0.0
+│       └── package-b -> ../package-b@2.0.0
+├── package-a                       # 符号链接
+└── package-b                       # 符号链接
+```
+
+1. 严格的依赖树：
+
+* 避免"幽灵依赖"问题
+* 确保依赖关系清晰
+
+2. 共享实例：
+
+相同版本的包只存储一次
+通过硬链接复用
+
+3. 版本隔离：
+
+* 不同版本可以共存
+* 避免版本冲突
+
+##### 举例
+
+假设有两个包都依赖 lodash：
+
+```text
+项目依赖结构：
+package-a 依赖 lodash@4.0.0
+package-b 依赖 lodash@4.0.0
+
+实际存储结构：
+node_modules/
+├── .pnpm/
+│   ├── lodash@4.0.0/     # 只存储一份实际文件
+│   └── node_modules/     # 扁平化引用
+└── [其他依赖]
+```
+
+```text
+项目依赖结构：
+package-a 依赖 lodash@4.0.0
+package-b 依赖 lodash@3.0.0
+
+实际存储结构：
+node_modules/
+├── .pnpm/
+│   ├── lodash@4.0.0/     # 第一个版本的实际文件
+│   │   └── node_modules/
+│   │       └── lodash    # 指向实际文件
+│   ├── lodash@3.0.0/     # 第二个版本的实际文件
+│   │   └── node_modules/
+│   │       └── lodash    # 指向实际文件
+│   └── node_modules/     # 扁平化引用
+└── [其他依赖]
+```
+
+### 文件存储机制
+
+pnpm 使用了两级存储机制：
+
+1. 全局 store（`.pnpm-store`）：
+
+```text
+C:\Users\[用户名]\AppData\Local\pnpm\store\v3    # Windows
+~/.pnpm-store/v3                                # Linux/macOS
+```
+
+2. 项目级 node_modules：
+
+```text
+├── node_modules
+│   ├── .pnpm
+│   │   ├── vue-router@4.4.5_vue@3.5.12_typescript@5.6.3_
+│   │   │   ├── node_modules
+│   │   │   │   ├── vue-router
+│   │   │   │   │   ├── dist
+│   │   │   │   │   │   ├── vue-router.mjs [实际文件，硬链接到本地全局store]
+│   │   │   │   │   │   ├── ...
+│   │   │   │   │   │   ├── ...
+└── vue-router -> ../.pnpm/vue-router@4.4.5_vue@3.5.12_typescript@5.6.3_/node_modules/vue-router/
+```
+
+#### 文件引用链路
+
+以`root/node_modules/vue-router`为例：
+
+1. 符号链接 symbolic link ：
+
+```powershell
+# 方法1：查看当前目录的链接目标
+(Get-Item .\node_modules\vue-router\).Target
+(Get-Item .).Target
+# 方法2：更详细的信息
+Get-Item . | Select-Object *
+```
+
+2. 硬链接 hard link：
+
+⚠️ 注意硬链接必须是某个具体的文件，不能是文件夹
+
+```powershell
+# PS C:\AI\DATA\z.sxsz.com\nuxt-website\node_modules\.pnpm\vue-router@4.4.5_vue@3.5.12_typescript@5.6.3_\node_modules\vue-router>
+fsutil hardlink list ".\dist\vue-router.mjs"
+```
+
+```text
+1. 符号链接：
+node_modules/vue-router
+  ↓ (符号链接 Symlink)
+  ↓ (Get-Item .).Target 可以查看
+2. 实际文件：
+.pnpm\vue-router@4.4.5_vue@3.5.12_typescript@5.6.3_\node_modules\vue-router\
+  ↓ (硬链接 Hardlink)
+  ↓ (fsutil hardlink list "文件路径" 可以查看)
+3. 全局存储：
+C:\Users\[用户名]\AppData\Local\pnpm\store\v3\files\[哈希值]
+```
 
 ## pnpm dlx
 
@@ -306,9 +503,9 @@ npx astro add tailwind
 
 > npx 的作用是临时安装和执行一个 npm 包，而不需要全局安装它
 >
-> 1.下载并运行 astro，npx 会检查你当前的环境中是否已经安装了 astro 命令行工具。如果没有，它会从 npm 注册表中下载这个工具。
+> 1. 下载并运行 astro，npx 会检查你当前的环境中是否已经安装了 astro 命令行工具。如果没有，它会从 npm 注册表中下载这个工具。
 >
-> 2.执行 add tailwind 命令，npx 会使用下载的 astro 工具执行 add tailwind 命令，这个命令会自动为你的 Astro 项目添加 Tailwind CSS，并进行必要的配置。
+> 2. 执行 add tailwind 命令，npx 会使用下载的 astro 工具执行 add tailwind 命令，这个命令会自动为你的 Astro 项目添加 Tailwind CSS，并进行必要的配置。
 
 这样，npx 简化了命令的执行过程，使得你不需要手动安装 astro 工具即可直接使用其功能
 
@@ -341,6 +538,7 @@ npm install -g cnpm --registry=https://registry.npmmirror.com/ # 可能不再适
 npm list -g # 用npm安装的全局包列表
 
 ### 安装依赖 ###
+
 npm install -g [moduleName] # 全局安装
 npm install [moduleName]    # 项目下安装
 npm install --save [moduleName] # 项目下安装，并在package文件的dependencies节点写入依赖，开发环境和生产环境都需要 -S
@@ -362,21 +560,22 @@ npx --no-install [moduleName] # --no-install 告诉npx不要自动下载，也�
 
 最新的 yarn 的安装方式已经变了，基于的 `nodejs >= 16.10` 自带的 corepack，详见 ♾️ [Installation | Yarn - Package Manager (yarnpkg.com)](https://yarnpkg.com/getting-started/install)
 
-> 全局包安装完成，要执行全局命令就要配置 bin 的位置，♾️https://classic.yarnpkg.com/en/docs/cli/global#:~:text=Defining%20install%20location
+> 全局包安装完成，要执行全局命令就要配置 bin 的位置，♾️<https://classic.yarnpkg.com/en/docs/cli/global#:~:text=Defining%20install%20location>
 
 > Yarn 是把自己作为项目的一个普通依赖看待的，所以升级 Yarn 也是针对项目而言
 > `yarn set version stable` > `yarn config set npmRegistryServer https://registry.npmmirror.com`
+
 > 🔆Yarn 最新版的命令和 node-corepack 版本的 yarn 命令不一致，使用 `yarn config`
 
 ```shell
-$ yarn config set global-folder "C:/A/global-package/yarn-global"
-$ yarn global dir
+yarn config set global-folder "C:/A/global-package/yarn-global"
+yarn global dir
 ```
 
 ```shell
-$ yarn global bin # 默认用的是npm的
-$ yarn config set prefix "C:/A/global-package/yarn-global/" # 设置自己的
-$ 非必须，添加 `C:/A/global-package/yarn-global/bin` 到环境变量
+yarn global bin # 默认用的是npm的
+yarn config set prefix "C:/A/global-package/yarn-global/" # 设置自己的
+非必须，添加 `C:/A/global-package/yarn-global/bin` 到环境变量
 ```
 
 ```shell
@@ -423,7 +622,7 @@ $ yarn global list # 用yarn安装的全局包列表
 
 > yarn 源管理器
 
-🚫[yrm](https://github.com/i5ting/yrm) forked from [Pana/nrm](https://github.com/Pana/nrm)，和 nrm 有些冲突，yrm 和 nrm 的 `ls` `current` 命令只有一个能正常显示
+🚫[yrm](https://github.com/i5ting/yrm) forked from [Pana/nrm](https://github.com/Pana/nrm)，和 nrm 有些冲突，yrm 和 nrm 的 `ls`  `current` 命令只有一个能正常显示
 
 ```shell
 # install

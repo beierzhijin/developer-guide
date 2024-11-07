@@ -4,7 +4,7 @@
 
 ### MacOS-Typora-picgo
 
-我的应用是通过 brew 管理的，`brew` - `fnm` - `node(npm)` - `pnpm` - `picgo`
+我的应用是通过 brew 管理的， `brew` - `fnm` - `node(npm)` - `pnpm` - `picgo`
 
 ```bash
 pnpm add picgo -g
@@ -15,15 +15,15 @@ picgo set uploader
 
 ✘ [which node] [which picgo] upload
 
-✔ [which node] [`npm root -g`/picgo/bin/picgo] upload
+✔ [which node] [ `npm root -g` /picgo/bin/picgo] upload
 
 ### [PicGo](https://support.typora.io/Upload-Image/#picgo-core-command-line-opensource)
 
 Config PicGo-Core
 Please edit config.json at following location
 
-- Linux / macOS → <u>~/.picgo/config.json</u>
-- Windows → <u>C:\Users\klaus\ .picgo\config.json</u>
+* Linux / macOS → <u>~/.picgo/config.json</u>
+* Windows → <u>C:\Users\klaus\ .picgo\config.json</u>
 
 [选择 PicGo-Core (Command line)下载或更新](https://picgo.github.io/PicGo-Core-Doc/zh/guide/config.html#%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
 
@@ -67,7 +67,7 @@ Please edit config.json at following location
 
 ### issues
 
-🔺[picgo + 七牛云`华东-浙江2`无法上传图片](https://github.com/Molunerfinn/PicGo/issues/365#issuecomment-1380207705)
+🔺[picgo + 七牛云 `华东-浙江2` 无法上传图片](https://github.com/Molunerfinn/PicGo/issues/365#issuecomment-1380207705)
 
 ## [Chrome offline](https://www.google.cn/chrome/next-steps.html?platform=win64&standalone=1&statcb=1&installdataindex=empty&defaultbrowser=0)
 
@@ -84,11 +84,13 @@ Please edit config.json at following location
 
 ## PowerToys
 
-![image-20230308170748337](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20230308170748337.png){width="555px"}
+![image-20230308170748337](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20230308170748337.png)
+
+{width="555px"}
 
 ## Brew 软件源配置
 
-在`~/.zshrc`中添加以下内容，然后执行`source ~/.zshrc`即可
+在 `~/.zshrc` 中添加以下内容，然后执行 `source ~/.zshrc` 即可
 
 ```bash
 # Homebrew设置国内镜像
@@ -110,7 +112,7 @@ function unset_china_source() {
 }
 ```
 
-如果报错 `Error: Another active Homebrew process is already in progress.`, 执行以下命令
+如果报错 `Error: Another active Homebrew process is already in progress.` , 执行以下命令
 
 ```bash
 rm -rf $(brew --prefix)/var/homebrew/locks
@@ -148,6 +150,76 @@ tasklist | findstr <PID>
 
 ## PS命令
 
+### 查看版本
+
+```powershell
+$PSVersionTable.PSVersion
+```
+
+### Tree
+
+```powershell
+tree /?
+# 查看所有 Profile 路径 
+$PROFILE | Get-Member -MemberType NoteProperty
+# C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1
+$PROFILE.AllUsersAllHosts
+# C:\Windows\System32\WindowsPowerShell\v1.0\Microsoft.PowerShell_profile.ps1
+$PROFILE.AllUsersCurrentHost
+# C:\Users\klaus\Documents\WindowsPowerShell\profile.ps1
+$PROFILE.CurrentUserAllHosts
+# C:\Users\klaus\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+$PROFILE.CurrentUserCurrentHost
+# 检查 Profile 是否存在
+Test-Path $PROFILE.AllUsersAllHosts
+# 如果不存在，创建文件
+if (!(Test-Path $PROFILE.AllUsersAllHosts)) {
+  New-Item -Path $PROFILE.AllUsersAllHosts -Type File -Force
+}
+# 安装 PSTree 模块
+Install-Module -Name PSTree
+# 模块实际存储位置
+C:\Program Files\WindowsPowerShell\Modules\PSTree
+# 用记事本打开编辑
+notepad $PROFILE.AllUsersAllHosts
+notepad $PROFILE.CurrentUserAllHosts
+# 以管理员权限打开
+Start-Process notepad -ArgumentList $PROFILE.AllUsersAllHosts -Verb RunAs
+# 添加如下
+Import-Module PSTree
+
+function Show-TreeStructure {
+    param (
+        [string]$path
+    )
+    $segments = $path.Split('\')
+    for ($i = 0; $i -lt $segments.Count; $i++) {
+        $indent = ""
+        # 为每一级添加正确的竖线和空格
+        for ($j = 0; $j -lt $i; $j++) {
+            $indent += [char]0x2502 + "   "  # 使用 Unicode 竖线
+        }
+        # 使用 Unicode 字符确保正确显示
+        Write-Output ($indent + [char]0x251C + [char]0x2500 + [char]0x2500 + " " + $segments[$i])
+    }
+}
+# 执行自定义函数
+Show-TreeStructure "node_modules\.pnpm\vue-router@4.4.5_vue@3.5.12_typescript@5.6.3_\node_modules\vue-router\dist"
+# 重新加载 Profile
+. $PROFILE.AllUsersAllHosts
+# 检查模块是否自动加载
+Get-Module PSTree
+# 或者测试命令是否可用
+Get-PSTree --version
+# 检查模块可用的命令
+Get-Command -Module PSTree
+
+# 使用 Get-PSTree 命令
+Get-PSTree "node_modules\.pnpm\vue-router@4.4.5_vue@3.5.12_typescript@5.6.3_\node_modules\vue-router\dist"
+# 或者使用它的别名 pstree
+pstree "node_modules\.pnpm\vue-router@4.4.5_vue@3.5.12_typescript@5.6.3_\node_modules\vue-router\dist"
+```
+
 ### 重启explorer
 
 ```powershell
@@ -162,7 +234,7 @@ Stop-Process -Name explorer -Force; Start-Process explorer
 & 'C:\AI\DATA\tools\scripts\install-open-with-cursor.ps1'
 ```
 
-### [System.IO.Path]::Combine()
+### [System. IO. Path]:: Combine()
 
 ```powershell
 $cursorExePath = [System.IO.Path]::Combine($env:LOCALAPPDATA, "Programs", "cursor", "Cursor.exe")
@@ -184,6 +256,7 @@ $cursorExePath = [System.IO.Path]::Combine($env:LOCALAPPDATA, "Programs", "curso
 ```
 
 3. 使用 Start-Process cmdlet 以管理员身份运行脚本
+
 ```powershell
 Start-Process powershell.exe -Verb RunAs -ArgumentList "-File", ".\your_script.ps1"
 ```
@@ -196,4 +269,3 @@ Start-Process powershell.exe -Verb RunAs -ArgumentList "-File", ".\your_script.p
 $cursorExePath = Get-ChildItem -Path $env:LOCALAPPDATA, $env:ProgramFiles, "$env:ProgramFiles(x86)" -Filter "Cursor.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
 Write-Host "Cursor executable path: $cursorExePath"
 ```
-
