@@ -162,13 +162,10 @@ $PSVersionTable.PSVersion
 tree /?
 # 查看所有 Profile 路径 
 $PROFILE | Get-Member -MemberType NoteProperty
-# C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1
+# 不同版本的PowerShell，需要在终端选择不同的powershell查看
 $PROFILE.AllUsersAllHosts
-# C:\Windows\System32\WindowsPowerShell\v1.0\Microsoft.PowerShell_profile.ps1
 $PROFILE.AllUsersCurrentHost
-# C:\Users\klaus\Documents\WindowsPowerShell\profile.ps1
 $PROFILE.CurrentUserAllHosts
-# C:\Users\klaus\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 $PROFILE.CurrentUserCurrentHost
 # 检查 Profile 是否存在
 Test-Path $PROFILE.AllUsersAllHosts

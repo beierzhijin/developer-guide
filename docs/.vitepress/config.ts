@@ -154,7 +154,7 @@ function nav() {
       text: 'Developer',
       activeMatch: `^/developer/`,
       items: [
-        { text: 'OSS', link: '/developer/daynight' },
+        { text: 'OSS', link: '/developer/software' },
         { text: 'Git', link: '/developer/git' },
       ]
     }
@@ -280,7 +280,7 @@ function sidebarDeveloper() {
       text: 'Developer',
       collapsible: true,
       items: [
-        { text: '软件配置', link: '/developer/daynight' },
+        { text: '软件配置', link: '/developer/software' },
         { text: 'ENGLISH', link: '/developer/english' },
         { text: 'Git', link: '/developer/git' },
       ]
