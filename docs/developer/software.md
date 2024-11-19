@@ -150,7 +150,21 @@ tasklist | findstr <PID>
 
 ## PS命令
 
-### 查看版本
+### 查看IP
+
+```powershell
+get-netIPAddress -AddressFamily IPv4 | ft -AutoSize
+get-netIPAddress | ft -AutoSize
+```
+
+> *来自AI：*
+>
+> 1. **`get-netIPAddress`**：这是PowerShell中的一个cmdlet（命令），用于检索与网络接口关联的所有IP地址的信息。这个cmdlet属于`NetAdapter`模块，该模块提供了管理和查询网络适配器及其相关配置的功能。
+> 2. **`-AddressFamily IPv4`**：这个参数指定了要检索的IP地址族。`IPv4`表示仅获取IPv4地址的信息。如果不指定此参数，`get-netIPAddress`默认会返回所有类型的IP地址（包括IPv4和IPv6）。
+> 3. **`|`**：这个符号在PowerShell中用作管道（Pipeline），它的作用是将前一个命令的输出作为后一个命令的输入。这意味着`get-netIPAddress -AddressFamily IPv4`的输出将被传递给后面的命令。
+> 4. **`ft -AutoSize`**：这里`ft`是`Format-Table`的别名，是PowerShell中的一个cmdlet，用于将输入数据格式化为表格形式。`-AutoSize`参数指示`Format-Table`自动调整列的宽度以适应内容的长度，使表格输出更加易读。
+
+### 查看powershell版本
 
 ```powershell
 $PSVersionTable.PSVersion
