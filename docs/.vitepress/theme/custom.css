@@ -77,10 +77,28 @@ code .line {
 
 /* 顶部导航 左侧标题 */
 .VPNavBarTitle .title {
-  font-family: 'PirataOne';
+  font-family: 'EDIX';
   font-size: 28px;
-  /* color: rgba(153, 44, 39, 1); */
-  color: rgb(71, 51, 36);
+}
+
+.VPNavBarTitle .title span {
+  background: linear-gradient(to right, #ea4335, #fbbc05, #34a853,#4285f4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.VPNavBarTitle .title::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #ea4335, #fbbc05, #34a853, #4285f4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  z-index: -1;
 }
 
 /* 顶部导航 左侧logo */

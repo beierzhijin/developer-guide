@@ -19,10 +19,10 @@ export default defineConfig({
   },
   themeConfig: {
     // logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/logo_01.png',
-    logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/wukong_logo.png',
+    logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/google.svg',
     // logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/AssassinS-1.png',
     // logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/TEXT-AssassinS.png',
-    siteTitle: 'BLACK MYTH: Wukong', // 导航栏左侧指向起始页的标题
+    siteTitle: 'MCG AI', // 导航栏左侧指向起始页的标题
     // siteTitle: false, // 导航栏左侧指向起始页的标题
     nav: nav(),
     sidebar: {
