@@ -28,6 +28,7 @@ export default defineConfig({
     sidebar: {
       '/frontend/': sidebarFrontend(),
       '/backend/': sidebarBackend(),
+      '/cryptocurrency/': sidebarCryptocurrency(),
       '/database/': sidebarDatabase(),
       '/network/': sidebarNetWork(),
       '/developer/': sidebarDeveloper()
@@ -133,6 +134,13 @@ function nav() {
         { text: 'Linux', link: '/backend/container/Linux' },
         { text: 'Containers', link: '/backend/container/docker' },
         { text: 'Vim', link: '/backend/container/vim' },
+      ]
+    },
+    {
+      text: 'Cryptocurrency',
+      activeMatch: `^/cryptocurrency/`,
+      items: [
+        { text: 'blockchain', link: '/cryptocurrency/blockchain' },
       ]
     },
     {
@@ -246,6 +254,18 @@ function sidebarBackend() {
       ]
     },
 
+  ]
+}
+
+function sidebarCryptocurrency() {
+  return [
+    {
+      text: 'Cryptocurrency',
+      collapsible: true,
+      items: [
+        { text: 'blockchain', link: '/cryptocurrency/blockchain' },
+      ]
+    }
   ]
 }
 
