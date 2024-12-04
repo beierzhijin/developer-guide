@@ -273,7 +273,10 @@ export default defineConfig({
 
 ## [VitePress](https://vitepress.vuejs.org/)
 
-## [Volar Takeover Mode](https://vuejs.org/guide/typescript/overview.html#volar-takeover-mode)
+## [Vue-Official插件](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+
+## Vscode属性换行
+vscode - settings - `html.format.wrapAttributes`: `force-expand-multiline`
 
 ### TS中对vue文件的导入类型支持
 
