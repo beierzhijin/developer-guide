@@ -273,7 +273,18 @@ export default defineConfig({
 
 ## [VitePress](https://vitepress.vuejs.org/)
 
-## [Volar Takeover Mode](https://vuejs.org/guide/typescript/overview.html#volar-takeover-mode)
+## [Vue-Official插件](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+
+## VSCode属性换行
+vscode - settings - 
+- `html.format.wrapAttributes`: `force-expand-multiline`
+  - auto: 仅在超出行长度时才对属性进行换行
+  - force: 对除第一个属性外的其他每个属性进行换行
+  - force-aligned: 对除第一个属性外的其他每个属性进行换行，并保持对齐
+  - force-expand-multiline: 对每个属性进行换行
+  - aligned-multiple: 当超出折行长度时，将属性进行垂直对齐
+
+- `html.format.wrapLineLength`: `120`
 
 ### TS中对vue文件的导入类型支持
 
