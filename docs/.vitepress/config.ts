@@ -242,6 +242,7 @@ function sidebarBackend() {
       items: [
         { text: '基础', link: '/backend/container/Linux' },
         { text: 'vim', link: '/backend/container/vim' },
+        { text: 'WSL', link: '/backend/container/wsl' },
         {
           text: 'Containers',
           collapsible: true,
