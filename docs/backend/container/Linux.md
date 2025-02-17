@@ -207,6 +207,11 @@ sudo chown -R www-data:www-data /var/www/site1.com/
 
 ### 软件相关
 
+# [清华源](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)
+
+> 在 Ubuntu 24.04 之前，Ubuntu 的软件源配置文件使用传统的 One-Line-Style，路径为 `/etc/apt/sources.list`；
+> 从 Ubuntu 24.04 开始，Ubuntu 的软件源配置文件变更为 DEB822 格式，路径为 `/etc/apt/sources.list.d/ubuntu.sources`
+
 ```bash
 sudo vim /etc/apt/sources.list              # 查看软件源
 sudo apt edit-sources                       # 查看软件源
