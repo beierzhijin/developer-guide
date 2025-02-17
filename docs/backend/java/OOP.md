@@ -52,29 +52,13 @@ javac
 
 通过 Homebrew 安装
 
+> JDK8
+
 ```shell
-brew search openjdk
-brew install openjdk@17
-java --version
-# 安装 JDK8
 brew tap homebrew/cask-versions
 brew install --cask zulu@8
 java -version
-# 查看 JAVA_HOME
-/usr/libexec/java_home
-# 结果是 /Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home
-/usr/libexec/java_home -V
-```
 
-把 homebrew 安装的 openjdk17 软链接到系统目录
-
-```shell
-sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
-```
-
-切到用户目录
-
-```shell
 cd
 vim .zshrc
 # 加入下面的配置，保存退出
@@ -84,6 +68,27 @@ export PATH=$JAVA_HOME/bin:$PATH
 source .zshrc
 # 检查配置
 echo $JAVA_HOME
+```
+
+> JDK17
+
+```shell
+brew search openjdk
+brew install openjdk@17
+# 软链接
+sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+```
+
+> JDK21
+
+```shell
+# https://formulae.brew.sh/formula/openjdk@21
+brew install openjdk@21
+java --version
+/usr/libexec/java_home
+/usr/libexec/java_home -V
+# 把 homebrew 安装的 openjdk 软链接到系统目录
+sudo ln -sfn $HOMEBREW_PREFIX/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk
 ```
 
 ## Maven 环境变量配置
