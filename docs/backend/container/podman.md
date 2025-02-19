@@ -252,19 +252,35 @@ ip addr show eth0 | grep 'inet\b' | awk '{print $2}' | cut -d/ -f1
 
 ## 切换至国内镜像
 
-🎉 [阿里云镜像](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors)
+- 🎉 [阿里云镜像](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors)
+- 🎉 [ustc中国科学技术大学Docker Hub](https://mirrors.ustc.edu.cn/help/dockerhub.html)
+- 🎉 [国内Docker服务状态 & 镜像加速监控](https://status.1panel.top/status/docker)
+
+> https://wcbing.top/linux/containers/install/
 
 ```bash
 # 编辑需要root权限
 sudo vi /etc/containers/registries.conf
 
-# 只需要在unqualified-search-registries添加阿里镜像就可以，正常情况pull的时候会让你选择镜像源，ustc中国科学技术大学
-unqualified-search-registries = ["docker.io", "docker.mirrors.ustc.edu.cn", "xxxxxx.mirror.aliyuncs.com"]
+# 在unqualified-search-registries添加阿里镜像就可以，正常情况pull的时候会让你选择镜像源 （ustc中国科学技术大学 "docker.mirrors.ustc.edu.cn" 已暂停服务）
+unqualified-search-registries = ["docker.io", "xxxxxx.mirror.aliyuncs.com"]
+```
 
-# 🚫不需要这么复杂；location为上面阿里云镜像地址，不需要https://
+```bash
+# location为上面阿里云镜像地址，不需要https://
 unqualified-search-registries = ["docker.io"]
+
+# 或者
 [[registry]]
 prefix = "docker.io"
+location = "xxxxxx.mirror.aliyuncs.com"
+
+# 或者
+[[registry]]
+location = "docker.io"
+
+[[registry.mirror]]
+# 这里不要写 https://
 location = "xxxxxx.mirror.aliyuncs.com"
 ```
 
