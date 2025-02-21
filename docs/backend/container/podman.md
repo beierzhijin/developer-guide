@@ -18,6 +18,37 @@ podman volume ls
 podman volume inspect postgres_volume
 ```
 
+### machine mode
+
+```bash
+# 如果输出正常（显示 Podman 的版本、存储驱动等信息），说明 Podman 在你的 Ubuntu 系统上已经可以直接使用，无需虚拟机
+podman info
+# 输出为 Linux，表明你已经在原生 Linux 环境中，不需要额外的虚拟机
+uname -s
+# 启动一个基于 Ubuntu 镜像的新容器, 进入这个容器的交互式 Bash shell，允许你在容器内执行命令
+# -i: 表示“交互式”（interactive），保持标准输入（stdin）打开，允许你与容器中的 shell 进行交互
+# -t: 表示分配一个伪终端（tty），提供一个类似终端的界面，通常与 -i 一起使用以获得完整的交互体验
+podman run -it ubuntu bash
+# 初始化一个虚拟机（通常基于 QEMU 或其他虚拟化技术），用于运行 Podman 的容器引擎。这个虚拟机提供了一个隔离的 Linux 环境，Podman 会在其中运行容器
+podman machine init
+podman machine start
+podman machine list
+# 删除
+podman machine rm podman-machine-default
+# 在指定的 Podman machine 上运行 MySQL 容器
+podman machine start podman-machine-default
+podman machine ssh podman-machine-default
+podman pull mysql:latest
+podman run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=your_password --name mysql-container mysql:latest
+podman ps
+# 使用主机的 IP 地址连接到 MySQL 服务器
+podman machine ip podman-machine-default
+```
+
+在没有原生 Linux 内核支持的系统上运行 Podman（例如 macOS 和 Windows），因为 Podman 需要 Linux 内核特性（如 cgroups 和 namespaces）来管理容器。在这些系统上，Podman 使用一个轻量级虚拟机来模拟 Linux 环境。
+
+
+
 ## Linux（Ubuntu）
 
 ⚠️ 在 `podman images` 时如果警告 `WARN[0000] "/" is not a shared mount, this could cause issues or missing mounts with rootless containers`，手动将挂载点设置为共享 `sudo mount --make-shared /`，
@@ -33,6 +64,8 @@ sudo apt update
 sudo apt install -y podman
 podman pull docker.io/mysql:latest
 podman pull docker.io/mysql:5.7 # 指定版本
+# 查询MySQL容器的版本，--rm：容器运行结束后自动删除 -it：交互模式，方便查看输出 mysql --version：运行 MySQL 客户端并输出版本信息
+podman run --rm -it docker.io/library/mysql:latest mysql --version
 podman image -h # Manage images: https://docs.podman.io/en/latest/markdown/podman-image.1.html
 podman images # List images in local storage: https://docs.podman.io/en/latest/markdown/podman-images.1.html
 podman rmi [Image ID]
