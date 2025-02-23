@@ -77,12 +77,13 @@ code .line {
 
 /* 顶部导航 左侧标题 */
 .VPNavBarTitle .title {
-  font-family: 'EDIX';
-  font-size: 28px;
+  font-family: 'Comforter';
+  font-size: 20px;
 }
 
 .VPNavBarTitle .title span {
-  background: linear-gradient(to right, #ea4335, #fbbc05, #34a853,#4285f4);
+  /* background: linear-gradient(to right, #ea4335, #fbbc05, #34a853,#4285f4); */
+  background: #FFFFFF;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -110,6 +111,16 @@ code .line {
 .VPNavBarMenu,
 .menu {
   font-family: 'Morena', 'SourceHanSerifCN';
+}
+
+@media (min-width: 960px) {
+  .VPHome .image-container {
+    min-height: 32vh;
+  }
+
+  .image-src {
+    min-width: 100%;
+  }
 }
 
 /* 起始页 中间标题 */

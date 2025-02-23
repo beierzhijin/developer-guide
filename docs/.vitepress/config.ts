@@ -19,10 +19,11 @@ export default defineConfig({
   },
   themeConfig: {
     // logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/logo_01.png',
-    logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/google.svg',
+    // logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/google.svg',
+    logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/grok.png',
     // logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/AssassinS-1.png',
     // logo: 'https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/TEXT-AssassinS.png',
-    siteTitle: 'MCG AI', // 导航栏左侧指向起始页的标题
+    siteTitle: 'Liupeng', // 导航栏左侧指向起始页的标题
     // siteTitle: false, // 导航栏左侧指向起始页的标题
     nav: nav(),
     sidebar: {

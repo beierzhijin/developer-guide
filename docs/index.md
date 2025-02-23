@@ -8,8 +8,9 @@ hero:
   image:
     # src: /Kobe R.I.P.webp
     # src: https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/AssassinS%20CREED.png
-    src: https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/douzhanshengfo.png
+    # src: https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/douzhanshengfo.png
     # src: https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/logo_01.png
+    src: /happy_year_of_snake.gif
     alt: wukong
   actions:
     - theme: brand
