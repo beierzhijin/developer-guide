@@ -11,7 +11,7 @@ hero:
     # src: https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/douzhanshengfo.png
     # src: https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/logo_01.png
     src: /happy_year_of_snake.gif
-    alt: wukong
+    alt: 影之刃零∅
   actions:
     - theme: brand
       text: Start
