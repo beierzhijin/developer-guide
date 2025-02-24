@@ -121,14 +121,8 @@ code .line {
   -webkit-text-fill-color: transparent;
 }
 
-@media (min-width: 960px) {
-  .VPHome .image-container {
-    min-height: 32vh;
-  }
-
-  .image-src {
-    min-width: 100%;
-  }
+.VPHome .image-src {
+  min-width: 100%;
 }
 
 /* 起始页 中间标题 */

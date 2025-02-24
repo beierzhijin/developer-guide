@@ -64,7 +64,9 @@ sudo apt update
 sudo apt install -y podman
 podman pull docker.io/mysql:latest
 podman pull docker.io/mysql:5.7 # 指定版本
-# 查询MySQL容器的版本，--rm：容器运行结束后自动删除 -it：交互模式，方便查看输出 mysql --version：运行 MySQL 客户端并输出版本信息
+podman pull docker.1ms.run/mysql:lts # 指定镜像源
+# 查看MySQL容器的版本，--rm：容器运行结束后自动删除 -it：交互模式，方便查看输出 mysql --version：运行 MySQL 客户端并输出版本信息
+podman run --rm -it docker.1ms.run/mysql:lts mysql --version
 podman run --rm -it docker.io/library/mysql:latest mysql --version
 podman image -h # Manage images: https://docs.podman.io/en/latest/markdown/podman-image.1.html
 podman images # List images in local storage: https://docs.podman.io/en/latest/markdown/podman-images.1.html
