@@ -113,6 +113,14 @@ code .line {
   font-family: 'Morena', 'SourceHanSerifCN';
 }
 
+.VPHome .heading .text {
+  font-family: 'EDIX';
+  font-size: 28px;
+  background: linear-gradient(120deg, #D0D0D9, #954043, #41d1ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 @media (min-width: 960px) {
   .VPHome .image-container {
     min-height: 32vh;

@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: Full Stack Engineer Developer & Programmer # product name
-  text: 
+  text: Full Stack Engineer Developer ∅ Programmer
   tagline:
   image:
     # src: /Kobe R.I.P.webp
