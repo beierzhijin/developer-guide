@@ -4,60 +4,9 @@
 
 > https://hub.docker.com/
 
-> https://dockerproxy.com/
+> https://dockerproxy.link/
 
-## Common Commands
-
-### volume
-```shell
-# 创建名为 postgres_volume 的卷，为卷添加元数据标签（组织分类，筛选查询）
-podman volume create --label purpose=database postgres_volume
-podman volume ls --filter label=purpose=database
-podman volume ls
-# postgres_volume卷 在系统中的精确位置
-podman volume inspect postgres_volume
-```
-
-### machine mode
-
-```bash
-# 如果输出正常（显示 Podman 的版本、存储驱动等信息），说明 Podman 在你的 Ubuntu 系统上已经可以直接使用，无需虚拟机
-podman info
-# 输出为 Linux，表明你已经在原生 Linux 环境中，不需要额外的虚拟机
-uname -s
-# 启动一个基于 Ubuntu 镜像的新容器, 进入这个容器的交互式 Bash shell，允许你在容器内执行命令
-# -i: 表示“交互式”（interactive），保持标准输入（stdin）打开，允许你与容器中的 shell 进行交互
-# -t: 表示分配一个伪终端（tty），提供一个类似终端的界面，通常与 -i 一起使用以获得完整的交互体验
-podman run -it ubuntu bash
-# 初始化一个虚拟机（通常基于 QEMU 或其他虚拟化技术），用于运行 Podman 的容器引擎。这个虚拟机提供了一个隔离的 Linux 环境，Podman 会在其中运行容器
-podman machine init
-podman machine start
-podman machine list
-# 删除
-podman machine rm podman-machine-default
-# 在指定的 Podman machine 上运行 MySQL 容器
-podman machine start podman-machine-default
-podman machine ssh podman-machine-default
-podman pull mysql:latest
-podman run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=your_password --name mysql-container mysql:latest
-podman ps
-# 使用主机的 IP 地址连接到 MySQL 服务器
-podman machine ip podman-machine-default
-```
-
-在没有原生 Linux 内核支持的系统上运行 Podman（例如 macOS 和 Windows），因为 Podman 需要 Linux 内核特性（如 cgroups 和 namespaces）来管理容器。在这些系统上，Podman 使用一个轻量级虚拟机来模拟 Linux 环境。
-
-
-
-## Linux（Ubuntu）
-
-⚠️ 在 `podman images` 时如果警告 `WARN[0000] "/" is not a shared mount, this could cause issues or missing mounts with rootless containers`，手动将挂载点设置为共享 `sudo mount --make-shared /`，
-上述命令需要在每次系统重启后运行Podman之前执行。
-
-也可以在powershell中执行以下（在WSL中以root用户身份执行`mount --make-rshared /`，这会将根目录（/）及其所有子目录的挂载点设置为递归共享）
-```powershell
-wsl.exe -u root -e mount --make-rshared /
-```
+## Commands
 
 ```shell
 sudo apt update
@@ -65,6 +14,9 @@ sudo apt install -y podman
 podman pull docker.io/mysql:latest
 podman pull docker.io/mysql:5.7 # 指定版本
 podman pull docker.1ms.run/mysql:lts # 指定镜像源
+podman tag docker.1ms.run/mysql:lts mysql:lts # 创建一个新的标签 mysql:lts
+podman rmi docker.1ms.run/mysql:lts
+podman run --rm -it mysql:lts mysql --version 
 # 查看MySQL容器的版本，--rm：容器运行结束后自动删除 -it：交互模式，方便查看输出 mysql --version：运行 MySQL 客户端并输出版本信息
 podman run --rm -it docker.1ms.run/mysql:lts mysql --version
 podman run --rm -it docker.io/library/mysql:latest mysql --version
@@ -108,43 +60,57 @@ cd ~/mysql_data
 sudo rm -rf *
 ```
 
-### 查看 mysql 容器的 root 密码
+### volume
+```shell
+# 创建名为 postgres_volume 的卷，为卷添加元数据标签（组织分类，筛选查询）
+podman volume create --label purpose=database postgres_volume
+podman volume ls --filter label=purpose=database
+podman volume ls
+# postgres_volume卷 在系统中的精确位置
+podman volume inspect postgres_volume
+```
 
+### machine mode
+```bash
+# 如果输出正常（显示 Podman 的版本、存储驱动等信息），说明 Podman 在你的 Ubuntu 系统上已经可以直接使用，无需虚拟机
+podman info
+# 输出为 Linux，表明你已经在原生 Linux 环境中，不需要额外的虚拟机
+uname -s
+# 启动一个基于 Ubuntu 镜像的新容器, 进入这个容器的交互式 Bash shell，允许你在容器内执行命令
+# -i: 表示“交互式”（interactive），保持标准输入（stdin）打开，允许你与容器中的 shell 进行交互
+# -t: 表示分配一个伪终端（tty），提供一个类似终端的界面，通常与 -i 一起使用以获得完整的交互体验
+podman run -it ubuntu bash
+# 初始化一个虚拟机（通常基于 QEMU 或其他虚拟化技术），用于运行 Podman 的容器引擎。这个虚拟机提供了一个隔离的 Linux 环境，Podman 会在其中运行容器
+podman machine init
+podman machine start
+podman machine list
+# 删除
+podman machine rm podman-machine-default
+# 在指定的 Podman machine 上运行 MySQL 容器
+podman machine start podman-machine-default
+podman machine ssh podman-machine-default
+podman pull mysql:latest
+podman run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=your_password --name mysql-container mysql:latest
+podman ps
+# 使用主机的 IP 地址连接到 MySQL 服务器
+podman machine ip podman-machine-default
+```
+
+在没有原生 Linux 内核支持的系统上运行 Podman（例如 macOS 和 Windows），因为 Podman 需要 Linux 内核特性（如 cgroups 和 namespaces）来管理容器。在这些系统上，Podman 使用一个轻量级虚拟机来模拟 Linux 环境。
+
+
+### 查看 mysql 容器的 root 密码
 ```shell
 podman inspect mysql-container # 查看容器的详细信息
 podman inspect mysql-container | grep MYSQL_ROOT_PASSWORD
 ```
 
 ### 进入容器
-
 ```bash
 podman exec -it 【容器 ID】 bash
 ```
 
-## command
-
-### run
-
-https://www.runoob.com/docker/docker-run-command.html
-
-## Podman for Debian（WSL2）
-
-Ubuntu 基于 Debian，都可使用`apt-get`
-
-[Podman for Ubuntu](https://podman.io/getting-started/installation#:~:text=the%20available%20streams.-,Ubuntu,-The%20podman%20package)
-
-### podman
-
-```bash
-# Ubuntu 20.10 and newer
-sudo apt-get -y update
-sudo apt-get -y install podman
-sudo apt -y update
-sudo apt -y install podman
-```
-
 ### mysql
-
 ```bash
 podman run --name mysql -p 3306:3306 -v ~/mypod/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
 ```
@@ -192,6 +158,14 @@ requirepass 123456
 
 ## Podman for Windows（WSL2）
 
+⚠️ 在 `podman images` 时如果警告 `WARN[0000] "/" is not a shared mount, this could cause issues or missing mounts with rootless containers`，手动将挂载点设置为共享 `sudo mount --make-shared /`，
+上述命令需要在每次系统重启后运行Podman之前执行。
+
+也可以在powershell中执行以下（在WSL中以root用户身份执行`mount --make-rshared /`，这会将根目录（/）及其所有子目录的挂载点设置为递归共享）
+```powershell
+wsl.exe -u root -e mount --make-rshared /
+```
+
 [podman/podman-for-windows.md at main · containers/podman · GitHub](https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md)
 
 简而言之，容器是针对 Linux 而言的，对于 windows 则是基于 WSL2
@@ -202,6 +176,44 @@ requirepass 123456
    podman machine init
    podman machine start
    ```
+
+Ubuntu 基于 Debian，都可使用`apt-get`
+[Podman for Ubuntu](https://podman.io/getting-started/installation#:~:text=the%20available%20streams.-,Ubuntu,-The%20podman%20package)
+
+### WSL2 现已支持 Systemd-2022.9.27
+
+> [WSL2 现已支持 Systemd - V2EX](https://www.v2ex.com/t/882117)
+>
+> [Systemd support is now available in WSL!](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/)
+
+```shell
+# 设置 systemd 开机自启（在 Linux 内执行以下命令）
+sudo vim /etc/wsl.conf
+# 设置以下内容
+[boot]
+systemd=true
+# 退出 Linux 子系统，并关闭 WSL
+wsl.exe --shutdown
+# 重新进入 WSL ，输入⬇️⬇️⬇️，即可检验 systemd 的运行状态
+systemctl list-unit-files --type=service
+```
+
+### ~~解决 WSL2 不支持 Systemd🚫~~
+
+[How to handle the lack of Systemd](https://askubuntu.com/questions/1379425/system-has-not-been-booted-with-systemd-as-init-system-pid-1-cant-operate#:~:text=How%20to%20handle%20the%20lack%20of%20Systemd) ，有数种方式可以解决这个问题，以下为我试过的一种
+
+[Make your Current WSL2 Distro Run Systemd](https://github.com/nullpo-head/wsl-distrod#option-2-make-your-current-distro-run-systemd)
+
+```bash
+# 妈的，翻墙也连不上，直接浏览器打开https://raw.githubusercontent.com...
+curl -L -O "https://raw.githubusercontent.com/nullpo-head/wsl-distrod/main/install.sh"
+# 我放到了 /home/my-config/install.sh
+cd /home/myconfig
+# 给予执行权限
+chmod +x install.sh
+# This script installs distrod, but doesn't enable it yet.
+sudo ./install.sh install
+```
 
 ### mysql
 
@@ -321,7 +333,7 @@ location = "xxxxxx.mirror.aliyuncs.com"
 
 ## ssh
 
-1. 添加至 Hosts `127.0.0.1:4472           localhost`
+1. 添加至 Hosts `127.0.0.1:4472 localhost`
 2. powershell `podman machine ssh sudo ...`
 
 ## Rootfull & Rootless
@@ -404,40 +416,6 @@ Failed to connect to bus: Host is down</strong> ，因为 WSL2 在截至 2022 �
 
 `wsl.exe --version` 查看 WSL 版本：`0.67.6.0`以上版本的 WSL2 现已支持 Systemd
 
-## WSL2 现已支持 Systemd-2022.9.27
-
-> [WSL2 现已支持 Systemd - V2EX](https://www.v2ex.com/t/882117)
->
-> [Systemd support is now available in WSL!](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/)
-
-```shell
-# 设置 systemd 开机自启（在 Linux 内执行以下命令）
-sudo vim /etc/wsl.conf
-# 设置以下内容
-[boot]
-systemd=true
-# 退出 Linux 子系统，并关闭 WSL
-wsl.exe --shutdown
-# 重新进入 WSL ，输入⬇️⬇️⬇️，即可检验 systemd 的运行状态
-systemctl list-unit-files --type=service
-```
-
-## ~~解决 WSL2 不支持 Systemd🚫~~
-
-[How to handle the lack of Systemd](https://askubuntu.com/questions/1379425/system-has-not-been-booted-with-systemd-as-init-system-pid-1-cant-operate#:~:text=How%20to%20handle%20the%20lack%20of%20Systemd) ，有数种方式可以解决这个问题，以下为我试过的一种
-
-[Make your Current WSL2 Distro Run Systemd](https://github.com/nullpo-head/wsl-distrod#option-2-make-your-current-distro-run-systemd)
-
-```bash
-# 妈的，翻墙也连不上，直接浏览器打开https://raw.githubusercontent.com...
-curl -L -O "https://raw.githubusercontent.com/nullpo-head/wsl-distrod/main/install.sh"
-# 我放到了 /home/my-config/install.sh
-cd /home/myconfig
-# 给予执行权限
-chmod +x install.sh
-# This script installs distrod, but doesn't enable it yet.
-sudo ./install.sh install
-```
 
 ### Enable distrod in your distro
 
