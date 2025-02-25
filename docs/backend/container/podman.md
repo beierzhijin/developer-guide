@@ -6,6 +6,53 @@
 
 > https://dockerproxy.link/
 
+## 容器技术的一些核心概念
+
+### 镜像（Image）
+
+镜像就像一个“模板”或“蓝图”，它是一个只读的文件系统快照，包含了运行某个应用所需的一切：代码、依赖库、配置文件、操作系统文件等。比如你的 localhost/mysql:lts 镜像，里面打包了 MySQL 的程序和必要的运行环境。
+
+- 打个比方：镜像是一个“压缩包”，里面存好了软件和系统文件，但它本身是静态的，不能运行。
+
+### 容器（Container）
+容器是基于镜像启动的一个“活的实例”。当你运行 podman run，Podman 会从镜像创建一个可运行的环境，加上一个可写的层（用来存储运行时的变化），然后启动里面的程序（比如 MySQL 的 mysqld）。
+
+- 比方说：容器是解压并运行那个“压缩包”后得到的一个工作副本。
+
+### **镜像和容器的关系**
+
+- 镜像是一个静态的基础，容器是镜像的动态执行状态。
+
+- 你可以从同一个镜像（比如 localhost/mysql:lts）启动多个容器，每个容器独立运行，互不干扰。
+
+- 所以镜像不是容器，但容器依赖镜像来创建。
+
+### 容器 - 轻量化的Linux发行版
+
+为什么容器通常基于轻量化的 Linux 发行版？
+
+> From Grok3 AI
+>
+> 容器技术（比如 Podman、Docker）的设计目标是轻量、高效、可移植，因此镜像通常基于轻量化的 Linux 发行版，而不是完整的操作系统。原因如下：
+>
+> 1. **效率和资源节省**
+>
+> - 容器不像虚拟机（VM），它不需要完整的操作系统内核（内核由宿主机提供）。容器只需要用户空间的库和工具来运行应用。
+> - 用轻量化发行版（比如 Alpine、Debian slim）可以去掉不必要的软件包，减少镜像大小和启动时间。比如 Alpine Linux 只有几 MB，而完整的 Ubuntu 可能上百 MB。
+>
+> 2. **专注应用**
+>
+> - 容器的目的是运行特定应用（比如 MySQL），不需要图形界面、多用户管理等功能。轻量化发行版只保留运行应用的最小依赖，减少复杂性。
+> - 你的 MySQL 镜像可能没有 netstat，因为它只需要 MySQL 服务，不需要额外的网络工具。
+>
+> 3. **安全性**
+>
+> - 更少的软件包意味着更小的攻击面。轻量化镜像减少了潜在的漏洞，提高了安全性。
+>
+> 4. **行业惯例**
+>
+> - 常见的容器镜像（如 MySQL、Nginx）通常基于 Alpine、Debian slim 或 Ubuntu minimal，这些发行版在容器生态中被广泛优化和测试。
+
 ## Commands
 
 ```shell
@@ -14,7 +61,9 @@ sudo apt install -y podman
 podman pull docker.io/mysql:latest
 podman pull docker.io/mysql:5.7 # 指定版本
 podman pull docker.1ms.run/mysql:lts # 指定镜像源
-podman tag docker.1ms.run/mysql:lts mysql:lts # 创建一个新的标签 mysql:lts
+# 为刚刚拉取的镜像 ocker.1ms.run/mysql:lts 创建一个新的标签 mysql:lts, 执行后，本地会有两个镜像名称指向同一个镜像实体（底层镜像 ID 相同）
+podman tag docker.1ms.run/mysql:lts mysql:lts
+# 镜像的实际内容（层数据）不会被删除，只是删除了一个标签
 podman rmi docker.1ms.run/mysql:lts
 podman run --rm -it mysql:lts mysql --version 
 # 查看MySQL容器的版本，--rm：容器运行结束后自动删除 -it：交互模式，方便查看输出 mysql --version：运行 MySQL 客户端并输出版本信息
@@ -24,50 +73,52 @@ podman image -h # Manage images: https://docs.podman.io/en/latest/markdown/podma
 podman images # List images in local storage: https://docs.podman.io/en/latest/markdown/podman-images.1.html
 podman rmi [Image ID]
 podman ps -a # 查看所有容器
+podman run -d --name mysql_container -v podman_volume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 mysql:lts
 podman start [CONTAINER ID] # Start one or more containers: https://docs.podman.io/en/latest/markdown/podman-start.1.html
 podman stop [CONTAINER ID] # Stop one or more containers: https://docs.podman.io/en/latest/markdown/podman-stop.1.html
+podman stop mysql_container # 用容器名称停止容器也可
 podman rm [CONTAINER ID] # Remove one or more containers: https://docs.podman.io/en/latest/markdown/podman-rm.1.html
-```
-
-或者先配置 `sudo vim /etc/containers/registries.conf`
-
-```shell
-unqualified-search-registries = ["docker.io", "quay.io"] 
-```
-
-```shell
-podman pull mysql:latest
-```
-
-> https://docs.podman.io/en/latest/markdown/podman-run.1.html
-
-```shell
-podman run --name mysql-container -p 3306:3306 -v ~/mysql_data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
-```
-
-- `--name mysql-container`：为容器指定一个名称
-- `-v ~/mysql_data:/var/lib/mysql`：将宿主机上的 `~/mysql_data` 目录挂载到容器的 `/var/lib/mysql` 目录
-- `-p 3306:3306`：将宿主机的 3306 端口映射到容器的 3306 端口
-- `-e MYSQL_ROOT_PASSWORD=root`：设置 MySQL 的 root 密码为 root
-- `-d`：后台运行容器，并返回容器 ID，否则关掉 shell 容器就停了
-
-🔺 注意：如果已经运行过一次 mysql 容器，想修改 root 密码再次运行时，不仅要删除容器，还要删除 `~/mysql_data` 目录下的所有内容
-
-> 如果你之前已经运行过容器并使用~/mysql_data 作为数据目录，那么该目录可能已经被初始化并设置了一个密码。当你再次运行容器并试图使用不同的密码时，它仍然会使用旧的密码。为了解决这个问题，你可以停止并删除容器，然后删除~/mysql_data 目录下的所有内容，再次运行容器。
-
-```shell
-cd ~/mysql_data
-sudo rm -rf *
+podman rm mysql_container # 用容器名称删除容器也可
 ```
 
 ### volume
+
+[podman-volume-create](https://docs.podman.io/en/latest/markdown/podman-volume-create.1.html)
+
+> From Grok3 AI
+>
+> #### Podman 创建 Volume 的好处
+>
+> 1. **数据持久性**
+>
+> 使用卷可以让容器的数据在容器删除后依然保留。Podman 容器是临时的，如果你直接把数据存储在容器内部的文件系统里，一旦容器被移除，数据也会丢失。而通过卷，数据被存储在宿主机的特定位置（通常由 Podman 管理），即便容器没了，数据依然安全。
+>
+> 2. **便于管理**
+>
+> 命名的卷（如用 podman volume create my_volume 创建的）可以通过 Podman 命令轻松管理，比如 podman volume ls 查看所有卷，podman volume rm 删除卷等。相比之下，直接用系统文件夹需要手动管理路径和权限，容易出错或混乱。
+>
+> 3. **隔离性**
+>
+> 卷由 Podman 管理，默认存储在用户主目录下的 `.local/share/containers/storage/volumes`（如果是 rootless 模式），或者系统级的存储路径（root 模式）。这种隔离避免了与系统其他文件夹混淆，也减少了误操作的风险。
+>
+> 4. **跨容器共享**
+>
+> 一个卷可以挂载到多个容器，实现数据共享。比如，你可以用同一个卷在不同的容器之间传递数据，而直接用系统文件夹需要手动指定路径并处理权限问题，操作更繁琐。
+>
+> 5. **性能优化**
+>
+> Podman 的卷通常会利用底层存储驱动（如 overlayfs），在某些场景下可能比直接操作系统文件夹更高效，尤其是在容器化环境中处理大量文件时。
+
+> 总结：用 podman volume create 创建卷的好处在于它的便利性、隔离性和容器友好的管理方式，特别适合追求容器化最佳实践的用户。如果你的需求是简单的临时存储或需要直接操作宿主机上的特定文件，直接用系统文件夹（通过 -v 挂载）会更直观。但长远来看，卷能让你的工作流更简洁和可靠。
+
 ```shell
-# 创建名为 postgres_volume 的卷，为卷添加元数据标签（组织分类，筛选查询）
-podman volume create --label purpose=database postgres_volume
+# 创建名为 podman_volume 的卷，Set metadata for a volume 
+podman volume create --label purpose=database podman_volume
 podman volume ls --filter label=purpose=database
 podman volume ls
+podman volume ls --help
 # postgres_volume卷 在系统中的精确位置
-podman volume inspect postgres_volume
+podman volume inspect podman_volume
 ```
 
 ### machine mode
@@ -90,7 +141,7 @@ podman machine rm podman-machine-default
 podman machine start podman-machine-default
 podman machine ssh podman-machine-default
 podman pull mysql:latest
-podman run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=your_password --name mysql-container mysql:latest
+podman run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=your_password --name mysql_container mysql:latest
 podman ps
 # 使用主机的 IP 地址连接到 MySQL 服务器
 podman machine ip podman-machine-default
@@ -101,18 +152,88 @@ podman machine ip podman-machine-default
 
 ### 查看 mysql 容器的 root 密码
 ```shell
-podman inspect mysql-container # 查看容器的详细信息
-podman inspect mysql-container | grep MYSQL_ROOT_PASSWORD
+podman inspect mysql_container # 查看容器详细信息
+podman inspect mysql_container | grep MYSQL_ROOT_PASSWORD # 查看密码
 ```
 
 ### 进入容器
 ```bash
-podman exec -it 【容器 ID】 bash
+podman exec -it 【容器ID】 bash
+podman exec -it 【容器名称】 bash
+podman exec -it mysql_container bash
+podman exec -it mysql_container sh
+exit # 退出容器
 ```
 
 ### mysql
+
+> MySQL 的官方镜像（或其他精简镜像）通常基于轻量化的 Linux 发行版（如 Debian 或 Alpine），默认不包含 net-tools（提供 netstat）等工具，以保持镜像小巧
+
+[podman-run - Run a command in a new container](https://docs.podman.io/en/latest/markdown/podman-run.1.html)
+
+✅ 推荐在podman volume中存储数据
+
+> 如果没有使用 -p 参数指定宿主机端口映射，容器内部的 3306 端口并没有暴露到宿主机上。这意味着：
+>
+> - 在容器内部，MySQL 仍然运行在 3306 端口
+>
+> - 但从宿主机或外部网络无法直接访问这个端口，除非你在 Podman 的网络中手动操作
+>
+> - `podman inspect mysql_container` 查看容器详细信息
+>
+>   `NetworkSettings`显示如下：
+>
+>   ```shell
+>   # 这里 null 表示没有映射到宿主机，但容器内部的 3306 端口是活跃的
+>   "Ports": {
+>       "3306/tcp": null
+>   }
+>   ```
+
+直接使用简化标签
+
+```shell
+podman run -d \
+  --name mysql_container \
+  -v podman_volume:/var/lib/mysql \
+  -e MYSQL_ROOT_PASSWORD=root \
+  -p 3306:3306 \
+  mysql:lts
+```
+
+```shell
+podman run -d \
+  --name mysql_container \
+  -v podman_volume:/var/lib/mysql \
+  -e MYSQL_ROOT_PASSWORD=root \
+  -p 3306:3306 \
+  localhost/mysql:lts
+```
+
+🚫 不推荐直接在宿主机的文件系统中存储数据
 ```bash
-podman run --name mysql -p 3306:3306 -v ~/mypod/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
+podman run -d \
+  --name mysql_container \
+  -v ~/mypod/mysql/data:/var/lib/mysql \
+  -e MYSQL_ROOT_PASSWORD=root \
+  -p 3306:3306 \
+  mysql:latest
+```
+
+- `--name mysql_container`：为容器指定一个名称
+- `-v podman_volume:/var/lib/mysql`：将 `podman_volume` 卷挂载到容器的 `/var/lib/mysql` 目录，`/var/lib/mysql`是 MySQL 默认的数据存储路径。
+- `-v ~/mysql_data:/var/lib/mysql`：将宿主机上的 `~/mysql_data` 目录挂载到容器的 `/var/lib/mysql` 目录
+- `-p 3306:3306`：将宿主机的 3306 端口映射到容器的 3306 端口
+- `-e MYSQL_ROOT_PASSWORD=root`：设置 MySQL 的 root 密码为 root（必需，否则容器会因缺少配置而退出）
+- `-d`：后台运行容器，并返回容器 ID，否则关掉 shell 容器就停了
+
+🔺 注意：如果已经运行过一次 mysql 容器，想修改 root 密码再次运行时，不仅要删除容器，还要删除 `~/mysql_data` 目录下的所有内容
+
+> 如果你之前已经运行过容器并使用~/mysql_data 作为数据目录，那么该目录可能已经被初始化并设置了一个密码。当你再次运行容器并试图使用不同的密码时，它仍然会使用旧的密码。为了解决这个问题，你可以停止并删除容器，然后删除~/mysql_data 目录下的所有内容，再次运行容器。
+
+```shell
+cd ~/mysql_data
+sudo rm -rf *
 ```
 
 `podman logs mysql` 查看报错：<strong style="color:red;">chown: changing ownership of '/var/lib/mysql/': Operation not permitted</strong>，该报错的本质原因可参考
@@ -315,6 +436,7 @@ unqualified-search-registries = ["docker.io", "xxxxxx.mirror.aliyuncs.com"]
 
 ```bash
 # location为上面阿里云镜像地址，不需要https://
+# unqualified-search-registries = ["docker.io", "quay.io"] 
 unqualified-search-registries = ["docker.io"]
 
 # 或者
