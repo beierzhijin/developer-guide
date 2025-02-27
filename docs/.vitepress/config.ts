@@ -15,6 +15,10 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(footnote)
+    },
+    image: {
+      // image lazy loading is disabled by default
+      lazyLoading: true
     }
   },
   themeConfig: {
@@ -149,6 +153,7 @@ function nav() {
       activeMatch: `^/database/`,
       items: [
         { text: 'MySQL', link: '/database/mysql' },
+        { text: 'Database Design', link: '/database/database-design' },
       ]
     },
     {
@@ -165,6 +170,7 @@ function nav() {
       items: [
         { text: 'OSS', link: '/developer/software' },
         { text: 'Git', link: '/developer/git' },
+        { text: 'Markdown', link: '/developer/markdown' },
       ]
     }
   ]
@@ -277,6 +283,7 @@ function sidebarDatabase() {
       text: 'Database',
       collapsible: true,
       items: [
+        { text: 'database Design', link: '/database/database-design' },
         { text: 'mysql', link: '/database/mysql' },
       ]
     }
