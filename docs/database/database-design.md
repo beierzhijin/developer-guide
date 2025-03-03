@@ -16,13 +16,13 @@
 * Comments and Likes
 * Premium Subscription
 
-### E.R.D. 实体关系图
+### E.R.D. 实体关系图 ER图
 
-[<strong style="color: skyblue;">entity relationship diagram</strong>](https://app.eraser.io/dashboard/all)
+[<strong style="color: skyblue;">Entity-Relationship Diagram</strong>](https://app.eraser.io/dashboard/all)
 
 ![ERD](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20250302022718932.png)
 
-```txt
+```eraser.io
 users [icon: user, color: Blue] {
   id string pk
   username string unique
@@ -54,12 +54,12 @@ comments [icon: message-square, color: orange] {
   tweetsId string fk
 }
 
-// 记录哪个用户关注了哪个用户
+// 关注关系表, 中间表
 follows [icon: users, color: purple] {
-  id string pk
+  id string pk //id字段是这条"关注关系"的唯一标识符，不是用户的id
   createdAt timestamp
-  followingId string fk //关注了谁
-  followedId string fk //被谁关注了
+  followerId string fk //关注者（主动方）
+  followingId string fk //被关注者（被动方）
 }
 
 likes [icon: heart, color: pink] {
@@ -79,7 +79,7 @@ subscriptions [icon: credit-card, color: red] {
   userId string fk
 }
 
-// < 一对多; > 多对一; - 一对一; <> 多对多
+// - 一对一(1:1); < 一对多(1:N); > 多对一; <> 多对多(N:M)
 users.id < tweets.userId
 tweets.id < media.tweetsId
 users.id  < comments.userId
@@ -87,8 +87,30 @@ tweets.id < comments.tweetsId
 users.id - subscriptions.userId
 users.id < likes.userId
 tweets.id < likes.tweetsId
-follows.followingId > users.id //查有多少粉丝
-follows.followedId > users.id //查有多少关注
+follows.followerId > users.id //查有多少粉丝
+follows.followingId > users.id //查有多少关注
 ```
+>想象一下微博的关注关系：
+>
+>- 小明(用户id: 001)关注了小红(用户id: 002)
+>- 小张(用户id: 003)也关注了小红(用户id: 002)
+>
+>这样在follows表中会有两条记录：
+>
+>```sql
+>follows {
+>  id: "f001",              // 关注关系的唯一标识
+>  followingId: "001",      // 小明的用户id
+>  followedId: "002",       // 小红的用户id
+>  createdAt: "2024-03-20"
+>}
+>
+>follows {
+>  id: "f002",              // 另一条关注关系的唯一标识
+>  followingId: "003",      // 小张的用户id
+>  followedId: "002",       // 小红的用户id
+>  createdAt: "2024-03-21"
+>}
+>```
 
 
