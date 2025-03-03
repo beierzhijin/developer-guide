@@ -254,6 +254,40 @@ https://github.com/docker-library/mysql/issues/396，
 
 至于 3306 端口占用，powershell 执行：`netstat -aon|findstr "3306"`，结束对应 PID 进程即可
 
+### postgresql
+
+```bash
+podman pull dockerproxy.net/bitnami/postgresql:latest
+podman tag dockerproxy.net/bitnami/postgresql:latest bitnami/postgresql:latest
+podman rmi dockerproxy.net/bitnami/postgresql:latest
+podman run --rm bitnami/postgresql:latest postgres --version
+podman run --rm postgresql:latest psql --version
+podman inspect postgresql:latest
+podman volume create postgresql_volume
+```
+
+```bash
+# -e POSTGRESQL_USERNAME=admin，不指定默认是 postgres 超级用户，这里指定超级用户，非必需
+# -e POSTGRESQL_DATABASE=my_database 创建除默认的 postgres 数据库以外的指定名称的数据库，非必需
+podman run -d \
+  --name postgresql_container \
+  -v postgresql_volume:/bitnami/postgresql \
+  -e POSTGRESQL_USERNAME=admin \
+  -e POSTGRESQL_PASSWORD=secure_password \
+  -e POSTGRESQL_DATABASE=my_database \
+  -p 5432:5432 \
+  bitnami/postgresql:latest
+```
+
+```bash
+podman run -d \
+  --name postgresql_container \
+  -v postgresql_volume:/bitnami/postgresql \
+  -e POSTGRESQL_PASSWORD=root \
+  -p 5432:5432 \
+  localhost/bitnami/postgresql:latest
+```
+
 ### redis & redisinsight
 
 > https://redis.io/docs/install/install-stack/docker/ > https://dockerproxy.com/
