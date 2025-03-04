@@ -113,7 +113,9 @@ podman rm mysql_container # 用容器名称删除容器也可
 
 ```shell
 # 创建名为 podman_volume 的卷，Set metadata for a volume 
-podman volume create --label purpose=database podman_volume
+podman volume create --label purpose=database mysql_volume
+podman volume create mysql_volume
+podman volume rm podman_volume
 podman volume ls --filter label=purpose=database
 podman volume ls
 podman volume ls --help
@@ -165,7 +167,7 @@ podman exec -it mysql_container sh
 exit # 退出容器
 ```
 
-### mysql
+## mysql
 
 > MySQL 的官方镜像（或其他精简镜像）通常基于轻量化的 Linux 发行版（如 Debian 或 Alpine），默认不包含 net-tools（提供 netstat）等工具，以保持镜像小巧
 
@@ -191,6 +193,10 @@ exit # 退出容器
 >   ```
 
 直接使用简化标签
+
+```shell
+podman volume create mysql_volume
+```
 
 ```shell
 podman run -d \
@@ -254,7 +260,7 @@ https://github.com/docker-library/mysql/issues/396，
 
 至于 3306 端口占用，powershell 执行：`netstat -aon|findstr "3306"`，结束对应 PID 进程即可
 
-### postgresql
+## postgresql
 
 ```bash
 podman pull dockerproxy.net/bitnami/postgresql:latest
@@ -279,16 +285,18 @@ podman run -d \
   bitnami/postgresql:latest
 ```
 
+✨✨✨
 ```bash
 podman run -d \
   --name postgresql_container \
   -v postgresql_volume:/bitnami/postgresql \
+  -e POSTGRESQL_USERNAME=admin \
   -e POSTGRESQL_PASSWORD=root \
   -p 5432:5432 \
-  localhost/bitnami/postgresql:latest
+  postgresql:latest
 ```
 
-### redis & redisinsight
+## redis & redisinsight
 
 > https://redis.io/docs/install/install-stack/docker/ > https://dockerproxy.com/
 
