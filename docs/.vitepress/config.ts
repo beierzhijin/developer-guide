@@ -119,8 +119,7 @@ function nav() {
           text: 'Framework',
           items: [
             { text: 'Vue', link: '/frontend/vue/ruoyi' },
-            { text: 'React', link: '/frontend/react/reactjs' },
-            { text: 'Nuxt', link: '/frontend/ssr/nuxt' },
+            { text: 'React', link: '/frontend/react/reactjs' }
           ]
         }
       ]
@@ -208,7 +207,8 @@ function sidebarFrontend() {
         { text: 'react', link: '/frontend/react/reactjs' },
         { text: 'jsx', link: '/frontend/react/jsx' },
         { text: 'astro', link: '/frontend/ssr/astro' },
-        { text: 'nuxt', link: '/frontend/ssr/nuxt' }
+        { text: 'nuxt', link: '/frontend/ssr/nuxt' },
+        { text: 'next', link: '/frontend/ssr/next' },
       ]
     },
     {
