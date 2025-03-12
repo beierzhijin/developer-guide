@@ -240,20 +240,56 @@ pnpm store verify # 验证 store 完整性
 pnpm view @slidev/cli versions # If you need the full list of all published versions
 ```
 
-## 查看安装依赖时的pnpm版本
+### 多版本 pnpm 共存
+
+✨ 推荐使用 corepack（Added in: v16.9.0, v14.19.0），最好卸载掉全局安装的 pnpm（因为它的优先级可能高于 corepack）
+
+```shell
+pnpm uninstall -g pnpm
+corepack enable pnpm
+corepack disable pnpm
+corepack cache clean
+# 1.在项目安装, 依赖于 package.json 中的 packageManager 配置，"packageManager": "pnpm@10.6.2"
+corepack install
+# 2.显式指定一个包管理器及其版本，不依赖 package.json 的 "packageManager" 字段
+# --activate 的作用是临时激活，影响范围取决于上下文（可能是当前终端或全局，但不会永久修改全局默认版本，除非结合其他配置）
+# 如果不加 --activate，prepare 仅下载到缓存而不激活
+corepack prepare pnpm@10.6.2 --activate
+corepack prepare pnpm@10.6.1 --activate
+
+```
+
+### 查看安装依赖时的 pnpm 版本
 
 `pnpm-lock.yaml`
 
 ```yaml
-lockfileVersion: '9.0'
+lockfileVersion: "9.0"
 ```
 
-lockfileVersion 的值对应于 pnpm 的特定版本范围：
+[lockfileVersion 的值对应于 pnpm 的特定版本范围](https://github.com/pnpm/spec/tree/fd3238639af86c09b7032cc942bab3438b497036/lockfile#relation-of-pnpm-version-to-lockfile-version)：
 
-- 5.4：pnpm 6.x 之前的版本
-- 6.0：pnpm 7.x 引入
-- 6.1：pnpm 8.x 引入
-- 9.0：pnpm 9.x 引入（从 2023 年底开始）
+| lockfile version | used by pnpm versions |
+| ---------------- | --------------------- |
+| 9.0              | >=9.0.0               |
+| 6.0              | >=8.0.0 <9.0.0        |
+| 5.4              | >=7.0.0 <8.0.0        |
+| 5.3              | >=6.0.0               |
+| 5.2              | >=5.10.0              |
+| 5.1              | >=3.5.0               |
+| 5.0              | >=3.0.0               |
+| 3.9 and 4.0      | >=2.17.0              |
+| 3.9              | >=2.13.3              |
+| 3.8              | >=2.8.0               |
+| 3.7              | >=2.0.0               |
+| 3.6              | >=1.43.0              |
+| 3.5              | >=1.40.0              |
+| 3.4              | >=1.23.0              |
+| 3.3              | >=1.22.0              |
+| 3.2              | >=1.18.1              |
+| 3.1              | >=1.17 <1.18.1        |
+| 3                | >=1 <1.17             |
+| 2                | >=0.62 <1             |
 
 ### 依赖问题
 
