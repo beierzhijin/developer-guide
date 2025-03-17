@@ -12,9 +12,12 @@
 conda update -n base -c defaults conda # 更新conda
 conda env list
 conda create --name myenv # 默认安装的是空环境，没有任何包
-conda install python=3.12.3
-conda create --name myenv python=3.12.3
-conda create --prefix ./myenv python=3.12.3
+conda install python=3.13.2
+conda create --name myenv python=3.13.2
+conda create --prefix ./myenv python=3.13.2
+# 这一步要重启shell
+conda init # conda init 的默认行为是针对你当前正在使用的 shell 进行初始化
+conda init --all
 conda activate myenv # To activate this environment, use
 conda activate ./myenv
 conda deactivate # To deactivate an active environment, use
@@ -27,11 +30,25 @@ conda list -e > requirements.txt #导出当前环境所有的依赖包及其对�
 conda install --yes --file requirements.txt #在新的环境中安装导出的包
 ```
 
+#### UnicodeEncodeError
+
 `conda activate` 在 windows powershell 激活时可能会报错 <strong style="color:red;">UnicodeEncodeError: 'gbk' codec can't encode character '\ue1bb' in position ...</strong>
 
-原因：Python 的输出尝试使用 'gbk' 编码来显示一个包含特殊字符的字符，但 'gbk' 编码无法处理该字符。这通常发生在 Windows 中，因为 Windows 中文版默认使用 'gbk' 编码来处理命令行输出。
+原因：这是中文 Windows 系统常见的编码问题。当 conda 尝试向控制台输出包含特殊字符的文本时，由于系统使用 GBK 编码（中文 Windows 的默认编码），而这个特殊字符在 GBK 编码中无法表示，因此出现了错误。
 
 解决方法如下：
+
+##### 临时
+
+执行 conda activate
+
+```shell
+$env:PYTHONIOENCODING="utf-8"
+```
+
+##### 持久
+
+但这个调整可能会对一些中国国内软件产生影响
 
 ![image-20230927171617269](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20230927171617269.png)
 

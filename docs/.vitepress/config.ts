@@ -134,7 +134,7 @@ function nav() {
             { text: 'OOP', link: '/backend/java/OOP' }
           ]
         },
-        { text: 'Python', link: '/backend/python/Django' },
+        { text: 'Python', link: '/backend/python/conda' },
         { text: 'Linux', link: '/backend/container/Linux' },
         { text: 'Containers', link: '/backend/container/docker' },
         { text: 'Vim', link: '/backend/container/vim' },
@@ -240,7 +240,7 @@ function sidebarBackend() {
       text: 'Python',
       collapsible: true,
       items: [
-        { text: 'Django', link: '/backend/python/Django' },
+        { text: 'conda', link: '/backend/python/conda' },
       ]
     },
     {
