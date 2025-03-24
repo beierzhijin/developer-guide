@@ -245,6 +245,7 @@ pnpm view @slidev/cli versions # If you need the full list of all published vers
 ✨ 推荐使用 corepack（Added in: v16.9.0, v14.19.0），最好卸载掉全局安装的 pnpm（因为它的优先级可能高于 corepack）
 
 ```shell
+npm view pnpm versions
 pnpm uninstall -g pnpm
 corepack enable pnpm
 corepack disable pnpm
