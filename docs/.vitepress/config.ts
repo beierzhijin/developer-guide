@@ -241,6 +241,7 @@ function sidebarBackend() {
       collapsible: true,
       items: [
         { text: 'conda', link: '/backend/python/conda' },
+        { text: 'syntax', link: '/backend/python/syntax' }
       ]
     },
     {
