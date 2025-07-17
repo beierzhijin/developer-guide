@@ -4,6 +4,8 @@
 
 #### [TYPESCRIPT](/frontend/feast/typescript)
 
+## 性能优化
+
 ## CSR
 
 ![image-20240302001429129](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20240302001429129.png)

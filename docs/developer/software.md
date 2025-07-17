@@ -123,8 +123,9 @@ rm -rf $(brew --prefix)/var/homebrew/locks
 ### 临时设置
 
 ```powershell
-$env:HTTP_PROXY = "http://localhost:7890"
-$env:HTTPS_PROXY = "http://localhost:7890"
+$env:http_proxy="http://127.0.0.1:7890"
+$env:https_proxy="http://127.0.0.1:7890"
+Invoke-WebRequest -Uri https://ipinfo.io/json
 ```
 
 ## windows 查看端口占用
