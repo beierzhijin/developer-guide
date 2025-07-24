@@ -257,7 +257,8 @@ corepack install
 # 如果不加 --activate，prepare 仅下载到缓存而不激活
 corepack prepare pnpm@10.6.2 --activate
 corepack prepare pnpm@10.6.1 --activate
-
+# 3.全局安装 pnpm
+corepack install -g pnpm@latest
 ```
 
 ### 查看安装依赖时的 pnpm 版本
