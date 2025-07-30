@@ -1,22 +1,23 @@
 # db design
 
 ## BEST PRACTICES
+
 1. Please, primary key should never be business logic. 业务逻辑永远不应该作为主键
-> 比如`users`表中即使 username is unique and not nullable，not undefined, but it's business logic, should not be used as primary key
-2. Always create an ID of type string, UUID or CUID (Collision-resistant Unique ID 碰撞唯一ID). 始终创建一个字符串、UUID 或 CUID 类型的ID
+   > 比如`users`表中即使 username is unique and not nullable，not undefined, but it's business logic, should not be used as primary key
+2. Always create an ID of type string, UUID or CUID (Collision-resistant Unique ID 碰撞唯一 ID). 始终创建一个字符串、UUID 或 CUID 类型的 ID
 3. Always add `createdAt` `timestamp` to all tables，even if you think it's not needed. 在所有表中添加 createdAt 时间戳，即使你认为它不需要
 4. 创建表关系时，先从`用户表`开始思考，因为应用程序的使用者是用户
 5. 创建多对多关系时，创建一个单独的表 `create a separate table`
 
 ## Twitter Like Social Media
 
-* Users
-* Tweets and Media uploads
-* Followers and Following
-* Comments and Likes
-* Premium Subscription
+- Users
+- Tweets and Media uploads
+- Followers and Following
+- Comments and Likes
+- Premium Subscription
 
-### E.R.D. 实体关系图 ER图
+### E.R.D. 实体关系图 ER 图
 
 [<strong style="color: skyblue;">Entity-Relationship Diagram</strong>](https://app.eraser.io/dashboard/all)
 
@@ -69,7 +70,7 @@ likes [icon: heart, color: pink] {
   tweetsId string fk
 }
 
-// 我们应用有多少会员订阅用户 
+// 我们应用有多少会员订阅用户
 subscriptions [icon: credit-card, color: red] {
   id string pk
   subscriptionType enum
@@ -90,27 +91,36 @@ tweets.id < likes.tweetsId
 follows.followerId > users.id //查有多少粉丝
 follows.followingId > users.id //查有多少关注
 ```
->想象一下微博的关注关系：
+
+> 想象一下微博的关注关系：
 >
->- 小明(用户id: 001)关注了小红(用户id: 002)
->- 小张(用户id: 003)也关注了小红(用户id: 002)
+> - 小明(用户 id: 001)关注了小红(用户 id: 002)
+> - 小张(用户 id: 003)也关注了小红(用户 id: 002)
 >
->这样在follows表中会有两条记录：
+> 这样在 follows 表中会有两条记录：
 >
->```sql
->follows {
+> ```sql
+> follows {
 >  id: "f001",              // 关注关系的唯一标识
 >  followingId: "001",      // 小明的用户id
 >  followedId: "002",       // 小红的用户id
 >  createdAt: "2024-03-20"
->}
+> }
 >
->follows {
+> follows {
 >  id: "f002",              // 另一条关注关系的唯一标识
 >  followingId: "003",      // 小张的用户id
 >  followedId: "002",       // 小红的用户id
 >  createdAt: "2024-03-21"
->}
->```
+> }
+> ```
 
+## UML
 
+### 序列图
+
+描述业务流程
+
+### 用例图
+
+### 类图
