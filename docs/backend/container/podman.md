@@ -61,7 +61,7 @@ sudo apt install -y podman
 podman pull docker.io/mysql:latest
 podman pull docker.io/mysql:5.7 # 指定版本
 podman pull docker.1ms.run/mysql:lts # 指定镜像源
-# 为刚刚拉取的镜像 ocker.1ms.run/mysql:lts 创建一个新的标签 mysql:lts, 执行后，本地会有两个镜像名称指向同一个镜像实体（底层镜像 ID 相同）
+# 为刚刚拉取的镜像 docker.1ms.run/mysql:lts 创建一个新的标签 mysql:lts, 执行后，本地会有两个镜像名称指向同一个镜像实体（底层镜像 ID 相同）
 podman tag docker.1ms.run/mysql:lts mysql:lts
 # 镜像的实际内容（层数据）不会被删除，只是删除了一个标签
 podman rmi docker.1ms.run/mysql:lts
@@ -73,7 +73,7 @@ podman image -h # Manage images: https://docs.podman.io/en/latest/markdown/podma
 podman images # List images in local storage: https://docs.podman.io/en/latest/markdown/podman-images.1.html
 podman rmi [Image ID]
 podman ps -a # 查看所有容器
-podman run -d --name mysql_container -v podman_volume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 mysql:lts
+podman run -d --name mysql_container -v mysql_volume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 mysql:lts
 podman start [CONTAINER ID] # Start one or more containers: https://docs.podman.io/en/latest/markdown/podman-start.1.html
 podman stop [CONTAINER ID] # Stop one or more containers: https://docs.podman.io/en/latest/markdown/podman-stop.1.html
 podman stop mysql_container # 用容器名称停止容器也可
@@ -115,12 +115,12 @@ podman rm mysql_container # 用容器名称删除容器也可
 # 创建名为 podman_volume 的卷，Set metadata for a volume 
 podman volume create --label purpose=database mysql_volume
 podman volume create mysql_volume
-podman volume rm podman_volume
+podman volume rm mysql_volume
 podman volume ls --filter label=purpose=database
 podman volume ls
 podman volume ls --help
 # postgres_volume卷 在系统中的精确位置
-podman volume inspect podman_volume
+podman volume inspect mysql_volume
 ```
 
 ### machine mode
