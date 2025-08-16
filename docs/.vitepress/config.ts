@@ -284,7 +284,7 @@ function sidebarDatabase() {
       text: 'Database',
       collapsible: true,
       items: [
-        { text: 'database Design', link: '/database/database-design' },
+        { text: 'database design', link: '/database/database-design' },
         { text: 'mysql', link: '/database/mysql' },
       ]
     }
