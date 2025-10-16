@@ -46,9 +46,23 @@ conda install --yes --file requirements.txt #在新的环境中安装导出的�
 $env:PYTHONIOENCODING="utf-8"
 ```
 
+--- or ---
+
+```shell
+conda --no-plugins activate python-ai
+```
+
 ##### 持久
 
-但这个调整可能会对一些中国国内软件产生影响
+设置系统环境变量
+
+```shell
+[System.Environment]::SetEnvironmentVariable("PYTHONIOENCODING", "utf-8", "User")
+```
+
+--- or ---
+
+这个调整可能会对一些中国国内软件产生影响
 
 ![image-20230927171617269](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20230927171617269.png)
 
