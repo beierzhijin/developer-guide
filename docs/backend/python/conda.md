@@ -12,10 +12,15 @@
 conda update -n base -c defaults conda # 更新conda
 conda env list
 conda create --name myenv # 默认安装的是空环境，没有任何包
-conda install python=3.13.2
-conda create --name myenv python=3.13.2
-conda create --prefix ./myenv python=3.13.2
-# 这一步要重启shell
+conda install python=3.14.0
+# 环境会被集中创建在 Conda 默认的环境目录，适合常规使用，管理更简单，适合全局使用的环境
+# 通过 conda env list 查看，~\scoop\apps\miniconda3\current\envs\
+conda create --name myenv python=3.14.0
+# 环境会被创建在当前目录下的 ./myenv 文件夹中（绝对路径也可）
+# 适合需要将环境存储在特定项目目录（例如项目根目录）或非默认位置的场景，便于项目隔离或共享
+conda create --prefix ./myenv python=3.14.0
+
+# *********** 这一步要重启shell ***********
 conda init # conda init 的默认行为是针对你当前正在使用的 shell 进行初始化
 conda init --all
 conda activate myenv # To activate this environment, use
