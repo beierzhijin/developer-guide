@@ -331,9 +331,10 @@ ssh-keygen -t ed25519 -C "Mac -> hwc"
 ```powershell
 ssh-keygen
 ```
+
 ### 第二步：将公钥文件通过 scp 的方式上传到远程服务器上
 
-以本地连接aliyun远程服务器为例
+以本地连接 aliyun 远程服务器为例
 
 ```shell
 # win
@@ -511,7 +512,7 @@ _/etc/resolv.conf -> /mnt/wsl/resolv.conf_
 
 ![image-20231005160357215](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20231005160357215.png){width="400px"}
 
-#### 设置代理1
+#### 设置代理 1
 
 ```shell
 curl -L --proxy http://nameserver:7890 https://www.google.com
@@ -534,7 +535,7 @@ unset_windows_proxy() {
 }
 ```
 
-#### 设置代理2
+#### 设置代理 2
 
 ➡ `~/proxy.sh`配置
 
@@ -599,7 +600,8 @@ proxy unset
 ```
 
 #### 官方
-Ubuntu-24.04 LTS 对上述代理设置不生效了，原因未知，google到了官方解决方案：
+
+Ubuntu-24.04 LTS 对上述代理设置不生效了，原因未知，google 到了官方解决方案：
 
 > https://learn.microsoft.com/en-us/windows/wsl/networking#auto-proxy
 
@@ -607,7 +609,8 @@ Ubuntu-24.04 LTS 对上述代理设置不生效了，原因未知，google到了
 
 > https://learn.microsoft.com/en-us/windows/wsl/wsl-config#wslconfig
 
-在用户目录下，`cd ~` 即文件地址栏输入 `%UserProfile%`，新建 `.wslconfig` 文件，内容如下，注意必须加上这个section label: [wsl2]，否则会报错 <strong style="color:red;">wsl: C:\Users\klaus\.wslconfig:1 中的未知密钥 'autoProxy'</strong>
+在用户目录下，`cd ~` 即文件地址栏输入 `%UserProfile%`，新建 `.wslconfig` 文件，内容如下，注意必须加上这个 section label: [wsl2]，否则会报错 <strong style="color:red;">wsl: C:\Users\klaus\.wslconfig:1 中的未知密钥 'autoProxy'</strong>
+
 ```shell
 [wsl2]
 autoProxy = true
@@ -617,13 +620,29 @@ autoProxy = true
 Configuring global settings with `.wslconfig` are only available for distributions running as WSL 2 in Windows Build 19041 and later. Keep in mind you may need to run `wsl --shutdown` to shut down the WSL 2 VM and then restart your WSL instance for these changes to take effect.
 :::
 
-实测没有卵用，可能我配置还不到位，提示镜像网络...NAT网络啥的...，按github上的解决方案目前也没用
+实测没有卵用，可能我配置还不到位，提示镜像网络...NAT 网络啥的...，按 github 上的解决方案目前也没用
+
+猜测如果用的是 Windows 系统代理，`autoProxy=true` 可能有效，但对 Clash 的 LAN 模式（LAN 模式 - 允许同一局域网（LAN）内的其他设备连接到本机的 Clash 代理服务器，从而共享本机的代理上网）无效
 
 #### ultimate solution
 
-TUN模式打开，开启全局代理
+1. TUN 模式打开，开启全局代理
 
+2. `~/.wslconfig` 配置
 
+```shell
+[wsl2]
+autoProxy=false
+networkingMode=mirrored
+```
+
+在 Windows PowerShell 执行 `wsl --shutdown`，重启 WSL, 无需查 host_ip
+
+```shell
+export http_proxy="http://127.0.0.1:7890"
+export https_proxy="http://127.0.0.1:7890"
+echo $https_proxy
+```
 
 ### 安装包时 Failed to ...
 

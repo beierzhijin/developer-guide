@@ -22,8 +22,8 @@ picgo set uploader
 Config PicGo-Core
 Please edit config.json at following location
 
-* Linux / macOS → <u>~/.picgo/config.json</u>
-* Windows → <u>C:\Users\klaus\ .picgo\config.json</u>
+- Linux / macOS → <u>~/.picgo/config.json</u>
+- Windows → <u>C:\Users\klaus\ .picgo\config.json</u>
 
 [选择 PicGo-Core (Command line)下载或更新](https://picgo.github.io/PicGo-Core-Doc/zh/guide/config.html#%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
 
@@ -145,27 +145,27 @@ tasklist | findstr <PID>
 
 `Win R，输入 resmon` > `网络` > `侦听端口`
 
-## VScode识别不出C盘
+## VScode 识别不出 C 盘
 
-一定不要给C盘的子目录取名A、B等这些单字母，害惨我了，不过大概是 Cursor 的bug，VSCode 也短时出现过识别不出的问题，导致 `@nuxtjs/tailwindcss` tailwindcss 在 VS Code 中的 Hover Preview 失效，C:/A/xxx 改成 C:/AI/xxx 后好了
+一定不要给 C 盘的子目录取名 A、B 等这些单字母，害惨我了，不过大概是 Cursor 的 bug，VSCode 也短时出现过识别不出的问题，导致 `@nuxtjs/tailwindcss` tailwindcss 在 VS Code 中的 Hover Preview 失效，C:/A/xxx 改成 C:/AI/xxx 后好了
 
-## PS命令
+## PS 命令
 
-### 查看IP
+### 查看 IP
 
 ```powershell
 get-netIPAddress -AddressFamily IPv4 | ft -AutoSize
 get-netIPAddress | ft -AutoSize
 ```
 
-> *来自AI：*
+> _来自 AI：_
 >
-> 1. **`get-netIPAddress`**：这是PowerShell中的一个cmdlet（命令），用于检索与网络接口关联的所有IP地址的信息。这个cmdlet属于`NetAdapter`模块，该模块提供了管理和查询网络适配器及其相关配置的功能。
-> 2. **`-AddressFamily IPv4`**：这个参数指定了要检索的IP地址族。`IPv4`表示仅获取IPv4地址的信息。如果不指定此参数，`get-netIPAddress`默认会返回所有类型的IP地址（包括IPv4和IPv6）。
-> 3. **`|`**：这个符号在PowerShell中用作管道（Pipeline），它的作用是将前一个命令的输出作为后一个命令的输入。这意味着`get-netIPAddress -AddressFamily IPv4`的输出将被传递给后面的命令。
-> 4. **`ft -AutoSize`**：这里`ft`是`Format-Table`的别名，是PowerShell中的一个cmdlet，用于将输入数据格式化为表格形式。`-AutoSize`参数指示`Format-Table`自动调整列的宽度以适应内容的长度，使表格输出更加易读。
+> 1. **`get-netIPAddress`**：这是 PowerShell 中的一个 cmdlet（命令），用于检索与网络接口关联的所有 IP 地址的信息。这个 cmdlet 属于`NetAdapter`模块，该模块提供了管理和查询网络适配器及其相关配置的功能。
+> 2. **`-AddressFamily IPv4`**：这个参数指定了要检索的 IP 地址族。`IPv4`表示仅获取 IPv4 地址的信息。如果不指定此参数，`get-netIPAddress`默认会返回所有类型的 IP 地址（包括 IPv4 和 IPv6）。
+> 3. **`|`**：这个符号在 PowerShell 中用作管道（Pipeline），它的作用是将前一个命令的输出作为后一个命令的输入。这意味着`get-netIPAddress -AddressFamily IPv4`的输出将被传递给后面的命令。
+> 4. **`ft -AutoSize`**：这里`ft`是`Format-Table`的别名，是 PowerShell 中的一个 cmdlet，用于将输入数据格式化为表格形式。`-AutoSize`参数指示`Format-Table`自动调整列的宽度以适应内容的长度，使表格输出更加易读。
 
-### 查看powershell版本
+### 查看 powershell 版本
 
 ```powershell
 $PSVersionTable.PSVersion
@@ -175,7 +175,7 @@ $PSVersionTable.PSVersion
 
 ```powershell
 tree /?
-# 查看所有 Profile 路径 
+# 查看所有 Profile 路径
 $PROFILE | Get-Member -MemberType NoteProperty
 # 不同版本的PowerShell，需要在终端选择不同的powershell查看
 $PROFILE.AllUsersAllHosts
@@ -232,13 +232,13 @@ Get-PSTree "node_modules\.pnpm\vue-router@4.4.5_vue@3.5.12_typescript@5.6.3_\nod
 pstree "node_modules\.pnpm\vue-router@4.4.5_vue@3.5.12_typescript@5.6.3_\node_modules\vue-router\dist"
 ```
 
-### 重启explorer
+### 重启 explorer
 
 ```powershell
 Stop-Process -Name explorer -Force; Start-Process explorer
 ```
 
-### PS执行策略
+### PS 执行策略
 
 临时将执行策略设置为 "Bypass"，允许您在当前 PowerShell 会话中运行任何脚本。
 
@@ -257,11 +257,11 @@ $cursorExePath = [System.IO.Path]::Combine($env:LOCALAPPDATA, "Programs", "curso
 
 所以最终的 $cursorExePath 变量的值应该类似于: `C:\Users\klaus\AppData\Local\Programs\cursor\Cursor.exe`
 
-### 以管理员身份运行.ps1脚本
+### 以管理员身份运行.ps1 脚本
 
-1. 在管理员 PowerShell 窗口中, cd到脚本所在的目录 `.\your_script.ps1`
+1. 在管理员 PowerShell 窗口中, cd 到脚本所在的目录 `.\your_script.ps1`
 
-2. 使用绝对路径来运行脚本 
+2. 使用绝对路径来运行脚本
 
 ```powershell
 & 'C:\AI\DATA\tools\scripts\install-open-with-cursor.ps1'
@@ -280,4 +280,12 @@ Start-Process powershell.exe -Verb RunAs -ArgumentList "-File", ".\your_script.p
 ```powershell
 $cursorExePath = Get-ChildItem -Path $env:LOCALAPPDATA, $env:ProgramFiles, "$env:ProgramFiles(x86)" -Filter "Cursor.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
 Write-Host "Cursor executable path: $cursorExePath"
+```
+
+### Git 中文乱码
+
+#### 临时设置
+
+```powershell
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 ```
