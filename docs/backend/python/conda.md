@@ -8,6 +8,8 @@
 
 > Miniconda 是一个小型的 Anaconda，提供了 Anaconda 的包管理器 conda，但不包括 Anaconda 发行版中预安装的大量数据科学包。这样可以节省空间，用户可以根据需要安装特定的包。
 
+> [Conda Package Management](https://www.anaconda.com/docs/getting-started/working-with-conda/packages/main)
+
 ```shell
 conda update -n base -c defaults conda # 更新conda
 conda env list
@@ -31,8 +33,10 @@ conda search python
 conda search --full-name python
 conda search --full-name python --channel conda-forge
 conda list
+conda update --all # 更新所有包
 conda list -e > requirements.txt #导出当前环境所有的依赖包及其对应的版本号
 conda install --yes --file requirements.txt #在新的环境中安装导出的包
+
 ```
 
 #### UnicodeEncodeError
