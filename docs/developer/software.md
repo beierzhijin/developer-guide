@@ -118,6 +118,13 @@ function unset_china_source() {
 rm -rf $(brew --prefix)/var/homebrew/locks
 ```
 
+## scoop
+
+```powershell
+# 位置 ~\.config\scoop\config.json
+scoop config
+```
+
 ## powershell 设置代理
 
 ### 临时设置

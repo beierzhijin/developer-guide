@@ -167,7 +167,7 @@ function nav() {
       text: 'Developer',
       activeMatch: `^/developer/`,
       items: [
-        { text: 'OSS', link: '/developer/software' },
+        { text: 'Software', link: '/developer/software' },
         { text: 'Git', link: '/developer/git' },
         { text: 'Markdown', link: '/developer/markdown' },
       ]
