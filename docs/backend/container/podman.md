@@ -167,6 +167,72 @@ podman exec -it mysql_container sh
 exit # 退出容器
 ```
 
+### podman-compose
+`podman-compose` 是一个“指挥官”工具，它的作用是让你通过一个配置文件，同时管理多个相互关联的容器
+
+```bash
+sudo apt install -y podman podman-compose
+```
+
+以部署 [claude-code-hub](https://claude-code-hub.app/docs/deployment/script) 这个项目为例：
+
++ [deploy-claude-code-hub.sh](https://raw.githubusercontent.com/beierzhijin/deploy-claude-code-hub/refs/heads/main/deploy-claude-code-hub.sh)
+
+```bash
+# 下载并运行部署脚本
+curl -fsSL https://raw.githubusercontent.com/beierzhijin/deploy-claude-code-hub/refs/heads/main/deploy-claude-code-hub.sh | bash
+
+# 或者先下载再执行
+wget https://raw.githubusercontent.com/beierzhijin/deploy-claude-code-hub/refs/heads/main/deploy-claude-code-hub.sh
+chmod +x deploy-claude-code-hub.sh
+./deploy-claude-code-hub.sh
+```
+
++ podman-compose 命令
+```bash
+cd ~/claude-code-hub
+# 查看容器列表和状态
+podman-compose ps
+# 重启所有容器
+podman-compose restart
+# 停止并关闭服务
+podman-compose down
+# 查看实时日志（按 Ctrl+C 退出查看）
+podman-compose logs -f
+# 以后台模式启动
+podman-compose up -d
+```
+
+#### 同一镜像，独立项目
+如何使用同样的镜像，运行多套独立的项目？
+
+假设你已经有了一套项目在 ~/project-A，现在你想部署第二套项目 ~/project-B
+
+1. 创建新目录并复制文件
+```bash
+# 创建第二个项目的文件夹
+mkdir -p ~/project-B
+# 将之前的部署脚本或配置文件复制过去
+cp ~/project-A/docker-compose.yaml ~/project-B/
+cp ~/project-A/.env ~/project-B/
+```
+
+2. 修改配置文件
+
+你需要编辑 ~/project-B/.env 文件，确保以下内容与项目 A 不同：
+
++ 端口号：将 APP_PORT=23000 改为 APP_PORT=23001
++ 管理 Token：为了安全，建议生成一个新的 ADMIN_TOKEN
++ 数据库密码：建议使用不同的 DB_PASSWORD
+
+3. 使用 -p 参数启动
+
+```bash
+cd ~/project-B
+# 使用 -p 参数指定项目名称为 project-b
+podman-compose -p project-b up -d
+```
+
 ## mysql
 
 > MySQL 的官方镜像（或其他精简镜像）通常基于轻量化的 Linux 发行版（如 Debian 或 Alpine），默认不包含 net-tools（提供 netstat）等工具，以保持镜像小巧
