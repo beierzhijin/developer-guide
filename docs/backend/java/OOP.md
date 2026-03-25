@@ -48,6 +48,18 @@ java
 javac
 ```
 
+#### scoop
+
+```powershell
+scoop bucket add java
+scoop install java/zulu-jdk # 最新版
+scoop install java/zulu21-jdk
+scoop install java/zulu8-jdk
+# 切换版本
+scoop reset zulu21-jdk
+scoop reset zulu8-jdk
+```
+
 ### Mac
 
 通过 Homebrew 安装
