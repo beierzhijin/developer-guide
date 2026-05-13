@@ -244,12 +244,15 @@ pnpm view @slidev/cli versions # If you need the full list of all published vers
 
 ✨ 推荐使用 corepack（Added in: v16.9.0, v14.19.0），最好卸载掉全局安装的 pnpm（因为它的优先级可能高于 corepack）
 
+Corepack 的设计哲学不是让你在全局“安装”多个二进制文件，而是作为一个“透明代理”。 它会根据你当前所在的目录（项目）自动切换到对应的 pnpm 版本
+
+当你执行带 --activate 的命令时，Corepack 会将该版本设置为当前的默认全局版本。如果你现在运行 pnpm -v，它会显示最后一次被 activate 的版本。
+
 ```shell
 npm view pnpm versions
 pnpm uninstall -g pnpm
 corepack enable pnpm
 corepack disable pnpm
-corepack cache clean
 # 1.在项目安装, 依赖于 package.json 中的 packageManager 配置，"packageManager": "pnpm@10.6.2"
 corepack install
 # 2.显式指定一个包管理器及其版本，不依赖 package.json 的 "packageManager" 字段
@@ -257,8 +260,13 @@ corepack install
 # 如果不加 --activate，prepare 仅下载到缓存而不激活
 corepack prepare pnpm@10.6.2 --activate
 corepack prepare pnpm@10.6.1 --activate
-# 3.全局安装 pnpm
+# 3.安装多个版本到全局缓存
 corepack install -g pnpm@latest
+# 查看corepack已安装的版本
+macOS/Linux: ~/.cache/node/corepack
+Windows: %LOCALAPPDATA%/node/corepack
+# 会删除上面已安装的版本
+corepack cache clean
 ```
 
 ### 查看安装依赖时的 pnpm 版本
