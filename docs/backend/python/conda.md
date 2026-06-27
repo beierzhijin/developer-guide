@@ -13,6 +13,8 @@
 ```shell
 conda update -n base -c defaults conda # 更新conda
 conda env list
+conda env remove -n pythonlearning # 删除 pythonlearning 这个环境
+conda remove --name pythonlearning --all # 或者使用更明确的写法删除 pythonlearning 这个环境
 conda create --name myenv # 默认安装的是空环境，没有任何包
 conda install python=3.14.0
 # 环境会被集中创建在 Conda 默认的环境目录，适合常规使用，管理更简单，适合全局使用的环境
