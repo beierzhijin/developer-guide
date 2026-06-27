@@ -38,7 +38,14 @@ conda list
 conda update --all # 更新所有包
 conda list -e > requirements.txt #导出当前环境所有的依赖包及其对应的版本号
 conda install --yes --file requirements.txt #在新的环境中安装导出的包
-
+conda config --show # 当前所有配置
+# 配置下载通道相关
+conda config --show channels
+conda config --add channels defaults
+conda config --add channels conda-forge
+conda config --set channel_priority strict # 默认，只从最高优先级的通道找包，如果最高优先级通道里有，就不会去低优先级的通道找，优点：版本冲突少，缺点：有时候会找不到包，或者版本比较老
+conda config --set channel_priority flexible # Conda 会智能地从多个通道搜索，优先考虑高优先级通道，但如果高优先级通道没有，或者版本太老，它会继续去其他通道找，平衡了速度和包的可用性，最常用
+conda config --set channel_priority disabled # 完全不考虑优先级，按照添加顺序搜索
 ```
 
 #### UnicodeEncodeError
