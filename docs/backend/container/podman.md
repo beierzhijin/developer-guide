@@ -56,6 +56,12 @@
 ## Commands
 
 ```shell
+# .bashrc 添加，记得 source .bashrc
+alias docker=podman
+```
+
+
+```shell
 sudo apt update
 sudo apt install -y podman
 podman pull docker.io/mysql:latest

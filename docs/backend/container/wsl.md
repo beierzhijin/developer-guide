@@ -2,14 +2,17 @@
 
 ## 基本命令
 
-> https://learn.microsoft.com/zh-cn/windows/wsl/install
+> https://learn.microsoft.com/zh-cn/windows/wsl/
 
 ```zsh
 wsl --update # 更新WSL
 wsl --shutdown # 关闭WSL
 wsl --list --online # 列出所有可用的WSL发行版
 wsl --install -d Ubuntu-24.04 # 安装指定的WSL发行版
+wsl --unregister Ubuntu-24.04 # 注销指定的分发版，注销后，与该分发关联的所有数据、设置和软件都将永久丢失
 wsl -l # 列出已安装的WSL发行版
+wsl --list --verbose # 查看精准的子系统名称
+wsl -l -v # 查看精准的子系统名称，简写
 sudo vim /etc/apt/sources.list.d/ubuntu.sources
 # 使用 Termius 连接 WSL2
 sudo apt install openssh-server

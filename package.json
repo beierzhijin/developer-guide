@@ -19,16 +19,8 @@
   "type": "module",
   "devDependencies": {
     "markdown-it": "^14.1.1",
-    "vite": "^8.0.0",
-    "vitepress": "^1.6.4",
-    "vue": "^3.5.30"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@algolia/client-search",
-        "search-insights"
-      ]
-    }
+    "vite": "^8.1.0",
+    "vitepress": "2.0.0-alpha.17",
+    "vue": "^3.5.39"
   }
 }

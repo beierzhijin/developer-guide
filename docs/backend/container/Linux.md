@@ -213,9 +213,10 @@ sudo chown -R www-data:www-data /var/www/site1.com/
 > 从 Ubuntu 24.04 开始，Ubuntu 的软件源配置文件变更为 DEB822 格式，路径为 `/etc/apt/sources.list.d/ubuntu.sources`
 
 ```bash
-sudo vim /etc/apt/sources.list              # 查看软件源
+sudo vim /etc/apt/sources.list.d/ubuntu.sources # 查看软件源
 sudo apt edit-sources                       # 查看软件源
 sudo apt update                             # 更新软件源
+apt list --installed                        # 查看已安装的软件
 sudo apt list --upgradable                  # 查看可更新的软件
 sudo select-editor                          # 选择编辑器，键入编辑器对应数字
 sudo apt -y upgrade                         # 更新软件
@@ -231,6 +232,8 @@ rm -rf ****                                 # 依次删除find查找到的所有
 ### 目录文件
 
 ```bash
+# In Linux, pwd stands for "print working directory".
+pwd
 #  -p 确保目录名称存在，不存在的就建一个
 mkdir -p ~/pod/mysql/conf
 # 新建文件
