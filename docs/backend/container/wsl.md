@@ -1,5 +1,9 @@
 # WSL2
 
+## ~/.wslconfig
+
+> https://learn.microsoft.com/zh-cn/windows/wsl/wsl-config
+
 ## 基本命令
 
 > https://learn.microsoft.com/zh-cn/windows/wsl/
@@ -22,6 +26,9 @@ sudo vim /etc/ssh/sshd_config
 # sshd_config 配置 Subsystem sftp /usr/lib/openssh/sftp-server
 systemctl list-units --type=service | grep ssh
 sudo systemctl restart ssh
+# 获取 WSL2 的 IP 地址
+hostname -I
+hostname -I | awk '{print $1}'
 ```
 
 ![image-20250217144823419](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/image-20250217144823419.png)
