@@ -261,6 +261,8 @@ corepack install
 corepack prepare pnpm@10.6.2 --activate
 corepack prepare pnpm@10.6.1 --activate
 # 3.安装多个版本到全局缓存
+# windows在 ~\AppData\Local\node\corepack\v1\pnpm
+# Linux/Mac在 ~/.cache/node/corepack/v1/pnpm
 corepack install -g pnpm@latest
 # 查看corepack已安装的版本
 macOS/Linux: ~/.cache/node/corepack
