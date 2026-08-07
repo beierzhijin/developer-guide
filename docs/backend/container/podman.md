@@ -64,6 +64,11 @@ alias docker=podman
 ```shell
 sudo apt update
 sudo apt install -y podman
+# 推荐使用，https://github.com/DaoCloud/public-image-mirror
+podman pull m.daocloud.io/docker.io/library/mysql:latest # DaoCloud镜像源
+podman tag m.daocloud.io/docker.io/library/mysql:latest mysql:lts # 可选
+podman run --rm -it m.daocloud.io/docker.io/library/mysql:lts mysql --version # 查看版本
+
 podman pull docker.io/mysql:latest
 podman pull docker.io/mysql:5.7 # 指定版本
 podman pull docker.1ms.run/mysql:lts # 指定镜像源
