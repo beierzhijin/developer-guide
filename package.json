@@ -18,9 +18,10 @@
   },
   "type": "module",
   "devDependencies": {
-    "markdown-it": "^14.1.1",
-    "vite": "^8.1.0",
-    "vitepress": "2.0.0-alpha.17",
-    "vue": "^3.5.39"
+    "@types/markdown-it-footnote": "^3.0.4",
+    "markdown-it": "^15.0.1",
+    "vite": "^8.2.2",
+    "vitepress": "2.0.0-alpha.20",
+    "vue": "^3.5.42"
   }
 }

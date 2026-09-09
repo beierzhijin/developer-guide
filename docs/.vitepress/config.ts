@@ -14,11 +14,11 @@ export default defineConfig({
   ],
   markdown: {
     config: (md) => {
-      md.use(footnote)
+      md.use(footnote as any)
     },
     image: {
       // image lazy loading is disabled by default
-      lazyLoading: true
+      lazyLoad: true
     }
   },
   themeConfig: {
@@ -38,9 +38,18 @@ export default defineConfig({
       '/network/': sidebarNetWork(),
       '/developer/': sidebarDeveloper()
     },
-    outline: 'deep', // 右侧大纲标题层级
-    // outlineTitle: '本页大纲', // 右侧导航栏顶部文字 customize the title of the right sidebar (on the top of outline links)
-    outlineTitle: 'THIS POST WILL COVER', // 右侧导航栏顶部文字 customize the title of the right sidebar (on the top of outline links)
+    outline: {
+      level: 'deep', // 右侧大纲标题层级
+      label: '本页大纲' // 右侧导航栏顶部文字 customize the title of the right sidebar (on the top of outline links)
+      // label: 'THIS POST WILL COVER' // 右侧导航栏顶部文字 customize the title of the right sidebar (on the top of outline links)
+    },
+    lastUpdated: {
+      text: '上次更新',
+      formatOptions: {
+        dateStyle: 'full',
+        timeStyle: 'medium',
+      }
+    },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/beierzhijin/developer-guide' },
       {
@@ -64,7 +73,6 @@ export default defineConfig({
       pattern: 'https://github.com/beierzhijin/full-stack-docs/edit/main/docs/:path',
       text: '在 GitHub 中 编辑此页'
     },
-    lastUpdatedText: '最近更新时间',
     search: {
       provider: 'local',
       options: {
