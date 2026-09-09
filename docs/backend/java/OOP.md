@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-![awesome](https://klaulover.oss-cn-beijing.aliyuncs.com/awesome.svg)
+![awesome](https://ulooklikeamovie.oss-cn-beijing.aliyuncs.com/img/awesome.svg)
 
 # Learn Java in Y Minutes
 
