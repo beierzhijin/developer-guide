@@ -41,3 +41,7 @@ CREATE TABLE `cart` (
 ### BigDecimal
 
 数据库中 `price` 字段 `decimal(10,2)`，在Java中要使用 `private BigDecimal price;`，绝对不要使用 `Double`，`Double` 会严重丢失丢失精度
+
+### DTO
+
+DTO 的全称是 Data Transfer Object（数据传输对象）。为什么需要它？因为我们的 JOIN 查询会同时从多张表取字段（比如用户名来自 user 表、商品名来自 product 表），单用一个实体类装不下，所以专门建一个类来接收查询结果。
