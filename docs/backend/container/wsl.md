@@ -177,7 +177,6 @@ autoProxy=true
 # firewall=true
 # WSL 使用稀疏 VHD，节省磁盘空间
 sparseVhd=true
-
 ```
 
 在 Windows PowerShell 执行 `wsl --shutdown`，重启 WSL, 无需查 host_ip
@@ -197,3 +196,45 @@ Failed to check for processor microcode upgrades.
 ```
 
 > [&#34;Failed to retrieve available ...&#34; when installing packages - Ask Ubuntu](https://askubuntu.com/questions/1404129/ubuntu-22-04-lts-on-wsl-failed-to-retrieve-available-kernel-versions-failed)
+
+### WSLC
+
+> https://learn.microsoft.com/zh-cn/windows/wsl/wsl-container?tabs=csharp#wsl-container-cli
+
+```shell
+wslc --help
+wslc system info
+
+# ① 先拉个 10KB 的小镜像，验证"wslc + 国内镜像"通路是否顺畅
+wslc pull docker.m.daocloud.io/library/hello-world:latest
+# ② 正式拉 MongoDB 8.3（约 831MB，走 DaoCloud 镜像，避开 Docker Hub 慢/超时）
+wslc pull docker.m.daocloud.io/library/mongo:8.3
+# ③ 打短标签：以后不用敲一长串前缀，直接 mongo:8.3
+wslc tag docker.m.daocloud.io/library/mongo:8.3 mongo:8.3
+# ④ 确认镜像列表
+wslc images
+
+wslc volume create mongodb-data    # 创建名为 mongodb-data 的卷（默认 guest 驱动 = VHD 卷）
+wslc volume list                   # 查看卷列表（DRIVER: guest）
+wslc run -d --name mongodb -p 27017:27017 -v mongodb-data:/data/db mongo:8.3
+
+wslc container ls                  # ① 容器层：状态应为 Up，端口映射 127.0.0.1:27017->27017
+wslc exec mongodb mongosh --quiet --eval "db.runCommand({ping:1})"   # ② 容器内：{ ok: 1 }
+Test-NetConnection localhost -Port 27017 -InformationLevel Quiet    # ③ Windows 侧：True
+
+## 数据持久化验证
+
+# ① 写入一条测试数据
+wslc exec mongodb mongosh --quiet --eval "db.getSiblingDB('test').users.insertOne({name:'klaus', age:30})"
+# ② 重启容器
+wslc container stop mongodb
+wslc container start mongodb
+# ③ 再查：数据还在 = 卷生效
+wslc exec mongodb mongosh --quiet --eval "db.getSiblingDB('test').users.find().toArray()"
+
+wslc images                                                # 先看有哪些镜像
+wslc rmi docker.m.daocloud.io/library/hello-world:latest   # 删测试镜像（标签+数据）
+wslc rmi docker.m.daocloud.io/library/mongo:8.3            # 删重复的长标签（同镜像，数据保留）
+wslc images                                                # 确认只剩 mongo:8.3
+```
+
