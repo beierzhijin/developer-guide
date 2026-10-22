@@ -238,3 +238,11 @@ wslc rmi docker.m.daocloud.io/library/mongo:8.3            # 删重复的长标�
 wslc images                                                # 确认只剩 mongo:8.3
 ```
 
+#### mysql
+wslc run -d \
+  --name mysql \                                # 容器名 mysql（旧的同名容器已删，不冲突）
+  -p 127.0.0.1:3306:3306 \                      # 端口映射，仅本机可访问
+  -v mysql-data:/var/lib/mysql \                # 具名卷 mysql-data；不存在→此刻自动新建空卷
+  docker.m.daocloud.io/library/mysql:8.4.11 \   # 用的还是本地已拉取的镜像
+  mysqld --lower-case-table-names=1             # 使表名和数据库名不区分大小写，并以小写形式存储在磁盘上
+
