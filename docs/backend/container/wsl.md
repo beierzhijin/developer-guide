@@ -246,3 +246,25 @@ wslc run -d \
   docker.m.daocloud.io/library/mysql:8.4.11 \   # 用的还是本地已拉取的镜像
   mysqld --lower-case-table-names=1             # 使表名和数据库名不区分大小写，并以小写形式存储在磁盘上
 
+#### 导出数据库
+
+##### 表结构加数据
++ `-p` 和密码之间绝对不能有空格（例如 -pMyPassword123 是正确的，-p MyPassword123 是错误的）
++ `mysql` 是指你的MySQL容器名
+```shell
+wslc exec mysql mysqldump -u root -proot db_name > C:\Users\klaus\Desktop\db_name.sql
+```
+
+##### 只有表结构没有数据
++ -d 参数（代表 --no-data）
+```shell
+wslc exec mysql mysqldump -u root -proot -d db_name > C:\Users\klaus\Desktop\db_name.sql
+```
+
+##### 只有数据没有表结构
++ -t 参数（代表 --no-create-info）
+```shell
+wslc exec mysql mysqldump -u root -proot -t db_name > C:\Users\klaus\Desktop\db_name.sql
+```
+
+
