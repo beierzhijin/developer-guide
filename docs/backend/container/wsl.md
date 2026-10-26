@@ -197,7 +197,7 @@ Failed to check for processor microcode upgrades.
 
 > [&#34;Failed to retrieve available ...&#34; when installing packages - Ask Ubuntu](https://askubuntu.com/questions/1404129/ubuntu-22-04-lts-on-wsl-failed-to-retrieve-available-kernel-versions-failed)
 
-### WSLC
+## WSLC
 
 > https://learn.microsoft.com/zh-cn/windows/wsl/wsl-container?tabs=csharp#wsl-container-cli
 
@@ -238,7 +238,7 @@ wslc rmi docker.m.daocloud.io/library/mongo:8.3            # 删重复的长标�
 wslc images                                                # 确认只剩 mongo:8.3
 ```
 
-#### mysql
+### mysql
 wslc run -d \
   --name mysql \                                # 容器名 mysql（旧的同名容器已删，不冲突）
   -p 127.0.0.1:3306:3306 \                      # 端口映射，仅本机可访问
@@ -246,23 +246,23 @@ wslc run -d \
   docker.m.daocloud.io/library/mysql:8.4.11 \   # 用的还是本地已拉取的镜像
   mysqld --lower-case-table-names=1             # 使表名和数据库名不区分大小写，并以小写形式存储在磁盘上
 
-#### 导出数据库
+### 导出数据库
 
-##### 表结构加数据
+#### 表结构加数据
 + `-p` 和密码之间绝对不能有空格（例如 -pMyPassword123 是正确的，-p MyPassword123 是错误的）
 + `mysql` 是指你的MySQL容器名
 ```shell
 wslc exec mysql mysqldump -u root -proot db_name > C:\Users\klaus\Desktop\db_name.sql
 ```
 
-##### 只有表结构没有数据
-+ -d 参数（代表 --no-data）
+#### 只有表结构
++ -d 参数（代表 --no-data），没有数据
 ```shell
 wslc exec mysql mysqldump -u root -proot -d db_name > C:\Users\klaus\Desktop\db_name.sql
 ```
 
-##### 只有数据没有表结构
-+ -t 参数（代表 --no-create-info）
+#### 只有数据
++ -t 参数（代表 --no-create-info），没有建表语句
 ```shell
 wslc exec mysql mysqldump -u root -proot -t db_name > C:\Users\klaus\Desktop\db_name.sql
 ```
