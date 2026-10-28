@@ -222,10 +222,17 @@ Usage: cgr [options] [command]
 
 ## pnpm
 
-> Performant NPM , <https://pnpm.io/>, semver 版本规范
+> https://pnpm.io/
 
 ```powershell
+# 推荐 ✅ ✨
+curl -fsSL https://get.pnpm.io | sh -
+pnpm config set registry https://registry.npmmirror.com/ --global
+pnpm config set storeDir /Volumes/Panamera/.pnpm-store/v11 --global
+pnpm config get globalconfig
+
 corepack enable
+corepack disable
 npm i -g pnpm
 which pnpm # Git Bash 中运行此命令
 pnpm root -g
@@ -242,7 +249,9 @@ pnpm view @slidev/cli versions # If you need the full list of all published vers
 
 ### 多版本 pnpm 共存
 
-✨ 推荐使用 corepack（Added in: v16.9.0, v14.19.0），最好卸载掉全局安装的 pnpm（因为它的优先级可能高于 corepack）
+推荐使用原生独立二进制文件，无需 Node.js。
+
+已经不推荐使用 corepack（Added in: v16.9.0, v14.19.0），最好卸载掉全局安装的 pnpm（因为它的优先级可能高于 corepack）。
 
 Corepack 的设计哲学不是让你在全局“安装”多个二进制文件，而是作为一个“透明代理”。 它会根据你当前所在的目录（项目）自动切换到对应的 pnpm 版本
 
