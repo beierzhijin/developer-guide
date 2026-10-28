@@ -225,22 +225,26 @@ Usage: cgr [options] [command]
 > https://pnpm.io/
 
 ```powershell
-# 推荐 ✅ ✨
+# Mac
 curl -fsSL https://get.pnpm.io | sh -
 pnpm config set registry https://registry.npmmirror.com/ --global
 pnpm config set storeDir /Volumes/Panamera/.pnpm-store/v11 --global
 pnpm config get globalconfig
 
+# windows
+npx get-pnpm
+where.exe pnpm
+
 corepack enable
 corepack disable
 npm i -g pnpm
 which pnpm # Git Bash 中运行此命令
-pnpm root -g
+pnpm root -g # 查看 pnpm 把全局安装的包装在了哪个目录
 pnpm why lodash # 查看为什么安装了某个包 lodash
 pnpm list vue-router # 查看已安装的 vue-router 版本
 pnpm list vue-router --depth Infinity # 完整依赖树
 pnpm list lodash --depth=999 # 查看特定包lodash的所有已安装版本
-pnpm store path # 返回活跃的存储目录的路径, 注意要在.pnpm-store下执行
+pnpm store path # 返回活跃存储目录的绝对路径，无论该路径是来自显式配置还是默认值
 pnpm store prune # 清理未使用的包
 pnpm store status # 检查存储状态，Packages in the store are untouched 表示 pnpm store（全局存储）处于健康状态，所有包都完整且未被修改
 pnpm store verify # 验证 store 完整性
